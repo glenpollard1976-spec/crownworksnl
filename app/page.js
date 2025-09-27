@@ -8,7 +8,8 @@ import "./globals.css";
 
 const nav = [
   { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
+  {{ label: "About Glen", href: "#about" },
+  },
   { label: "Why Us", href: "#why" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
