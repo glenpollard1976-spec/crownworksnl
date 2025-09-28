@@ -6,3 +6,18 @@ dist
 .env*
 *.log
 .DS_Store
+
+# Ignore node modules and build
+node_modules/
+.next/
+out/
+
+# Ignore system stuff
+.DS_Store
+Thumbs.db
+.vscode/
+.env
+*.log
+
+# Ignore Windows/CapCut cache
+AppData/
