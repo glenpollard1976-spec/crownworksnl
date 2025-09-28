@@ -1,14 +1,12 @@
 "use client";
 import React, { useState } from "react";
 
-// ---- Site constants ----
 const SITE = {
   name: "CrownWorksNL",
   phone: "+1 (709) 721-0340",
-  url: "https://crownworksnl.vercel.app", // Add your live Vercel link here
+  url: "https://crownworksnl.com", // Your live site
 };
 
-// ---- Navigation ----
 const nav = [
   { label: "Services", href: "#services" },
   { label: "AI Agents", href: "#ai-agents" },
@@ -19,100 +17,92 @@ const nav = [
   { label: "Contact", href: "#contact" },
 ];
 
-// ---- Page Component ----
 export default function Page() {
   const [open, setOpen] = useState(false);
 
   return (
-    <main className="font-sans text-zinc-900 scroll-smooth">
+    <main className="font-sans text-zinc-900">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <a href="#hero" className="font-bold text-purple-800">
-            {SITE.name}
-          </a>
+      <header className="bg-white shadow-md sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto flex justify-between items-center p-4">
+          <h1 className="text-xl font-bold">{SITE.name}</h1>
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex gap-6">
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex space-x-6">
             {nav.map((item) => (
               <a
-                key={item.href}
+                key={item.label}
                 href={item.href}
-                className="text-sm font-medium text-purple-800 hover:text-purple-600 transition-colors duration-200"
+                className="hover:text-purple-600 transition"
               >
                 {item.label}
               </a>
             ))}
           </nav>
 
-          {/* Mobile menu toggle */}
+          {/* Mobile Menu Button */}
           <button
-            className="md:hidden inline-flex items-center justify-center rounded-lg p-2 text-purple-800 hover:bg-purple-100"
-            aria-label="Toggle navigation"
-            aria-expanded={open}
             onClick={() => setOpen(!open)}
+            className="md:hidden p-2 border rounded"
           >
             ☰
           </button>
         </div>
 
-        {/* Mobile nav */}
+        {/* Mobile Nav */}
         {open && (
-          <nav className="md:hidden border-t bg-white">
-            <div className="max-w-6xl mx-auto px-6 py-3 flex flex-col gap-3">
+          <nav className="md:hidden bg-white shadow-md">
+            <ul className="flex flex-col p-4 space-y-3">
               {nav.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="text-sm font-medium text-purple-800 hover:text-purple-600"
-                >
-                  {item.label}
-                </a>
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    className="block hover:text-purple-600"
+                    onClick={() => setOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                </li>
               ))}
-            </div>
+            </ul>
           </nav>
         )}
       </header>
 
       {/* Hero Section */}
-      <section
-        id="hero"
-        className="relative text-white py-24 text-center bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(64,0,128,0.6), rgba(128,0,128,0.6)), url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')",
-        }}
-      >
-        <h1 className="text-5xl font-bold mb-6">
-          {SITE.name} - Land & AI Services
-        </h1>
-        <p className="text-xl mb-8 max-w-3xl mx-auto">
-          Helping Newfoundlanders with Crown Land opportunities and empowering
-          small businesses with AI agents.
-        </p>
-        <div className="flex gap-4 justify-center">
-          <a
-            href="#opportunities"
-            className="bg-white/90 hover:bg-white text-purple-800 px-8 py-4 rounded-xl text-lg font-bold shadow-lg transition duration-300"
-          >
-            Claim Crown Land →
-          </a>
-          <a
-            href="#ai-agents"
-            className="bg-black/20 hover:bg-black/30 text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg transition duration-300 border border-white/40"
-          >
-            Explore AI Agents →
-          </a>
+      <section className="relative h-[60vh] flex items-center justify-center bg-purple-800 text-white text-center px-4">
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="relative z-10 max-w-2xl">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+            CrownWorksNL – Land & AI Services
+          </h2>
+          <p className="text-lg md:text-xl mb-6">
+            Helping Newfoundlanders with Crown Land opportunities and empowering
+            small businesses with AI agents.
+          </p>
+          <div className="flex flex-col md:flex-row gap-4 justify-center">
+            <a
+              href="#services"
+              className="px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-semibold"
+            >
+              Claim Crown Land →
+            </a>
+            <a
+              href="#ai-agents"
+              className="px-6 py-3 bg-white text-purple-800 hover:bg-gray-100 rounded-lg font-semibold"
+            >
+              Explore AI Agents →
+            </a>
+          </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-purple-50 text-center">
-        <h2 className="text-3xl font-bold mb-6 text-purple-800">Contact Us</h2>
+      <section id="contact" className="py-16 text-center">
+        <h2 className="text-2xl md:text-3xl font-bold mb-4">Contact Us</h2>
         <p className="mb-4">For all inquiries, email us at:</p>
         <a
-          href="mailto:glenpollard@hotmail.com"
+          href={`mailto:${SITE.phone}`}
           className="text-lg font-semibold text-purple-700 hover:underline"
         >
           glenpollard@hotmail.com
@@ -121,3 +111,4 @@ export default function Page() {
     </main>
   );
 }
+
