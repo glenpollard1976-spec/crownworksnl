@@ -1,132 +1,59 @@
-/* globals.css */
-
-/* Import Tailwind base styles */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* General body settings */
-body {
-  font-family: system-ui, sans-serif;
+/* Reset spacing */
+body, h1, h2, h3, p, ul, ol {
   margin: 0;
   padding: 0;
-  background-color: #fafafa;
-  color: #1a1a1a;
 }
 
-/* Navigation bar */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 1.25rem;
-  background: white;
-  border-bottom: 1px solid #e5e7eb;
-  position: sticky;
-  top: 0;
-  z-index: 50;
+/* Global font + smoothing */
+body {
+  font-family: system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: #fdfdfd;
+  color: #111;
+  line-height: 1.6;
 }
 
-/* Nav links */
+/* Fix navbar wrapping on mobile */
 nav a {
-  margin-left: 1rem;
-  font-weight: 500;
+  display: inline-block;
+  margin: 0 8px;
   text-decoration: none;
-  color: #4c1d95; /* purple-800 */
+  font-weight: 600;
 }
 
-nav a:hover {
-  color: #6d28d9; /* purple-600 */
-}
-
-/* Hero section */
+/* Hero section fix */
 #hero {
-  text-align: center;
   padding: 4rem 1rem;
-  background: linear-gradient(rgba(64,0,128,0.6), rgba(128,0,128,0.6)),
-    url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80");
+  text-align: center;
   background-size: cover;
   background-position: center;
   color: white;
 }
 
-#hero h1 {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
+/* Responsive text */
+h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
 }
 
-#hero p {
-  font-size: 1.125rem;
-  margin-bottom: 1.5rem;
+p {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
 }
 
 /* Buttons */
-.button-primary {
-  display: inline-block;
-  background: #4c1d95;
-  color: white;
-  font-weight: bold;
+button, .btn {
   padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
-  text-decoration: none;
-  margin: 0.5rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
 }
 
-.button-primary:hover {
-  background: #6d28d9;
+/* Mobile spacing */
+section {
+  padding: 3rem 1rem;
 }
 
-.button-secondary {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  font-weight: bold;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.75rem;
-  text-decoration: none;
-  margin: 0.5rem;
-  border: 1px solid rgba(255,255,255,0.4);
-}
-
-.button-secondary:hover {
-  background: rgba(255,255,255,0.3);
-}
-
-/* Contact section */
-#contact {
-  padding: 2rem 1rem;
-  text-align: center;
-  background: #f3f4f6;
-}
-
-#contact h2 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-#contact a {
-  color: #4c1d95;
-  text-decoration: underline;
-}
-
-/* Mobile tweaks */
-@media (max-width: 640px) {
-  nav {
-    display: none;
-  }
-
-  .mobile-menu {
-    display: block;
-  }
-
-  #hero h1 {
-    font-size: 1.5rem;
-  }
-
-  #hero p {
-    font-size: 1rem;
-  }
-}
 
