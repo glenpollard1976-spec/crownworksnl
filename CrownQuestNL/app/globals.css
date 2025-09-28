@@ -1,18 +1,70 @@
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --bg: 255 255 255;
-  --fg: 24 24 27;
+/* Reset some default spacing */
+body, h1, h2, h3, p, ul, li {
+  margin: 0;
+  padding: 0;
 }
 
-html, body {
-  color: rgb(var(--fg));
-  background: rgb(var(--bg));
+/* General body styling */
+body {
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  background-color: #f9fafb; /* light gray background */
+  color: #111827; /* dark text */
 }
 
-a {
-  @apply underline-offset-4;
+/* Make sure everything scales */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
 }
+
+/* Navigation bar */
+nav {
+  display: flex;
+  flex-wrap: wrap;         /* allows wrapping on small screens */
+  gap: 1rem;               /* spacing between links */
+  justify-content: center; /* center items */
+  padding: 1rem;
+  background: #111827;
+}
+
+nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Sections */
+section {
+  padding: 2rem 1rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* Contact section */
+#contact {
+  background: #f3f4f6;
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  nav {
+    flex-direction: column;   /* stack links vertically */
+    align-items: center;
+  }
+  
+  h1 {
+    font-size: 1.75rem;
+  }
+  
+  h2 {
+    font-size: 1.25rem;
+  }
+}
+
