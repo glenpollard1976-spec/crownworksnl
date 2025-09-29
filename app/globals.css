@@ -37,3 +37,4 @@ html, body {
 .contact a {
   @apply text-purple-400 font-semibold hover:underline;
 }
+@apply bg-purple-900 text-white text-center py-20;
