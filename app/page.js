@@ -200,26 +200,26 @@ export default function Page() {
       <header className="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-zinc-200" style={{ willChange: 'transform', transform: 'translateZ(0)' }}>
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            <a href="#home" className="flex items-center gap-2 font-semibold no-underline group">
+            <a href="#home" onClick={(e) => { e.preventDefault(); const el = document.getElementById('home'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }} className="flex items-center gap-2 font-semibold no-underline group">
               <Crown className="w-6 h-6 icon-pop text-indigo-600 group-hover:text-indigo-700" />
               <span className="gradient-text">CrownWorksNL</span>
             </a>
             <nav className="hidden md:flex items-center gap-6" aria-label="Main navigation">
               {nav.map((n) => (
-                <a key={n.href} href={n.href} className="text-sm hover:text-zinc-900 text-zinc-600 no-underline transition-colors">
+                <a key={n.href} href={n.href} onClick={(e) => { e.preventDefault(); const el = document.getElementById(n.href.substring(1)); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }} className="text-sm hover:text-zinc-900 text-zinc-600 no-underline transition-colors">
                   {n.label}
                 </a>
               ))}
               <a href="/email-list" className="text-sm hover:text-zinc-900 text-zinc-600 no-underline transition-colors">
                 Email List
               </a>
-              <a href={`tel:${SITE.phone}`} className="no-underline mr-2">
+              <a href={`tel:${SITE.phone}`} onClick={() => handleCTAClick('call_now', 'header')} className="no-underline mr-2">
                 <Button variant="outline" className="rounded-2xl text-sm">
                   <Phone className="w-4 h-4 mr-1" />
                   Call Now
                 </Button>
               </a>
-              <a href="#contact" className="no-underline">
+              <a href="#contact" onClick={(e) => { e.preventDefault(); const el = document.getElementById('contact'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); handleCTAClick('get_quote', 'header'); }} className="no-underline">
                 <Button className="rounded-2xl">Get a Quote</Button>
               </a>
             </nav>
@@ -764,7 +764,7 @@ export default function Page() {
           </div>
           <AnimatedSection className="mt-8 text-center">
             <p className="text-zinc-600 mb-4">Interested in implementing AI agents for your business?</p>
-            <a href="#contact" className="no-underline">
+            <a href="#contact" onClick={() => handleCTAClick('get_started', 'ai_agents_section')} className="no-underline">
               <Button className="rounded-2xl">Get Started <ArrowRight className="ml-2 w-4 h-4" /></Button>
             </a>
           </AnimatedSection>
@@ -835,7 +835,7 @@ export default function Page() {
           </div>
           <AnimatedSection className="text-center">
             <p className="text-zinc-600 mb-4">Have a partnership idea? Let's discuss how we can work together.</p>
-            <a href="#contact" className="no-underline">
+            <a href="#contact" onClick={() => handleCTAClick('contact_us', 'partnership_section')} className="no-underline">
               <Button className="rounded-2xl">Contact Us <ArrowRight className="ml-2 w-4 h-4" /></Button>
             </a>
           </AnimatedSection>
@@ -860,7 +860,7 @@ export default function Page() {
                   Whether you're looking to grow your business, expand your reach, or explore new opportunities in Newfoundland & Labrador, Glen and the CrownWorksNL team are here to guide you every step of the way.
                 </p>
                 <div className="flex items-center gap-4 pt-4">
-                  <a href="#contact" className="no-underline">
+                  <a href="#contact" onClick={() => handleCTAClick('connect_glen', 'about_section')} className="no-underline">
                     <Button className="rounded-2xl">Connect with Glen <ArrowRight className="ml-2 w-4 h-4" /></Button>
                   </a>
                 </div>
