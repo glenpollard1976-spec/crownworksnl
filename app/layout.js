@@ -92,7 +92,7 @@ export default function RootLayout({ children }) {
               },
               "serviceType": ["Crown Land Services", "Business Consulting", "AI Solutions", "Brand Development"],
               "priceRange": "$$",
-              "paymentAccepted": "Cash, Credit Card, Bank Transfer"
+              "paymentAccepted": "Cash, Credit Card, Bank Transfer (USD)"
             })
           }}
         />

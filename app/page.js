@@ -344,7 +344,7 @@ export default function Page() {
                   <CardTitle className="text-xl">Crown Land Consultation</CardTitle>
                   <div className="mt-4">
                     <span className="text-3xl font-bold text-zinc-900">$299</span>
-                    <span className="text-zinc-600 ml-2">one-time</span>
+                    <span className="text-zinc-600 ml-2">USD one-time</span>
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -415,7 +415,7 @@ export default function Page() {
                   <CardTitle className="text-xl">Business Growth Package</CardTitle>
                   <div className="mt-4">
                     <span className="text-3xl font-bold text-zinc-900">$1,499</span>
-                    <span className="text-zinc-600 ml-2">/month</span>
+                    <span className="text-zinc-600 ml-2">USD/month</span>
                   </div>
                 </CardHeader>
                 <CardContent>

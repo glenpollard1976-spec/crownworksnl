@@ -134,7 +134,7 @@ export async function POST(request) {
       sessionParams.line_items = [
         {
           price_data: {
-            currency: 'cad',
+            currency: 'usd',
             product_data: {
               name: sanitizedPackageName,
               description: sanitizedPackageName,
