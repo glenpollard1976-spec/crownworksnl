@@ -19,6 +19,7 @@ const nav = [
   { label: "iLawyer", href: "#ilawyer" },
   { label: "ProVet", href: "#provet" },
   { label: "Pricing", href: "#pricing" },
+  { label: "Mobile App", href: "#mobile-apps" },
   { label: "AI Agents", href: "#ai-agents" },
   { label: "About Glen", href: "#about" },
   { label: "Testimonials", href: "#testimonials" },
