@@ -1,8 +1,8 @@
 
 export const metadata = {
   title: "CrownWorksNL — Business Consulting & Growth Services in Newfoundland & Labrador",
-  description: "Expert business consulting, strategy, and AI solutions in Corner Brook, NL. Founded by Glen Pollard of Qalipu First Nation. Get your free consultation today.",
-  keywords: "business consulting NL, business growth Newfoundland, Qalipu First Nation, Corner Brook business services, AI business solutions, strategic planning",
+  description: "Expert business consulting, strategy, and AI solutions in Corner Brook, NL. Founded by Glen Pollard of Qalipu First Nation. Mobile apps available for Android and iOS. Get your free consultation today.",
+  keywords: "business consulting NL, business growth Newfoundland, Qalipu First Nation, Corner Brook business services, AI business solutions, strategic planning, mobile app, Android app, iOS app, CrownWorksNL app, iLawyer, ProVet",
   authors: [{ name: "Glen Pollard" }],
   openGraph: {
     title: "CrownWorksNL — Business Consulting & Growth Services",
@@ -90,9 +90,21 @@ export default function RootLayout({ children }) {
                 "@type": "State",
                 "name": "Newfoundland and Labrador"
               },
-              "serviceType": ["Business Consulting", "AI Solutions", "Brand Development", "Strategic Planning"],
+              "serviceType": ["Business Consulting", "AI Solutions", "Brand Development", "Strategic Planning", "Legal Services", "Veterinary Practice Management"],
               "priceRange": "$$",
-              "paymentAccepted": "Cash, Credit Card, Bank Transfer (USD)"
+              "paymentAccepted": "Cash, Credit Card, Bank Transfer (USD)",
+              "applicationCategory": "BusinessApplication",
+              "operatingSystem": ["Android", "iOS"],
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock"
+              },
+              "softwareVersion": "1.0.0",
+              "softwareRequirements": "Android 5.0+ or iOS 12.0+",
+              "downloadUrl": "https://play.google.com/store/apps/details?id=com.crownworksnl.app",
+              "screenshot": "https://crownworksnl.com/app-screenshot.png"
             })
           }}
         />

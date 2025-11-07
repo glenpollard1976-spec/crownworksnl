@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { Crown, Sparkles, ShieldCheck, MapPin, Phone, Mail, ArrowRight, CheckCircle2, X, Bot, FileText, TrendingUp, DollarSign, Clock, Users } from "lucide-react";
+import { Crown, Sparkles, ShieldCheck, MapPin, Phone, Mail, ArrowRight, CheckCircle2, X, Bot, FileText, TrendingUp, DollarSign, Clock, Users, Smartphone, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { validateContactForm, checkRateLimit } from "@/lib/security";
@@ -1004,6 +1004,109 @@ export default function Page() {
             >
               <Button className="rounded-2xl">Contact Us <ArrowRight className="ml-2 w-4 h-4" /></Button>
             </a>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      <section id="mobile-apps" className="py-20 bg-gradient-to-b from-indigo-600 to-purple-600 text-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <AnimatedSection className="text-center mb-12">
+            <div className="mb-6">
+              <Smartphone className="w-16 h-16 mx-auto mb-4 opacity-90" />
+            </div>
+            <h2 className="text-3xl font-bold mb-4">Get Our Mobile App</h2>
+            <p className="text-indigo-100 max-w-2xl mx-auto text-lg">
+              Access CrownWorksNL services on the go! Our mobile apps are available for both Android and iOS devices.
+            </p>
+          </AnimatedSection>
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            <AnimatedSection>
+              <Card className="bg-white/10 backdrop-blur border-white/20 text-white">
+                <CardContent className="pt-6 text-center">
+                  <div className="mb-4">
+                    <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                      <Smartphone className="w-8 h-8" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-2">Android App</h3>
+                    <p className="text-indigo-100 mb-4">
+                      Available on Google Play Store. Download now for instant access to all CrownWorksNL services.
+                    </p>
+                    <a 
+                      href="https://play.google.com/store/apps/details?id=com.crownworksnl.app" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      onClick={() => handleCTAClick('download_app', 'android')}
+                      className="no-underline inline-block"
+                    >
+                      <Button className="rounded-2xl bg-white text-indigo-600 hover:bg-indigo-50 px-6 py-3 font-semibold flex items-center gap-2 mx-auto">
+                        <Download className="w-5 h-5" />
+                        Get on Google Play
+                      </Button>
+                    </a>
+                    <p className="text-xs text-indigo-200 mt-3">Coming soon to Play Store</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </AnimatedSection>
+            <AnimatedSection>
+              <Card className="bg-white/10 backdrop-blur border-white/20 text-white">
+                <CardContent className="pt-6 text-center">
+                  <div className="mb-4">
+                    <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                      <Smartphone className="w-8 h-8" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-2">iOS App</h3>
+                    <p className="text-indigo-100 mb-4">
+                      Available on Apple App Store. Download now for instant access to all CrownWorksNL services.
+                    </p>
+                    <a 
+                      href="https://apps.apple.com/app/crownworksnl/id1234567890" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      onClick={() => handleCTAClick('download_app', 'ios')}
+                      className="no-underline inline-block"
+                    >
+                      <Button className="rounded-2xl bg-white text-indigo-600 hover:bg-indigo-50 px-6 py-3 font-semibold flex items-center gap-2 mx-auto">
+                        <Download className="w-5 h-5" />
+                        Get on App Store
+                      </Button>
+                    </a>
+                    <p className="text-xs text-indigo-200 mt-3">Coming soon to App Store</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </AnimatedSection>
+          </div>
+          <AnimatedSection className="mt-12 text-center">
+            <div className="bg-white/10 backdrop-blur rounded-2xl p-6 border border-white/20">
+              <h3 className="text-xl font-bold mb-4">App Features</h3>
+              <div className="grid md:grid-cols-3 gap-4 text-sm">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-indigo-100">Full website functionality</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-indigo-100">Secure payment processing</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-indigo-100">Contact forms & consultations</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-indigo-100">iLawyer & ProVet services</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-indigo-100">AI agent information</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-indigo-100">Offline access support</span>
+                </div>
+              </div>
+            </div>
           </AnimatedSection>
         </div>
       </section>
