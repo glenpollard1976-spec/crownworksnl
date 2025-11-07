@@ -148,8 +148,10 @@ export default function Page() {
     if (typeof window !== 'undefined' && window.fbq) {
       window.fbq('track', eventName, eventData);
     }
-    // Console log for debugging (remove in production)
-    console.log('Conversion tracked:', eventName, eventData);
+    // Production: Only log in development
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Conversion tracked:', eventName, eventData);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -165,7 +167,8 @@ export default function Page() {
     const validation = validateContactForm(formData);
     
     if (!validation.isValid) {
-      alert(validation.errors.join('\n'));
+      const errorMessage = validation.errors.join('\n• ');
+      alert(`Please fix the following:\n\n• ${errorMessage}`);
       return;
     }
     
@@ -197,6 +200,10 @@ export default function Page() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-zinc-50 to-white text-zinc-900">
+      {/* Skip to main content for accessibility */}
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-indigo-600 focus:text-white focus:rounded-lg">
+        Skip to main content
+      </a>
       <header className="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-zinc-200" style={{ willChange: 'transform', transform: 'translateZ(0)' }}>
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
@@ -224,8 +231,9 @@ export default function Page() {
               </a>
             </nav>
             <button 
-              className="md:hidden p-2 text-zinc-600 hover:text-zinc-900 transition-colors z-50" 
+              className="md:hidden p-2 text-zinc-600 hover:text-zinc-900 transition-colors z-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded-lg" 
               aria-label="Toggle mobile menu"
+              aria-expanded={mobileMenuOpen}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? (
@@ -271,6 +279,7 @@ export default function Page() {
         </div>
       </header>
 
+      <main id="main-content">
       <section id="home" className="relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="w-[50rem] h-[50rem] rounded-full bg-indigo-200/40 blur-3xl absolute -top-40 -right-32" />
@@ -296,11 +305,11 @@ export default function Page() {
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <a href="#contact" onClick={() => handleCTAClick('get_free_consultation', 'hero')} className="no-underline"><Button className="rounded-2xl text-lg px-6 py-3 bg-indigo-600 hover:bg-indigo-700">Get Free Consultation <ArrowRight className="ml-2 w-4 h-4" /></Button></a>
-                <a href={`tel:${SITE.phone}`} onClick={() => handleCTAClick('call_now', 'hero')} className="px-5 py-3 rounded-2xl border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50 no-underline font-medium flex items-center gap-2">
+                <a href={`tel:${SITE.phone}`} onClick={() => handleCTAClick('call_now', 'hero')} className="px-5 py-3 rounded-2xl border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50 no-underline font-medium flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors" aria-label={`Call ${SITE.phone}`}>
                   <Phone className="w-4 h-4" />
                   Call Now
                 </a>
-                <a href="#pricing" onClick={() => handleCTAClick('view_pricing', 'hero')} className="px-5 py-3 rounded-2xl border border-zinc-300 text-sm hover:bg-zinc-50 no-underline font-medium">View Pricing</a>
+                <a href="#pricing" onClick={() => handleCTAClick('view_pricing', 'hero')} className="px-5 py-3 rounded-2xl border border-zinc-300 text-sm hover:bg-zinc-50 no-underline font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors">View Pricing</a>
               </div>
               <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
                 <p className="text-sm text-green-800 font-medium">
@@ -324,7 +333,7 @@ export default function Page() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="w-4 h-4" />
-                  <a href={`tel:${SITE.phone}`} className="no-underline">{SITE.phone}</a>
+                  <a href={`tel:${SITE.phone}`} className="no-underline hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded" aria-label={`Call ${SITE.phone}`}>{SITE.phone}</a>
                 </div>
               </div>
             </div>
@@ -597,7 +606,7 @@ export default function Page() {
                         });
                         const data = await response.json();
                         if (data.error) {
-                          alert(data.error);
+                          alert(`Payment Error: ${data.error}\n\nPlease contact us at ${SITE.email} or call ${SITE.phone}`);
                           setLoadingCheckout(prev => ({ ...prev, businessGrowth: false }));
                         } else if (data.url) {
                           window.location.href = data.url;
@@ -605,15 +614,25 @@ export default function Page() {
                           throw new Error('No checkout URL received');
                         }
                       } catch (error) {
-                        console.error('Checkout error:', error);
-                        alert('Error starting checkout. Please contact us directly at ' + SITE.email);
+                        if (process.env.NODE_ENV === 'development') {
+                          console.error('Checkout error:', error);
+                        }
+                        alert(`Unable to start checkout. Please contact us directly:\n\n📧 ${SITE.email}\n📞 ${SITE.phone}`);
                         setLoadingCheckout(prev => ({ ...prev, businessGrowth: false }));
                       }
                     }}
-                    className="rounded-2xl w-full bg-indigo-600 hover:bg-indigo-700" 
+                    className="rounded-2xl w-full bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all" 
                     disabled={loadingCheckout.businessGrowth}
+                    aria-label={loadingCheckout.businessGrowth ? 'Processing payment...' : 'Subscribe to Business Growth Package for $1,499 per month'}
                   >
-                    {loadingCheckout.businessGrowth ? 'Processing...' : 'Subscribe - $1,499/month'}
+                    {loadingCheckout.businessGrowth ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <span className="loading-spinner" aria-hidden="true"></span>
+                        Processing...
+                      </span>
+                    ) : (
+                      'Subscribe - $1,499/month'
+                    )}
                   </Button>
                 </CardContent>
               </Card>
@@ -913,11 +932,11 @@ export default function Page() {
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                       <Phone className="w-5 h-5 flex-shrink-0" />
-                    <a href={`tel:${SITE.phone}`} className="no-underline text-white hover:underline">{SITE.phone}</a>
+                    <a href={`tel:${SITE.phone}`} className="no-underline text-white hover:underline focus:outline-none focus:ring-2 focus:ring-white rounded" aria-label={`Call ${SITE.phone}`}>{SITE.phone}</a>
                   </div>
                   <div className="flex items-center gap-3">
                       <Mail className="w-5 h-5 flex-shrink-0" />
-                    <a href={`mailto:${SITE.email}`} className="no-underline text-white hover:underline">{SITE.email}</a>
+                    <a href={`mailto:${SITE.email}`} className="no-underline text-white hover:underline focus:outline-none focus:ring-2 focus:ring-white rounded" aria-label={`Email ${SITE.email}`}>{SITE.email}</a>
                   </div>
                     <div className="flex items-start gap-3">
                       <MapPin className="w-5 h-5 flex-shrink-0 mt-1" />
@@ -932,8 +951,8 @@ export default function Page() {
                 <CardContent className="pt-6">
                   <h3 className="font-semibold text-lg mb-6">Send a Message</h3>
                   {formSubmitted && (
-                    <div className="mb-4 p-3 bg-green-500/20 border border-green-400/30 rounded-lg text-sm">
-                      Thank you! Your message has been sent. We'll get back to you soon.
+                    <div className="mb-4 p-3 bg-green-500/20 border border-green-400/30 rounded-lg text-sm" role="alert" aria-live="polite">
+                      <strong className="text-green-200">✓ Success!</strong> Thank you! Your message has been sent. We'll get back to you soon.
                     </div>
                   )}
                   <form onSubmit={handleSubmit} className="space-y-4">
@@ -945,7 +964,8 @@ export default function Page() {
                         value={formData.name}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50"
+                        aria-label="Your name"
+                        className="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/50 transition-colors"
                       />
                     </div>
                     <div>
@@ -956,7 +976,8 @@ export default function Page() {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50"
+                        aria-label="Your email address"
+                        className="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/50 transition-colors"
                       />
                     </div>
                     <div>
@@ -966,7 +987,8 @@ export default function Page() {
                         placeholder="Your Phone (optional)"
                         value={formData.phone}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50"
+                        aria-label="Your phone number (optional)"
+                        className="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/50 transition-colors"
                       />
                     </div>
                     <div>
@@ -977,14 +999,16 @@ export default function Page() {
                         onChange={handleInputChange}
                         required
                         rows={4}
-                        className="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 resize-none"
+                        aria-label="Your message"
+                        className="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/50 resize-none transition-colors"
                       />
                     </div>
                     <button
                       type="submit"
-                      className="w-full px-6 py-3 rounded-2xl bg-white text-indigo-600 font-medium hover:bg-indigo-50 transition-colors"
+                      className="w-full px-6 py-3 rounded-2xl bg-white text-indigo-600 font-medium hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      aria-label="Send contact message"
                     >
-                      Send Message
+                      {formSubmitted ? 'Message Sent!' : 'Send Message'}
                     </button>
                   </form>
                 </CardContent>
@@ -993,6 +1017,7 @@ export default function Page() {
           </div>
         </div>
       </section>
+      </main>
 
       <footer className="bg-zinc-900 text-zinc-400 py-8">
         <div className="max-w-6xl mx-auto px-4 text-center">

@@ -1,6 +1,6 @@
 
-export function Button({ className = "", variant = "default", size = "default", children, ...props }) {
-  const baseClasses = "inline-flex items-center justify-center font-medium transition rounded-md";
+export function Button({ className = "", variant = "default", size = "default", children, disabled, ...props }) {
+  const baseClasses = "inline-flex items-center justify-center font-medium transition rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed";
   const variantClasses = {
     default: "bg-indigo-600 hover:bg-indigo-700 text-white",
     outline: "border border-zinc-300 bg-white hover:bg-zinc-50 text-zinc-900",
@@ -14,6 +14,7 @@ export function Button({ className = "", variant = "default", size = "default", 
   return (
     <button
       className={`${baseClasses} ${variantClasses[variant] || variantClasses.default} ${sizeClasses[size] || sizeClasses.default} ${className}`}
+      disabled={disabled}
       {...props}
     >
       {children}
