@@ -304,7 +304,20 @@ export default function Page() {
                 CrownWorksNL, founded by Glen Pollard of the Qalipu First Nation, provides strategy, design, and business consulting services to help you grow and succeed in Newfoundland & Labrador.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <a href="#contact" onClick={() => handleCTAClick('get_free_consultation', 'hero')} className="no-underline"><Button className="rounded-2xl text-lg px-6 py-3 bg-indigo-600 hover:bg-indigo-700">Get Free Consultation <ArrowRight className="ml-2 w-4 h-4" /></Button></a>
+                <a 
+                  href="#contact" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleCTAClick('get_free_consultation', 'hero');
+                    const targetElement = document.getElementById('contact');
+                    if (targetElement) {
+                      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }} 
+                  className="no-underline"
+                >
+                  <Button className="rounded-2xl text-lg px-6 py-3 bg-indigo-600 hover:bg-indigo-700">Get Free Consultation <ArrowRight className="ml-2 w-4 h-4" /></Button>
+                </a>
                 <a href={`tel:${SITE.phone}`} onClick={() => handleCTAClick('call_now', 'hero')} className="px-5 py-3 rounded-2xl border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50 no-underline font-medium flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors" aria-label={`Call ${SITE.phone}`}>
                   <Phone className="w-4 h-4" />
                   Call Now
@@ -368,7 +381,18 @@ export default function Page() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-zinc-600">{service.desc}</p>
-                    <a href="#contact" onClick={() => handleCTAClick('get_started', `service_${service.title}`)} className="no-underline mt-4 inline-block">
+                    <a 
+                      href="#contact" 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleCTAClick('get_started', `service_${service.title}`);
+                        const targetElement = document.getElementById('contact');
+                        if (targetElement) {
+                          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                      }} 
+                      className="no-underline mt-4 inline-block"
+                    >
                       <Button className="rounded-2xl mt-4 w-full group-hover:bg-indigo-700 transition-all">Get Started</Button>
                     </a>
                   </CardContent>
@@ -550,7 +574,18 @@ export default function Page() {
                       <span>Billing and payment systems</span>
                     </li>
                   </ul>
-                  <a href="#contact" onClick={() => handleCTAClick('get_started', 'provet_practice_mgmt')} className="no-underline">
+                  <a 
+                    href="#contact" 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCTAClick('get_started', 'provet_practice_mgmt');
+                      const targetElement = document.getElementById('contact');
+                      if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }} 
+                    className="no-underline"
+                  >
                     <Button className="rounded-2xl w-full">Get Started</Button>
                   </a>
                 </CardContent>
@@ -584,7 +619,18 @@ export default function Page() {
                       <span>Staff training and development</span>
                     </li>
                   </ul>
-                  <a href="#contact" onClick={() => handleCTAClick('learn_more', 'provet_business_growth')} className="no-underline">
+                  <a 
+                    href="#contact" 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCTAClick('learn_more', 'provet_business_growth');
+                      const targetElement = document.getElementById('contact');
+                      if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }} 
+                    className="no-underline"
+                  >
                     <Button className="rounded-2xl w-full">Learn More</Button>
                   </a>
                 </CardContent>
@@ -722,7 +768,18 @@ export default function Page() {
                       <span className="text-zinc-600">Ongoing maintenance & updates</span>
                     </li>
                   </ul>
-                  <a href="#contact" onClick={() => handleCTAClick('pricing_click', 'ai_solutions')} className="no-underline">
+                  <a 
+                    href="#contact" 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCTAClick('pricing_click', 'ai_solutions');
+                      const targetElement = document.getElementById('contact');
+                      if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }} 
+                    className="no-underline"
+                  >
                     <Button className="rounded-2xl w-full">Get Quote</Button>
                   </a>
                 </CardContent>
@@ -731,7 +788,18 @@ export default function Page() {
           </div>
           <AnimatedSection className="text-center mt-8">
             <p className="text-zinc-600 mb-4">Need a custom solution? We offer flexible packages tailored to your needs.</p>
-            <a href="#contact" onClick={() => handleCTAClick('schedule_consultation', 'pricing_section')} className="no-underline">
+            <a 
+              href="#contact" 
+              onClick={(e) => {
+                e.preventDefault();
+                handleCTAClick('schedule_consultation', 'pricing_section');
+                const targetElement = document.getElementById('contact');
+                if (targetElement) {
+                  targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }} 
+              className="no-underline"
+            >
               <Button className="rounded-2xl">Schedule Free Consultation <ArrowRight className="ml-2 w-4 h-4" /></Button>
             </a>
           </AnimatedSection>
@@ -840,7 +908,18 @@ export default function Page() {
           </div>
           <AnimatedSection className="mt-8 text-center">
             <p className="text-zinc-600 mb-4">Interested in implementing AI agents for your business?</p>
-            <a href="#contact" onClick={() => handleCTAClick('get_started', 'ai_agents_section')} className="no-underline">
+            <a 
+              href="#contact" 
+              onClick={(e) => {
+                e.preventDefault();
+                handleCTAClick('get_started', 'ai_agents_section');
+                const targetElement = document.getElementById('contact');
+                if (targetElement) {
+                  targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }} 
+              className="no-underline"
+            >
               <Button className="rounded-2xl">Get Started <ArrowRight className="ml-2 w-4 h-4" /></Button>
             </a>
           </AnimatedSection>
@@ -911,7 +990,18 @@ export default function Page() {
           </div>
           <AnimatedSection className="text-center">
             <p className="text-zinc-600 mb-4">Have a partnership idea? Let's discuss how we can work together.</p>
-            <a href="#contact" onClick={() => handleCTAClick('contact_us', 'partnership_section')} className="no-underline">
+            <a 
+              href="#contact" 
+              onClick={(e) => {
+                e.preventDefault();
+                handleCTAClick('contact_us', 'partnership_section');
+                const targetElement = document.getElementById('contact');
+                if (targetElement) {
+                  targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }} 
+              className="no-underline"
+            >
               <Button className="rounded-2xl">Contact Us <ArrowRight className="ml-2 w-4 h-4" /></Button>
             </a>
           </AnimatedSection>
@@ -936,7 +1026,18 @@ export default function Page() {
                   Whether you're looking to grow your business, expand your reach, or explore new opportunities in Newfoundland & Labrador, Glen and the CrownWorksNL team are here to guide you every step of the way.
                 </p>
                 <div className="flex items-center gap-4 pt-4">
-                  <a href="#contact" onClick={() => handleCTAClick('connect_glen', 'about_section')} className="no-underline">
+                  <a 
+                    href="#contact" 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCTAClick('connect_glen', 'about_section');
+                      const targetElement = document.getElementById('contact');
+                      if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }} 
+                    className="no-underline"
+                  >
                     <Button className="rounded-2xl">Connect with Glen <ArrowRight className="ml-2 w-4 h-4" /></Button>
                   </a>
                 </div>
