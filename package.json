@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "send-emails": "node scripts/send-emails.js",
-    "send-emails-auto": "node scripts/send-emails-auto.js"
+    "send-emails-auto": "node scripts/send-emails-auto.js",
+    "send-batch": "node scripts/send-batch.js"
   },
   "dependencies": {
     "@stripe/stripe-js": "^8.3.0",
