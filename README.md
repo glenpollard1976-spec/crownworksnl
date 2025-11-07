@@ -1,7 +1,7 @@
 
-# CrownQuestNL
+# CrownWorksNL
 
-Next.js + Tailwind site for CrownQuestNL.
+Next.js + Tailwind site for CrownWorksNL.
 
 ## Local dev
 ```bash
@@ -16,7 +16,7 @@ npm run dev
 vercel
 ```
 3. Follow prompts to deploy. You'll get a live *.vercel.app URL.
-4. Add your custom domain (e.g., crownquestnl.ca) in Vercel > Settings > Domains.
+4. Add your custom domain (e.g., crownworksnl.com) in Vercel > Settings > Domains.
 
 ## Deploy to Netlify
 - Use "Import from Git" or drag-and-drop a zip of this project.
