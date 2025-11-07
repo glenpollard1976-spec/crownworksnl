@@ -95,8 +95,45 @@ export default function Page() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [loadingCheckout, setLoadingCheckout] = useState({ businessGrowth: false });
 
-  const handleNavClick = () => {
+  // Smooth scroll for anchor links
+  useEffect(() => {
+    const handleAnchorClick = (e) => {
+      const href = e.currentTarget.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    };
+
+    const anchorLinks = document.querySelectorAll('a[href^="#"]:not([href="#"])');
+    anchorLinks.forEach(link => {
+      link.addEventListener('click', handleAnchorClick);
+    });
+
+    return () => {
+      anchorLinks.forEach(link => {
+        link.removeEventListener('click', handleAnchorClick);
+      });
+    };
+  }, []);
+
+  const handleNavClick = (e) => {
     setMobileMenuOpen(false);
+    const href = e.currentTarget.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      const targetId = href.substring(1);
+      setTimeout(() => {
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
   };
 
   const handleInputChange = (e) => {
@@ -163,9 +200,9 @@ export default function Page() {
       <header className="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-zinc-200" style={{ willChange: 'transform', transform: 'translateZ(0)' }}>
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            <a href="#home" className="flex items-center gap-2 font-semibold no-underline">
-              <Crown className="w-6 h-6" />
-              <span>CrownWorksNL</span>
+            <a href="#home" className="flex items-center gap-2 font-semibold no-underline group">
+              <Crown className="w-6 h-6 icon-pop text-indigo-600 group-hover:text-indigo-700" />
+              <span className="gradient-text">CrownWorksNL</span>
             </a>
             <nav className="hidden md:flex items-center gap-6" aria-label="Main navigation">
               {nav.map((n) => (
@@ -247,9 +284,9 @@ export default function Page() {
             style={{ willChange: 'opacity', transform: 'translateZ(0)' }}
           >
             <div>
-              <div className="inline-flex items-center gap-2 text-xs px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 mb-4">
-                <Sparkles className="w-4 h-4" />
-                Empowering business growth in NL
+              <div className="inline-flex items-center gap-2 text-xs px-3 py-1 rounded-full bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 mb-4 border border-indigo-200/50 shadow-sm">
+                <Sparkles className="w-4 h-4 icon-sparkle text-indigo-600" />
+                <span className="font-medium">Empowering business growth in NL</span>
               </div>
               <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight">
                 Grow boldly. Build your future with confidence.
@@ -291,9 +328,11 @@ export default function Page() {
                 </div>
               </div>
             </div>
-            <div className="relative">
-              <div className="aspect-square rounded-3xl bg-gradient-to-br from-indigo-500 to-purple-600 p-8 flex items-center justify-center">
-                <Crown className="w-32 h-32 text-white opacity-80" />
+            <div className="relative hero-glow">
+              <div className="aspect-square rounded-3xl bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 p-8 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-400/20 to-purple-600/20 animate-pulse" />
+                <Crown className="w-32 h-32 text-white logo-crown relative z-10" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent)]" />
               </div>
             </div>
           </motion.div>
@@ -309,15 +348,19 @@ export default function Page() {
           <div className="grid md:grid-cols-3 gap-6">
             {services.map((service, i) => (
               <AnimatedSection key={i}>
-                <Card>
+                <Card className="group hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-1">
                   <CardHeader>
-                    <div className="text-indigo-600 mb-2">{service.icon}</div>
-                    <CardTitle>{service.title}</CardTitle>
+                    <div className="service-icon-wrapper mb-4">
+                      <div className="text-indigo-600 icon-pop icon-sparkle">
+                        {service.icon}
+                      </div>
+                    </div>
+                    <CardTitle className="group-hover:text-indigo-600 transition-colors">{service.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-zinc-600">{service.desc}</p>
                     <a href="#contact" onClick={() => handleCTAClick('get_started', `service_${service.title}`)} className="no-underline mt-4 inline-block">
-                      <Button className="rounded-2xl mt-4 w-full">Get Started</Button>
+                      <Button className="rounded-2xl mt-4 w-full group-hover:bg-indigo-700 transition-all">Get Started</Button>
                     </a>
                   </CardContent>
                 </Card>
@@ -337,12 +380,14 @@ export default function Page() {
           </AnimatedSection>
           <div className="grid md:grid-cols-2 gap-6">
             <AnimatedSection>
-              <Card>
+              <Card className="group hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-1">
                 <CardHeader>
-                  <div className="text-indigo-600 mb-2">
-                    <FileText className="w-6 h-6" />
+                  <div className="service-icon-wrapper mb-4">
+                    <div className="text-indigo-600 icon-pop icon-sparkle">
+                      <FileText className="w-6 h-6" />
+                    </div>
                   </div>
-                  <CardTitle>Legal Document Preparation</CardTitle>
+                  <CardTitle className="group-hover:text-indigo-600 transition-colors">Legal Document Preparation</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-zinc-600 mb-4">
@@ -369,12 +414,14 @@ export default function Page() {
               </Card>
             </AnimatedSection>
             <AnimatedSection>
-              <Card>
+              <Card className="group hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-1">
                 <CardHeader>
-                  <div className="text-indigo-600 mb-2">
-                    <Bot className="w-6 h-6" />
+                  <div className="service-icon-wrapper mb-4">
+                    <div className="text-indigo-600 icon-pop icon-sparkle">
+                      <Bot className="w-6 h-6" />
+                    </div>
                   </div>
-                  <CardTitle>AI Legal Assistant</CardTitle>
+                  <CardTitle className="group-hover:text-indigo-600 transition-colors">AI Legal Assistant</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-zinc-600 mb-4">
@@ -414,12 +461,14 @@ export default function Page() {
           </AnimatedSection>
           <div className="grid md:grid-cols-2 gap-6">
             <AnimatedSection>
-              <Card>
+              <Card className="group hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-1">
                 <CardHeader>
-                  <div className="text-indigo-600 mb-2">
-                    <ShieldCheck className="w-6 h-6" />
+                  <div className="service-icon-wrapper mb-4">
+                    <div className="text-indigo-600 icon-pop icon-sparkle">
+                      <ShieldCheck className="w-6 h-6" />
+                    </div>
                   </div>
-                  <CardTitle>Practice Management</CardTitle>
+                  <CardTitle className="group-hover:text-indigo-600 transition-colors">Practice Management</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-zinc-600 mb-4">
@@ -446,12 +495,14 @@ export default function Page() {
               </Card>
             </AnimatedSection>
             <AnimatedSection>
-              <Card>
+              <Card className="group hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-1">
                 <CardHeader>
-                  <div className="text-indigo-600 mb-2">
-                    <TrendingUp className="w-6 h-6" />
+                  <div className="service-icon-wrapper mb-4">
+                    <div className="text-indigo-600 icon-pop icon-sparkle">
+                      <TrendingUp className="w-6 h-6" />
+                    </div>
                   </div>
-                  <CardTitle>Business Growth</CardTitle>
+                  <CardTitle className="group-hover:text-indigo-600 transition-colors">Business Growth</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-zinc-600 mb-4">
@@ -529,7 +580,7 @@ export default function Page() {
                       <span className="text-zinc-600">Priority email support</span>
                     </li>
                   </ul>
-                  <button
+                  <Button 
                     onClick={async () => {
                       if (loadingCheckout.businessGrowth) return;
                       handleCTAClick('pricing_click', 'business_growth_package');
@@ -559,13 +610,11 @@ export default function Page() {
                         setLoadingCheckout(prev => ({ ...prev, businessGrowth: false }));
                       }
                     }}
-                    className="w-full"
+                    className="rounded-2xl w-full bg-indigo-600 hover:bg-indigo-700" 
                     disabled={loadingCheckout.businessGrowth}
                   >
-                    <Button className="rounded-2xl w-full bg-indigo-600 hover:bg-indigo-700" disabled={loadingCheckout.businessGrowth}>
-                      {loadingCheckout.businessGrowth ? 'Processing...' : 'Subscribe - $1,499/month'}
-                    </Button>
-                  </button>
+                    {loadingCheckout.businessGrowth ? 'Processing...' : 'Subscribe - $1,499/month'}
+                  </Button>
                 </CardContent>
               </Card>
             </AnimatedSection>
@@ -662,12 +711,14 @@ export default function Page() {
           </AnimatedSection>
           <div className="grid md:grid-cols-3 gap-6">
             <AnimatedSection>
-              <Card>
+              <Card className="group hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-1">
                 <CardHeader>
-                  <div className="text-indigo-600 mb-2">
-                    <Bot className="w-6 h-6" />
+                  <div className="service-icon-wrapper mb-4">
+                    <div className="text-indigo-600 icon-pop icon-sparkle">
+                      <Bot className="w-6 h-6" />
+                    </div>
                   </div>
-                  <CardTitle>Customer Support Agent</CardTitle>
+                  <CardTitle className="group-hover:text-indigo-600 transition-colors">Customer Support Agent</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-zinc-600">
@@ -677,12 +728,14 @@ export default function Page() {
               </Card>
             </AnimatedSection>
             <AnimatedSection>
-              <Card>
+              <Card className="group hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-1">
                 <CardHeader>
-                  <div className="text-indigo-600 mb-2">
-                    <FileText className="w-6 h-6" />
+                  <div className="service-icon-wrapper mb-4">
+                    <div className="text-indigo-600 icon-pop icon-sparkle">
+                      <FileText className="w-6 h-6" />
+                    </div>
                   </div>
-                  <CardTitle>Document Assistant</CardTitle>
+                  <CardTitle className="group-hover:text-indigo-600 transition-colors">Document Assistant</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-zinc-600">
@@ -692,12 +745,14 @@ export default function Page() {
               </Card>
             </AnimatedSection>
             <AnimatedSection>
-              <Card>
+              <Card className="group hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-1">
                 <CardHeader>
-                  <div className="text-indigo-600 mb-2">
-                    <TrendingUp className="w-6 h-6" />
+                  <div className="service-icon-wrapper mb-4">
+                    <div className="text-indigo-600 icon-pop icon-sparkle">
+                      <TrendingUp className="w-6 h-6" />
+                    </div>
                   </div>
-                  <CardTitle>Business Intelligence</CardTitle>
+                  <CardTitle className="group-hover:text-indigo-600 transition-colors">Business Intelligence</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-zinc-600">
