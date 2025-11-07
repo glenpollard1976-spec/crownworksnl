@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Mail, Upload, Send, Trash2, Plus, FileText, X, CheckCircle2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { validateEmail, validatePhone, sanitizeContact, validateCSVFile, checkRateLimit } from "@/lib/security";
 
 export default function EmailListPage() {
   const [contacts, setContacts] = useState([]);
@@ -16,20 +17,34 @@ export default function EmailListPage() {
   const [newContact, setNewContact] = useState({ name: "", email: "", phone: "" });
   const fileInputRef = useRef(null);
 
-  // Parse CSV file
+  // Parse CSV file with security validation
   const parseCSV = (text) => {
+    // Limit file size processing
+    if (text.length > 5 * 1024 * 1024) { // 5MB limit
+      throw new Error('File is too large. Maximum size is 5MB.');
+    }
+    
     const lines = text.split('\n').filter(line => line.trim());
     if (lines.length === 0) return [];
+    
+    // Limit number of lines processed
+    const maxLines = 10000;
+    if (lines.length > maxLines) {
+      lines.splice(maxLines);
+    }
 
     // Try to detect if first line is header
-    const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
+    const headers = lines[0].split(',').map(h => h.trim().toLowerCase().slice(0, 50));
     const hasHeader = headers.some(h => h.includes('email') || h.includes('name'));
 
     const startIndex = hasHeader ? 1 : 0;
     const contacts = [];
 
     for (let i = startIndex; i < lines.length; i++) {
-      const values = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+      // Limit line length
+      if (lines[i].length > 1000) continue;
+      
+      const values = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, '').slice(0, 500));
       
       // Try to find email, name, phone columns
       let email = "";
@@ -41,76 +56,138 @@ export default function EmailListPage() {
         const nameIndex = headers.findIndex(h => h.includes('name') && !h.includes('email'));
         const phoneIndex = headers.findIndex(h => h.includes('phone') || h.includes('tel'));
 
-        if (emailIndex >= 0 && values[emailIndex]) email = values[emailIndex];
-        if (nameIndex >= 0 && values[nameIndex]) name = values[nameIndex];
-        if (phoneIndex >= 0 && values[phoneIndex]) phone = values[phoneIndex];
+        if (emailIndex >= 0 && values[emailIndex]) email = values[emailIndex].trim();
+        if (nameIndex >= 0 && values[nameIndex]) name = values[nameIndex].trim();
+        if (phoneIndex >= 0 && values[phoneIndex]) phone = values[phoneIndex].trim();
       } else {
         // Assume format: email, name, phone or name, email, phone
         if (values.length >= 1) {
           // Check if first value is email
           if (values[0].includes('@')) {
-            email = values[0];
-            if (values[1]) name = values[1];
-            if (values[2]) phone = values[2];
+            email = values[0].trim();
+            if (values[1]) name = values[1].trim();
+            if (values[2]) phone = values[2].trim();
           } else {
-            name = values[0];
-            if (values[1] && values[1].includes('@')) email = values[1];
-            if (values[2] && values[2].includes('@')) email = values[2];
-            if (values[1] && !values[1].includes('@')) phone = values[1];
-            if (values[2] && !values[2].includes('@')) phone = values[2];
+            name = values[0].trim();
+            if (values[1] && values[1].includes('@')) email = values[1].trim();
+            if (values[2] && values[2].includes('@')) email = values[2].trim();
+            if (values[1] && !values[1].includes('@')) phone = values[1].trim();
+            if (values[2] && !values[2].includes('@')) phone = values[2].trim();
           }
         }
       }
 
-      if (email && email.includes('@')) {
-        contacts.push({ name: name || email.split('@')[0], email, phone: phone || "" });
+      // Validate and sanitize before adding
+      if (email && validateEmail(email)) {
+        const sanitized = sanitizeContact({ name, email, phone });
+        if (sanitized.email) {
+          contacts.push(sanitized);
+        }
       }
     }
 
     return contacts;
   };
 
-  // Handle file upload
+  // Handle file upload with security validation
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
     if (!file) return;
 
+    // Validate file
+    const fileValidation = validateCSVFile(file);
+    if (!fileValidation.isValid) {
+      alert(fileValidation.error);
+      event.target.value = ''; // Reset file input
+      return;
+    }
+
+    // Rate limiting
+    if (!checkRateLimit('file_upload', 10, 60000)) {
+      alert('Too many uploads. Please wait a minute.');
+      event.target.value = '';
+      return;
+    }
+
     const reader = new FileReader();
     reader.onload = (e) => {
-      const text = e.target.result;
-      const importedContacts = parseCSV(text);
-      
-      // Merge with existing contacts, avoiding duplicates
-      setContacts(prev => {
-        const existingEmails = new Set(prev.map(c => c.email.toLowerCase()));
-        const newContacts = importedContacts.filter(c => !existingEmails.has(c.email.toLowerCase()));
-        return [...prev, ...newContacts];
-      });
+      try {
+        const text = e.target.result;
+        const importedContacts = parseCSV(text);
+        
+        // Limit total contacts
+        const maxContacts = 10000;
+        const currentCount = contacts.length;
+        
+        if (currentCount + importedContacts.length > maxContacts) {
+          const allowed = maxContacts - currentCount;
+          importedContacts.splice(allowed);
+          alert(`Imported ${allowed} contacts (reached maximum of ${maxContacts}).`);
+        }
+        
+        // Merge with existing contacts, avoiding duplicates
+        setContacts(prev => {
+          const existingEmails = new Set(prev.map(c => c.email.toLowerCase()));
+          const newContacts = importedContacts.filter(c => !existingEmails.has(c.email.toLowerCase()));
+          return [...prev, ...newContacts];
+        });
 
-      alert(`Imported ${importedContacts.length} contacts. ${importedContacts.length - (importedContacts.length - contacts.length)} new, ${contacts.length} duplicates skipped.`);
+        const newCount = importedContacts.filter(c => !contacts.some(ex => ex.email.toLowerCase() === c.email.toLowerCase())).length;
+        const duplicateCount = importedContacts.length - newCount;
+        
+        alert(`Imported ${importedContacts.length} contacts. ${newCount} new, ${duplicateCount} duplicates skipped.`);
+      } catch (error) {
+        alert(`Error importing file: ${error.message}`);
+      }
+    };
+
+    reader.onerror = () => {
+      alert('Error reading file. Please try again.');
     };
 
     if (file.name.endsWith('.csv') || file.name.endsWith('.txt')) {
       reader.readAsText(file);
     } else {
       alert('Please upload a CSV or TXT file');
+      event.target.value = '';
     }
   };
 
-  // Add manual contact
+  // Add manual contact with validation
   const handleAddContact = () => {
-    if (!newContact.email || !newContact.email.includes('@')) {
+    // Validate email
+    if (!newContact.email || !validateEmail(newContact.email)) {
+      alert('Please enter a valid email address');
+      return;
+    }
+
+    // Validate phone if provided
+    if (newContact.phone && !validatePhone(newContact.phone)) {
+      alert('Please enter a valid phone number');
+      return;
+    }
+
+    // Sanitize and validate contact
+    const sanitized = sanitizeContact(newContact);
+    
+    if (!sanitized.email) {
       alert('Please enter a valid email address');
       return;
     }
 
     // Check for duplicates
-    if (contacts.some(c => c.email.toLowerCase() === newContact.email.toLowerCase())) {
+    if (contacts.some(c => c.email.toLowerCase() === sanitized.email.toLowerCase())) {
       alert('This email already exists in your list');
       return;
     }
 
-    setContacts([...contacts, { ...newContact }]);
+    // Limit total contacts
+    if (contacts.length >= 10000) {
+      alert('Maximum of 10,000 contacts allowed. Please delete some contacts first.');
+      return;
+    }
+
+    setContacts([...contacts, sanitized]);
     setNewContact({ name: "", email: "", phone: "" });
     setShowAddForm(false);
   };
@@ -139,16 +216,40 @@ export default function EmailListPage() {
     }
   };
 
-  // Send bulk emails
+  // Send bulk emails with security checks
   const handleSendBulkEmail = async () => {
     if (selectedContacts.length === 0) {
       alert('Please select at least one contact');
       return;
     }
 
-    if (!emailSubject || !emailBody) {
-      alert('Please enter both subject and message');
+    // Rate limiting
+    if (!checkRateLimit('bulk_email', 5, 300000)) { // 5 per 5 minutes
+      alert('Too many email sends. Please wait 5 minutes.');
       return;
+    }
+
+    // Validate inputs
+    if (!emailSubject || emailSubject.trim().length < 3) {
+      alert('Please enter a subject (at least 3 characters)');
+      return;
+    }
+
+    if (!emailBody || emailBody.trim().length < 10) {
+      alert('Please enter a message (at least 10 characters)');
+      return;
+    }
+
+    // Sanitize inputs
+    const sanitizedSubject = emailSubject.trim().slice(0, 200);
+    const sanitizedBody = emailBody.trim().slice(0, 10000);
+
+    // Limit batch size
+    const maxBatchSize = 50;
+    const contactsToEmail = selectedContacts.slice(0, maxBatchSize);
+    
+    if (selectedContacts.length > maxBatchSize) {
+      alert(`Sending to first ${maxBatchSize} contacts. Select smaller batches for better deliverability.`);
     }
 
     setIsSending(true);
@@ -156,14 +257,24 @@ export default function EmailListPage() {
 
     try {
       // Create mailto links for each selected contact
-      const selectedContactData = contacts.filter(c => selectedContacts.includes(c.email));
+      const selectedContactData = contacts.filter(c => contactsToEmail.includes(c.email));
+      
+      // Validate all emails before proceeding
+      const validContacts = selectedContactData.filter(c => validateEmail(c.email));
+      
+      if (validContacts.length === 0) {
+        alert('No valid email addresses found in selected contacts');
+        setIsSending(false);
+        return;
+      }
       
       // For bulk sending, we'll create a mailto with BCC
       // Note: Most email clients limit BCC recipients, so we'll create individual mailto links
-      const emailList = selectedContactData.map(contact => {
-        const subject = encodeURIComponent(emailSubject);
+      const emailList = validContacts.map(contact => {
+        const subject = encodeURIComponent(sanitizedSubject);
+        const personalizedBody = sanitizedBody.replace(/\{name\}/g, contact.name || 'there');
         const body = encodeURIComponent(
-          `Hello ${contact.name || 'there'},\n\n${emailBody}\n\nBest regards,\nCrownQuestNL`
+          `Hello ${contact.name || 'there'},\n\n${personalizedBody}\n\nBest regards,\nCrownQuestNL`
         );
         return `mailto:${contact.email}?subject=${subject}&body=${body}`;
       });
@@ -176,13 +287,13 @@ export default function EmailListPage() {
         if (emailList.length > 1) {
           const remaining = emailList.slice(1);
           localStorage.setItem('pendingEmails', JSON.stringify(remaining));
-          localStorage.setItem('emailSubject', emailSubject);
-          localStorage.setItem('emailBody', emailBody);
+          localStorage.setItem('emailSubject', sanitizedSubject);
+          localStorage.setItem('emailBody', sanitizedBody);
           alert(`Opening first email. After sending, refresh this page to continue with the remaining ${remaining.length} emails.`);
         }
       }
 
-      setSendStatus({ success: true, message: `Prepared ${selectedContacts.length} emails` });
+      setSendStatus({ success: true, message: `Prepared ${validContacts.length} emails` });
     } catch (error) {
       setSendStatus({ success: false, message: 'Error preparing emails: ' + error.message });
     } finally {

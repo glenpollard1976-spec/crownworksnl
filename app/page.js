@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { Crown, Sparkles, ShieldCheck, MapPin, Phone, Mail, ArrowRight, CheckCircle2, X, Bot, FileText, TrendingUp, DollarSign, Clock, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { validateContactForm, checkRateLimit } from "@/lib/security";
 import "./globals.css";
 
 const SITE = {
@@ -88,16 +89,34 @@ export default function Page() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Rate limiting check
+    if (!checkRateLimit('contact_form', 5, 60000)) {
+      alert('Too many requests. Please wait a minute before submitting again.');
+      return;
+    }
+    
+    // Validate form data
+    const validation = validateContactForm(formData);
+    
+    if (!validation.isValid) {
+      alert(validation.errors.join('\n'));
+      return;
+    }
+    
     // Track form submission
     trackConversion('contact_form_submit', {
       form_name: 'contact_form',
       form_location: 'contact_section'
     });
     
+    // Use validated and sanitized data
+    const sanitizedData = validation.data;
+    
     // In a real application, you would send this to a backend API
     // For now, we'll use mailto as a fallback
-    const subject = encodeURIComponent(`Contact from ${formData.name}`);
-    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\n\nMessage:\n${formData.message}`);
+    const subject = encodeURIComponent(`Contact from ${sanitizedData.name}`);
+    const body = encodeURIComponent(`Name: ${sanitizedData.name}\nEmail: ${sanitizedData.email}\nPhone: ${sanitizedData.phone}\n\nMessage:\n${sanitizedData.message}`);
     window.location.href = `mailto:${SITE.email}?subject=${subject}&body=${body}`;
     setFormSubmitted(true);
     setFormData({ name: "", email: "", phone: "", message: "" });
