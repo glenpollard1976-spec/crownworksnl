@@ -9,6 +9,34 @@ const stripe = stripeSecretKey
     })
   : null;
 
+// Allowed package configurations for security
+const ALLOWED_PACKAGES = {
+  'Crown Land Consultation': { amount: 299, isRecurring: false },
+  'Business Growth Package': { amount: 1499, isRecurring: true },
+};
+
+// Rate limiting store (in production, use Redis or similar)
+const rateLimitStore = new Map();
+
+function checkRateLimit(ip, maxRequests = 5, windowMs = 60000) {
+  const now = Date.now();
+  const key = `checkout_${ip}`;
+  const record = rateLimitStore.get(key);
+
+  if (!record || now > record.resetAt) {
+    rateLimitStore.set(key, { count: 1, resetAt: now + windowMs });
+    return true;
+  }
+
+  if (record.count >= maxRequests) {
+    return false;
+  }
+
+  record.count++;
+  rateLimitStore.set(key, record);
+  return true;
+}
+
 export async function POST(request) {
   try {
     if (!stripe) {
@@ -18,7 +46,56 @@ export async function POST(request) {
       );
     }
 
-    const { priceId, packageName, amount, isRecurring } = await request.json();
+    // Get client IP for rate limiting
+    const ip = request.headers.get('x-forwarded-for') || 
+               request.headers.get('x-real-ip') || 
+               'unknown';
+
+    // Rate limiting check
+    if (!checkRateLimit(ip, 5, 60000)) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please wait a minute before trying again.' },
+        { status: 429 }
+      );
+    }
+
+    const body = await request.json();
+    const { priceId, packageName, amount, isRecurring } = body;
+
+    // Validate package name and amount match
+    if (packageName && ALLOWED_PACKAGES[packageName]) {
+      const allowed = ALLOWED_PACKAGES[packageName];
+      // Enforce correct amount and recurring status
+      if (amount !== allowed.amount || isRecurring !== allowed.isRecurring) {
+        return NextResponse.json(
+          { error: 'Invalid package configuration' },
+          { status: 400 }
+        );
+      }
+    } else if (packageName) {
+      return NextResponse.json(
+        { error: 'Invalid package name' },
+        { status: 400 }
+      );
+    }
+
+    // Validate amount if provided
+    if (amount !== undefined) {
+      if (typeof amount !== 'number' || amount <= 0 || amount > 100000) {
+        return NextResponse.json(
+          { error: 'Invalid amount' },
+          { status: 400 }
+        );
+      }
+      // Round to 2 decimal places and convert to cents
+      const amountInCents = Math.round(amount * 100);
+      if (amountInCents < 50) { // Minimum $0.50
+        return NextResponse.json(
+          { error: 'Amount too small' },
+          { status: 400 }
+        );
+      }
+    }
 
     if (!priceId && !amount) {
       return NextResponse.json(
@@ -27,6 +104,11 @@ export async function POST(request) {
       );
     }
 
+    // Sanitize package name
+    const sanitizedPackageName = packageName 
+      ? packageName.replace(/[<>]/g, '').slice(0, 100)
+      : 'CrownWorksNL Service';
+
     // Create checkout session
     const sessionParams = {
       payment_method_types: ['card'],
@@ -34,7 +116,8 @@ export async function POST(request) {
       success_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://crownworksnl.com'}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://crownworksnl.com'}/pricing?canceled=true`,
       metadata: {
-        packageName: packageName || 'Service Package',
+        packageName: sanitizedPackageName,
+        timestamp: new Date().toISOString(),
       },
     };
 
@@ -53,8 +136,8 @@ export async function POST(request) {
           price_data: {
             currency: 'cad',
             product_data: {
-              name: packageName || 'CrownWorksNL Service',
-              description: packageName || 'Service Package',
+              name: sanitizedPackageName,
+              description: sanitizedPackageName,
             },
             unit_amount: amount ? Math.round(amount * 100) : 29900, // $299 default in cents
           },

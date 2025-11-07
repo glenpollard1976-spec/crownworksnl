@@ -1,0 +1,21 @@
+ICON PLACEHOLDER - Replace with actual icons
+
+You need to create two icon files:
+1. icon-192.png (192x192 pixels)
+2. icon-512.png (512x512 pixels)
+
+You can:
+- Use a design tool like Canva, Figma, or Photoshop
+- Use an online icon generator
+- Hire a designer
+
+The icons should:
+- Represent CrownWorksNL brand
+- Be clear and recognizable at small sizes
+- Use the brand colors (indigo #4f46e5)
+- Be square with transparent or solid background
+
+Once created, place them in the /public folder:
+- public/icon-192.png
+- public/icon-512.png
+

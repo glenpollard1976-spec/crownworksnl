@@ -5,6 +5,42 @@
 /* ---- Global styles ---- */
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Remove unused styles - design is handled via Tailwind classes in components */
+body {
+  /* Prevent layout shift on mobile */
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Prevent layout shift from images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Smooth transitions for mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Fix for mobile viewport issues */
+@supports (-webkit-touch-callout: none) {
+  body {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Prevent jumpiness from animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

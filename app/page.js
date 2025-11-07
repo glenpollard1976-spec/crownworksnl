@@ -66,6 +66,7 @@ export default function Page() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" });
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [loadingCheckout, setLoadingCheckout] = useState({ crownLand: false, businessGrowth: false });
 
   const handleNavClick = () => {
     setMobileMenuOpen(false);
@@ -132,7 +133,7 @@ export default function Page() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-zinc-50 to-white text-zinc-900">
-      <header className="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-zinc-200">
+      <header className="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-zinc-200 will-change-transform">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <a href="#home" className="flex items-center gap-2 font-semibold no-underline">
@@ -316,7 +317,9 @@ export default function Page() {
                   </ul>
                   <button
                     onClick={async () => {
+                      if (loadingCheckout.crownLand) return;
                       handleCTAClick('pricing_click', 'crown_land_consultation');
+                      setLoadingCheckout(prev => ({ ...prev, crownLand: true }));
                       try {
                         const response = await fetch('/api/checkout', {
                           method: 'POST',
@@ -328,16 +331,26 @@ export default function Page() {
                           }),
                         });
                         const data = await response.json();
-                        if (data.url) {
+                        if (data.error) {
+                          alert(data.error);
+                          setLoadingCheckout(prev => ({ ...prev, crownLand: false }));
+                        } else if (data.url) {
                           window.location.href = data.url;
+                        } else {
+                          throw new Error('No checkout URL received');
                         }
                       } catch (error) {
-                        alert('Error starting checkout. Please contact us directly.');
+                        console.error('Checkout error:', error);
+                        alert('Error starting checkout. Please contact us directly at ' + SITE.email);
+                        setLoadingCheckout(prev => ({ ...prev, crownLand: false }));
                       }
                     }}
                     className="w-full"
+                    disabled={loadingCheckout.crownLand}
                   >
-                    <Button className="rounded-2xl w-full">Buy Now - $299</Button>
+                    <Button className="rounded-2xl w-full" disabled={loadingCheckout.crownLand}>
+                      {loadingCheckout.crownLand ? 'Processing...' : 'Buy Now - $299'}
+                    </Button>
                   </button>
                 </CardContent>
               </Card>
@@ -379,7 +392,9 @@ export default function Page() {
                   </ul>
                   <button
                     onClick={async () => {
+                      if (loadingCheckout.businessGrowth) return;
                       handleCTAClick('pricing_click', 'business_growth_package');
+                      setLoadingCheckout(prev => ({ ...prev, businessGrowth: true }));
                       try {
                         const response = await fetch('/api/checkout', {
                           method: 'POST',
@@ -391,16 +406,26 @@ export default function Page() {
                           }),
                         });
                         const data = await response.json();
-                        if (data.url) {
+                        if (data.error) {
+                          alert(data.error);
+                          setLoadingCheckout(prev => ({ ...prev, businessGrowth: false }));
+                        } else if (data.url) {
                           window.location.href = data.url;
+                        } else {
+                          throw new Error('No checkout URL received');
                         }
                       } catch (error) {
-                        alert('Error starting checkout. Please contact us directly.');
+                        console.error('Checkout error:', error);
+                        alert('Error starting checkout. Please contact us directly at ' + SITE.email);
+                        setLoadingCheckout(prev => ({ ...prev, businessGrowth: false }));
                       }
                     }}
                     className="w-full"
+                    disabled={loadingCheckout.businessGrowth}
                   >
-                    <Button className="rounded-2xl w-full bg-indigo-600 hover:bg-indigo-700">Subscribe - $1,499/month</Button>
+                    <Button className="rounded-2xl w-full bg-indigo-600 hover:bg-indigo-700" disabled={loadingCheckout.businessGrowth}>
+                      {loadingCheckout.businessGrowth ? 'Processing...' : 'Subscribe - $1,499/month'}
+                    </Button>
                   </button>
                 </CardContent>
               </Card>
