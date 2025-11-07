@@ -31,8 +31,8 @@ export async function POST(request) {
     const sessionParams = {
       payment_method_types: ['card'],
       mode: isRecurring ? 'subscription' : 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://glenp-websitenl.vercel.app'}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://glenp-websitenl.vercel.app'}/pricing?canceled=true`,
+      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://crownworksnl.com'}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://crownworksnl.com'}/pricing?canceled=true`,
       metadata: {
         packageName: packageName || 'Service Package',
       },
@@ -53,7 +53,7 @@ export async function POST(request) {
           price_data: {
             currency: 'cad',
             product_data: {
-              name: packageName || 'CrownQuestNL Service',
+              name: packageName || 'CrownWorksNL Service',
               description: packageName || 'Service Package',
             },
             unit_amount: amount ? Math.round(amount * 100) : 29900, // $299 default in cents

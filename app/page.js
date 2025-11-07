@@ -8,7 +8,7 @@ import { validateContactForm, checkRateLimit } from "@/lib/security";
 import "./globals.css";
 
 const SITE = {
-  name: "CrownQuestNL",
+  name: "CrownWorksNL",
   phone: "+1 (709) 721-0340",
   url: "https://crownworksnl.com",
   email: "info@crownworksnl.com",
@@ -39,7 +39,7 @@ const features = [
 ];
 
 const testimonials = [
-  { quote: "CrownQuestNL took us from idea to launch in two weeks. Our bookings doubled in month one.", name: "M. Jacobs", role: "Owner, Harbor Outfitters" },
+  { quote: "CrownWorksNL took us from idea to launch in two weeks. Our bookings doubled in month one.", name: "M. Jacobs", role: "Owner, Harbor Outfitters" },
   { quote: "Smart strategy + crisp design. They handled site, branding, and shorts—stress free.", name: "R. Bennett", role: "Founder, EastRock Guides" },
 ];
 
@@ -137,7 +137,7 @@ export default function Page() {
           <div className="flex items-center justify-between h-16">
             <a href="#home" className="flex items-center gap-2 font-semibold no-underline">
               <Crown className="w-6 h-6" />
-              <span>CrownQuestNL</span>
+              <span>CrownWorksNL</span>
             </a>
             <nav className="hidden md:flex items-center gap-6" aria-label="Main navigation">
               {nav.map((n) => (
@@ -214,7 +214,7 @@ export default function Page() {
                 Grow boldly. Land your future with confidence.
               </h1>
               <p className="mt-4 text-zinc-600 text-lg">
-                CrownQuestNL, founded by Glen Pollard of the Qalipu First Nation, provides strategy, design, and Crown Land services to simplify your path to ownership and growth in Newfoundland & Labrador.
+                CrownWorksNL, founded by Glen Pollard of the Qalipu First Nation, provides strategy, design, and Crown Land services to simplify your path to ownership and growth in Newfoundland & Labrador.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <a href="#contact" onClick={() => handleCTAClick('get_free_consultation', 'hero')} className="no-underline"><Button className="rounded-2xl text-lg px-6 py-3">Get Free Consultation <ArrowRight className="ml-2 w-4 h-4" /></Button></a>
@@ -557,7 +557,7 @@ export default function Page() {
           <AnimatedSection className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Partnership Opportunities</h2>
             <p className="text-zinc-600 max-w-2xl mx-auto">
-              Join forces with CrownQuestNL to create meaningful impact in Newfoundland & Labrador. We're always looking for partners who share our vision.
+              Join forces with CrownWorksNL to create meaningful impact in Newfoundland & Labrador. We're always looking for partners who share our vision.
             </p>
           </AnimatedSection>
           <div className="grid md:grid-cols-2 gap-6 mb-8">
@@ -632,13 +632,13 @@ export default function Page() {
             <AnimatedSection>
               <div className="space-y-4">
                 <p className="text-zinc-600 text-lg">
-                  Glen Pollard, a proud member of the Qalipu First Nation, founded CrownQuestNL to help businesses and individuals navigate the complexities of Crown Land acquisition in Newfoundland & Labrador.
+                  Glen Pollard, a proud member of the Qalipu First Nation, founded CrownWorksNL to help businesses and individuals navigate the complexities of Crown Land acquisition in Newfoundland & Labrador.
                 </p>
                 <p className="text-zinc-600">
                   Based in Corner Brook, Glen brings deep local expertise and a genuine understanding of the region's unique challenges and opportunities. With a commitment to Indigenous values and community empowerment, he combines strategic business acumen with cultural sensitivity to deliver results that matter.
                 </p>
                 <p className="text-zinc-600">
-                  Whether you're looking to acquire Crown Land, grow your business, or explore new opportunities in Newfoundland & Labrador, Glen and the CrownQuestNL team are here to guide you every step of the way.
+                  Whether you're looking to acquire Crown Land, grow your business, or explore new opportunities in Newfoundland & Labrador, Glen and the CrownWorksNL team are here to guide you every step of the way.
                 </p>
                 <div className="flex items-center gap-4 pt-4">
                   <a href="#contact" className="no-underline">
@@ -688,26 +688,26 @@ export default function Page() {
           </AnimatedSection>
           <div className="grid md:grid-cols-2 gap-8">
             <AnimatedSection>
-              <Card className="bg-white/10 backdrop-blur border-white/20">
-                <CardContent className="pt-6">
+            <Card className="bg-white/10 backdrop-blur border-white/20">
+              <CardContent className="pt-6">
                   <h3 className="font-semibold text-lg mb-6">Contact Information</h3>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
                       <Phone className="w-5 h-5 flex-shrink-0" />
-                      <a href={`tel:${SITE.phone}`} className="no-underline text-white hover:underline">{SITE.phone}</a>
-                    </div>
-                    <div className="flex items-center gap-3">
+                    <a href={`tel:${SITE.phone}`} className="no-underline text-white hover:underline">{SITE.phone}</a>
+                  </div>
+                  <div className="flex items-center gap-3">
                       <Mail className="w-5 h-5 flex-shrink-0" />
-                      <a href={`mailto:${SITE.email}`} className="no-underline text-white hover:underline">{SITE.email}</a>
-                    </div>
+                    <a href={`mailto:${SITE.email}`} className="no-underline text-white hover:underline">{SITE.email}</a>
+                  </div>
                     <div className="flex items-start gap-3">
                       <MapPin className="w-5 h-5 flex-shrink-0 mt-1" />
-                      <span>Corner Brook, Newfoundland & Labrador</span>
-                    </div>
+                    <span>Corner Brook, Newfoundland & Labrador</span>
                   </div>
-                </CardContent>
-              </Card>
-            </AnimatedSection>
+                </div>
+              </CardContent>
+            </Card>
+          </AnimatedSection>
             <AnimatedSection>
               <Card className="bg-white/10 backdrop-blur border-white/20">
                 <CardContent className="pt-6">

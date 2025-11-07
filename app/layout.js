@@ -1,20 +1,20 @@
 
 export const metadata = {
-  title: "CrownQuestNL — Crown Land & Business Services in Newfoundland & Labrador",
+  title: "CrownWorksNL — Crown Land & Business Services in Newfoundland & Labrador",
   description: "Expert Crown Land acquisition, business consulting, and AI solutions in Corner Brook, NL. Founded by Glen Pollard of Qalipu First Nation. Get your free consultation today.",
   keywords: "Crown Land Newfoundland, Crown Land Labrador, business consulting NL, Qalipu First Nation, Corner Brook business services, Crown Land application, AI business solutions",
   authors: [{ name: "Glen Pollard" }],
   openGraph: {
-    title: "CrownQuestNL — Crown Land & Business Services",
+    title: "CrownWorksNL — Crown Land & Business Services",
     description: "Expert Crown Land acquisition and business consulting in Newfoundland & Labrador",
     url: "https://crownworksnl.com",
-    siteName: "CrownQuestNL",
+    siteName: "CrownWorksNL",
     locale: "en_CA",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "CrownQuestNL — Crown Land & Business Services",
+    title: "CrownWorksNL — Crown Land & Business Services",
     description: "Expert Crown Land acquisition and business consulting in Newfoundland & Labrador",
   },
   robots: {
@@ -63,7 +63,7 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
-              "name": "CrownQuestNL",
+              "name": "CrownWorksNL",
               "description": "Crown Land acquisition and business consulting services in Newfoundland & Labrador",
               "url": "https://crownworksnl.com",
               "telephone": "+1-709-721-0340",

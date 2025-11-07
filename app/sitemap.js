@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = 'https://glenp-websitenl.vercel.app';
+  const baseUrl = 'https://crownworksnl.com';
   
   return [
     {

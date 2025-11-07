@@ -5,7 +5,7 @@ export default function robots() {
       allow: '/',
       disallow: [],
     },
-    sitemap: 'https://glenp-websitenl.vercel.app/sitemap.xml',
+    sitemap: 'https://crownworksnl.com/sitemap.xml',
   };
 }
 

@@ -274,7 +274,7 @@ export default function EmailListPage() {
         const subject = encodeURIComponent(sanitizedSubject);
         const personalizedBody = sanitizedBody.replace(/\{name\}/g, contact.name || 'there');
         const body = encodeURIComponent(
-          `Hello ${contact.name || 'there'},\n\n${personalizedBody}\n\nBest regards,\nCrownQuestNL`
+          `Hello ${contact.name || 'there'},\n\n${personalizedBody}\n\nBest regards,\nCrownWorksNL`
         );
         return `mailto:${contact.email}?subject=${subject}&body=${body}`;
       });
