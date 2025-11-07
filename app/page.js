@@ -541,10 +541,47 @@ export default function Page() {
       <section id="provet" className="py-20 bg-gradient-to-b from-indigo-50 to-white">
         <div className="max-w-6xl mx-auto px-4">
           <AnimatedSection className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">ProVet</h2>
-            <p className="text-zinc-600 max-w-2xl mx-auto">
-              Professional veterinary practice management and business consulting services.
+            <h2 className="text-3xl font-bold mb-4">24/7 AI Veterinary Care for Your Best Friend</h2>
+            <p className="text-zinc-600 max-w-2xl mx-auto text-lg mb-6">
+              Complete canine health management at a fraction of traditional vet costs. AI-powered consultations, health records, vaccination tracking, and instant expert guidance whenever your dog needs it.
             </p>
+            <div className="flex flex-wrap gap-4 justify-center mb-6">
+              <a 
+                href="#contact" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleCTAClick('start_free_trial', 'provet_hero');
+                  const targetElement = document.getElementById('contact');
+                  if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }} 
+                className="no-underline"
+              >
+                <Button className="rounded-2xl bg-indigo-600 hover:bg-indigo-700 px-6 py-3 font-semibold">
+                  Start Free Trial
+                </Button>
+              </a>
+              <a 
+                href="#pricing" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleCTAClick('view_pricing', 'provet_hero');
+                  const targetElement = document.getElementById('pricing');
+                  if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }} 
+                className="no-underline"
+              >
+                <Button variant="outline" className="rounded-2xl px-6 py-3 font-semibold">
+                  View Pricing
+                </Button>
+              </a>
+            </div>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium">
+              <span>💰 Save up to 80% compared to traditional vet visits</span>
+            </div>
           </AnimatedSection>
           <div className="grid md:grid-cols-2 gap-6">
             <AnimatedSection>
