@@ -263,6 +263,13 @@ async function main() {
   
   console.log(`✅ Found ${contacts.length} valid contacts\n`);
   
+  // Limit to 111 emails as requested
+  const maxEmails = 111;
+  const contactsToSend = contacts.slice(0, maxEmails);
+  if (contacts.length > maxEmails) {
+    console.log(`📊 Limiting to first ${maxEmails} contacts (out of ${contacts.length} total)\n`);
+  }
+  
   // Create transporter
   const transporter = createTransporter();
   
@@ -291,8 +298,8 @@ async function main() {
   console.log('Starting in 3 seconds...');
   await new Promise(resolve => setTimeout(resolve, 3000));
   
-  // Start batch send
-  await batchSend(transporter, contacts, batchSize, delayMs);
+  // Start batch send (using limited contacts)
+  await batchSend(transporter, contactsToSend, batchSize, delayMs);
   
   // Close transporter
   transporter.close();

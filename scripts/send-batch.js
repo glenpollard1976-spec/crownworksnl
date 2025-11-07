@@ -97,17 +97,24 @@ function openMailto(link) {
 
 // Batch send with delays
 async function batchSend(contacts, batchSize = 10, delayMs = 5000) {
+  // Limit to 111 emails as requested
+  const maxEmails = 111;
+  const contactsToSend = contacts.slice(0, maxEmails);
+  if (contacts.length > maxEmails) {
+    console.log(`📊 Limiting to first ${maxEmails} contacts (out of ${contacts.length} total)\n`);
+  }
+  
   console.log(`\n🚀 Starting batch send...`);
-  console.log(`📊 Total contacts: ${contacts.length}`);
+  console.log(`📊 Total contacts: ${contactsToSend.length}`);
   console.log(`📦 Batch size: ${batchSize}`);
   console.log(`⏱️  Delay between batches: ${delayMs / 1000} seconds\n`);
   
   let sent = 0;
   const batches = [];
   
-  // Create batches
-  for (let i = 0; i < contacts.length; i += batchSize) {
-    batches.push(contacts.slice(i, i + batchSize));
+  // Create batches from limited contacts
+  for (let i = 0; i < contactsToSend.length; i += batchSize) {
+    batches.push(contactsToSend.slice(i, i + batchSize));
   }
   
   console.log(`📋 Created ${batches.length} batches\n`);
@@ -131,7 +138,7 @@ async function batchSend(contacts, batchSize = 10, delayMs = 5000) {
       }
     }
     
-    console.log(`  ✅ Batch ${batchIndex + 1} complete - ${sent}/${contacts.length} total`);
+    console.log(`  ✅ Batch ${batchIndex + 1} complete - ${sent}/${contactsToSend.length} total`);
     
     // Delay between batches (except last one)
     if (batchIndex < batches.length - 1) {
@@ -140,7 +147,7 @@ async function batchSend(contacts, batchSize = 10, delayMs = 5000) {
     }
   }
   
-  console.log(`\n✅ COMPLETE! Opened ${sent} emails`);
+  console.log(`\n✅ COMPLETE! Opened ${sent} emails (out of ${contactsToSend.length} requested)`);
   console.log(`\n📝 Next steps:`);
   console.log(`   1. Your email client should have opened with all emails`);
   console.log(`   2. Review and click "Send" on each one`);
