@@ -13,9 +13,20 @@
     "send-bulk": "node scripts/send-bulk-smtp.js",
     "auto-launch": "powershell -ExecutionPolicy Bypass -File AUTO_LAUNCH.ps1",
     "auto-deploy": "powershell -ExecutionPolicy Bypass -File AUTO_DEPLOY.ps1",
-    "auto-email": "powershell -ExecutionPolicy Bypass -File AUTO_SEND_EMAILS.ps1"
+    "auto-email": "powershell -ExecutionPolicy Bypass -File AUTO_SEND_EMAILS.ps1",
+    "cap:sync": "npx cap sync",
+    "cap:android": "npx cap open android",
+    "cap:ios": "npx cap open ios",
+    "build:mobile": "npm run build && npx cap sync"
   },
   "dependencies": {
+    "@capacitor/android": "^7.4.4",
+    "@capacitor/app": "^7.1.0",
+    "@capacitor/cli": "^7.4.4",
+    "@capacitor/core": "^7.4.4",
+    "@capacitor/ios": "^7.4.4",
+    "@capacitor/splash-screen": "^7.0.3",
+    "@capacitor/status-bar": "^7.0.3",
     "@stripe/stripe-js": "^8.3.0",
     "framer-motion": "^11.0.0",
     "lucide-react": "^0.441.0",

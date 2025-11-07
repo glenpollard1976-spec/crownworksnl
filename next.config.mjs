@@ -3,6 +3,10 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false, // Remove X-Powered-By header
   compress: true,
+  output: 'export', // Enable static export for Capacitor
+  images: {
+    unoptimized: true, // Required for static export
+  },
   async headers() {
     return [
       {
