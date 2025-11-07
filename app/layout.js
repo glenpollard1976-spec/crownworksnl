@@ -1,12 +1,12 @@
 
 export const metadata = {
-  title: "CrownWorksNL — Crown Land & Business Services in Newfoundland & Labrador",
-  description: "Expert Crown Land acquisition, business consulting, and AI solutions in Corner Brook, NL. Founded by Glen Pollard of Qalipu First Nation. Get your free consultation today.",
-  keywords: "Crown Land Newfoundland, Crown Land Labrador, business consulting NL, Qalipu First Nation, Corner Brook business services, Crown Land application, AI business solutions",
+  title: "CrownWorksNL — Business Consulting & Growth Services in Newfoundland & Labrador",
+  description: "Expert business consulting, strategy, and AI solutions in Corner Brook, NL. Founded by Glen Pollard of Qalipu First Nation. Get your free consultation today.",
+  keywords: "business consulting NL, business growth Newfoundland, Qalipu First Nation, Corner Brook business services, AI business solutions, strategic planning",
   authors: [{ name: "Glen Pollard" }],
   openGraph: {
-    title: "CrownWorksNL — Crown Land & Business Services",
-    description: "Expert Crown Land acquisition and business consulting in Newfoundland & Labrador",
+    title: "CrownWorksNL — Business Consulting & Growth Services",
+    description: "Expert business consulting and growth services in Newfoundland & Labrador",
     url: "https://crownworksnl.com",
     siteName: "CrownWorksNL",
     locale: "en_CA",
@@ -14,8 +14,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "CrownWorksNL — Crown Land & Business Services",
-    description: "Expert Crown Land acquisition and business consulting in Newfoundland & Labrador",
+    title: "CrownWorksNL — Business Consulting & Growth Services",
+    description: "Expert business consulting and growth services in Newfoundland & Labrador",
   },
   robots: {
     index: true,
@@ -72,7 +72,7 @@ export default function RootLayout({ children }) {
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
               "name": "CrownWorksNL",
-              "description": "Crown Land acquisition and business consulting services in Newfoundland & Labrador",
+              "description": "Business consulting and growth services in Newfoundland & Labrador",
               "url": "https://crownworksnl.com",
               "telephone": "+1-709-721-0340",
               "email": "info@crownworksnl.com",
@@ -90,7 +90,7 @@ export default function RootLayout({ children }) {
                 "@type": "State",
                 "name": "Newfoundland and Labrador"
               },
-              "serviceType": ["Crown Land Services", "Business Consulting", "AI Solutions", "Brand Development"],
+              "serviceType": ["Business Consulting", "AI Solutions", "Brand Development", "Strategic Planning"],
               "priceRange": "$$",
               "paymentAccepted": "Cash, Credit Card, Bank Transfer (USD)"
             })

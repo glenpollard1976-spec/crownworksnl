@@ -26,13 +26,11 @@ const nav = [
 const services = [
   { icon: <ShieldCheck className="w-6 h-6" />, title: "Consulting & Strategy", desc: "Roadmaps, audits, and hands‑on guidance to grow with confidence." },
   { icon: <Sparkles className="w-6 h-6" />, title: "Brand & Creative", desc: "Identity systems, content packages, and thumbnail/shorts kits." },
-  { icon: <Crown className="w-6 h-6" />, title: "Crown Land Services", desc: "Simplifying the process of obtaining Crown Land with trusted local expertise." },
 ];
 
 const features = [
   "Proud member of Qalipu First Nation",
   "Based in Corner Brook, Newfoundland",
-  "Specializing in simplifying Crown Land access",
   "Clear pricing & fast turnaround",
   "You own your data and assets",
   "Ongoing support plans",
@@ -91,7 +89,7 @@ export default function Page() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" });
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [loadingCheckout, setLoadingCheckout] = useState({ crownLand: false, businessGrowth: false });
+  const [loadingCheckout, setLoadingCheckout] = useState({ businessGrowth: false });
 
   const handleNavClick = () => {
     setMobileMenuOpen(false);
@@ -247,13 +245,13 @@ export default function Page() {
             <div>
               <div className="inline-flex items-center gap-2 text-xs px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 mb-4">
                 <Sparkles className="w-4 h-4" />
-                Empowering business & land ownership in NL
+                Empowering business growth in NL
               </div>
               <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight">
                 Grow boldly. Land your future with confidence.
               </h1>
               <p className="mt-4 text-zinc-600 text-lg">
-                CrownWorksNL, founded by Glen Pollard of the Qalipu First Nation, provides strategy, design, and Crown Land services to simplify your path to ownership and growth in Newfoundland & Labrador.
+                CrownWorksNL, founded by Glen Pollard of the Qalipu First Nation, provides strategy, design, and business consulting services to help you grow and succeed in Newfoundland & Labrador.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <a href="#contact" onClick={() => handleCTAClick('get_free_consultation', 'hero')} className="no-underline"><Button className="rounded-2xl text-lg px-6 py-3 bg-indigo-600 hover:bg-indigo-700">Get Free Consultation <ArrowRight className="ml-2 w-4 h-4" /></Button></a>
@@ -330,82 +328,14 @@ export default function Page() {
           <AnimatedSection className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Service Packages</h2>
             <p className="text-zinc-600 max-w-2xl mx-auto mb-4">
-              Transparent pricing for Crown Land services and business consulting. All packages include a free initial consultation.
+              Transparent pricing for business consulting and growth services. All packages include a free initial consultation.
             </p>
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium">
               <Users className="w-4 h-4" />
               <span>12+ businesses helped this month</span>
             </div>
           </AnimatedSection>
-          <div className="grid md:grid-cols-3 gap-6">
-            <AnimatedSection>
-              <Card className="border-2 border-zinc-200">
-                <CardHeader>
-                  <CardTitle className="text-xl">Crown Land Consultation</CardTitle>
-                  <div className="mt-4">
-                    <span className="text-3xl font-bold text-zinc-900">$299</span>
-                    <span className="text-zinc-600 ml-2">USD one-time</span>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3 mb-6">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-zinc-600">Initial consultation & assessment</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-zinc-600">Application guidance & review</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-zinc-600">Document preparation support</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-zinc-600">Follow-up support (30 days)</span>
-                    </li>
-                  </ul>
-                  <button
-                    onClick={async () => {
-                      if (loadingCheckout.crownLand) return;
-                      handleCTAClick('pricing_click', 'crown_land_consultation');
-                      setLoadingCheckout(prev => ({ ...prev, crownLand: true }));
-                      try {
-                        const response = await fetch('/api/checkout', {
-                          method: 'POST',
-                          headers: { 'Content-Type': 'application/json' },
-                          body: JSON.stringify({
-                            packageName: 'Crown Land Consultation',
-                            amount: 299,
-                            isRecurring: false,
-                          }),
-                        });
-                        const data = await response.json();
-                        if (data.error) {
-                          alert(data.error);
-                          setLoadingCheckout(prev => ({ ...prev, crownLand: false }));
-                        } else if (data.url) {
-                          window.location.href = data.url;
-                        } else {
-                          throw new Error('No checkout URL received');
-                        }
-                      } catch (error) {
-                        console.error('Checkout error:', error);
-                        alert('Error starting checkout. Please contact us directly at ' + SITE.email);
-                        setLoadingCheckout(prev => ({ ...prev, crownLand: false }));
-                      }
-                    }}
-                    className="w-full"
-                    disabled={loadingCheckout.crownLand}
-                  >
-                    <Button className="rounded-2xl w-full" disabled={loadingCheckout.crownLand}>
-                      {loadingCheckout.crownLand ? 'Processing...' : 'Buy Now - $299'}
-                    </Button>
-                  </button>
-                </CardContent>
-              </Card>
-            </AnimatedSection>
+          <div className="grid md:grid-cols-2 gap-6">
             <AnimatedSection>
               <Card className="border-2 border-indigo-500 relative">
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -598,7 +528,7 @@ export default function Page() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-zinc-600">
-                    Streamline Crown Land applications and business documentation with AI that helps prepare, review, and organize your paperwork.
+                    Streamline business documentation and paperwork with AI that helps prepare, review, and organize your files.
                   </p>
                 </CardContent>
               </Card>
@@ -649,7 +579,7 @@ export default function Page() {
                   <ul className="space-y-2 text-zinc-600">
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                      <span>Joint ventures in Crown Land development projects</span>
+                      <span>Joint ventures in business development projects</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
@@ -679,7 +609,7 @@ export default function Page() {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                      <span>Educational workshops on Crown Land access</span>
+                      <span>Educational workshops on business growth</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
@@ -708,13 +638,13 @@ export default function Page() {
             <AnimatedSection>
               <div className="space-y-4">
                 <p className="text-zinc-600 text-lg">
-                  Glen Pollard, a proud member of the Qalipu First Nation, founded CrownWorksNL to help businesses and individuals navigate the complexities of Crown Land acquisition in Newfoundland & Labrador.
+                  Glen Pollard, a proud member of the Qalipu First Nation, founded CrownWorksNL to help businesses and individuals grow and succeed in Newfoundland & Labrador.
                 </p>
                 <p className="text-zinc-600">
                   Based in Corner Brook, Glen brings deep local expertise and a genuine understanding of the region's unique challenges and opportunities. With a commitment to Indigenous values and community empowerment, he combines strategic business acumen with cultural sensitivity to deliver results that matter.
                 </p>
                 <p className="text-zinc-600">
-                  Whether you're looking to acquire Crown Land, grow your business, or explore new opportunities in Newfoundland & Labrador, Glen and the CrownWorksNL team are here to guide you every step of the way.
+                  Whether you're looking to grow your business, expand your reach, or explore new opportunities in Newfoundland & Labrador, Glen and the CrownWorksNL team are here to guide you every step of the way.
                 </p>
                 <div className="flex items-center gap-4 pt-4">
                   <a href="#contact" className="no-underline">
@@ -730,7 +660,7 @@ export default function Page() {
                   <ul className="space-y-3">
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-zinc-600">Crown Land application and acquisition processes</span>
+                      <span className="text-zinc-600">Business strategy and growth planning</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />

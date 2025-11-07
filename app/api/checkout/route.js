@@ -11,7 +11,6 @@ const stripe = stripeSecretKey
 
 // Allowed package configurations for security
 const ALLOWED_PACKAGES = {
-  'Crown Land Consultation': { amount: 299, isRecurring: false },
   'Business Growth Package': { amount: 1499, isRecurring: true },
 };
 
