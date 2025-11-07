@@ -314,9 +314,31 @@ export default function Page() {
                       <span className="text-zinc-600">Follow-up support (30 days)</span>
                     </li>
                   </ul>
-                  <a href="#contact" onClick={() => handleCTAClick('pricing_click', 'crown_land_consultation')} className="no-underline">
-                    <Button className="rounded-2xl w-full">Get Started</Button>
-                  </a>
+                  <button
+                    onClick={async () => {
+                      handleCTAClick('pricing_click', 'crown_land_consultation');
+                      try {
+                        const response = await fetch('/api/checkout', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({
+                            packageName: 'Crown Land Consultation',
+                            amount: 299,
+                            isRecurring: false,
+                          }),
+                        });
+                        const data = await response.json();
+                        if (data.url) {
+                          window.location.href = data.url;
+                        }
+                      } catch (error) {
+                        alert('Error starting checkout. Please contact us directly.');
+                      }
+                    }}
+                    className="w-full"
+                  >
+                    <Button className="rounded-2xl w-full">Buy Now - $299</Button>
+                  </button>
                 </CardContent>
               </Card>
             </AnimatedSection>
@@ -355,9 +377,31 @@ export default function Page() {
                       <span className="text-zinc-600">Priority email support</span>
                     </li>
                   </ul>
-                  <a href="#contact" onClick={() => handleCTAClick('pricing_click', 'business_growth_package')} className="no-underline">
-                    <Button className="rounded-2xl w-full bg-indigo-600 hover:bg-indigo-700">Get Started</Button>
-                  </a>
+                  <button
+                    onClick={async () => {
+                      handleCTAClick('pricing_click', 'business_growth_package');
+                      try {
+                        const response = await fetch('/api/checkout', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({
+                            packageName: 'Business Growth Package',
+                            amount: 1499,
+                            isRecurring: true,
+                          }),
+                        });
+                        const data = await response.json();
+                        if (data.url) {
+                          window.location.href = data.url;
+                        }
+                      } catch (error) {
+                        alert('Error starting checkout. Please contact us directly.');
+                      }
+                    }}
+                    className="w-full"
+                  >
+                    <Button className="rounded-2xl w-full bg-indigo-600 hover:bg-indigo-700">Subscribe - $1,499/month</Button>
+                  </button>
                 </CardContent>
               </Card>
             </AnimatedSection>
