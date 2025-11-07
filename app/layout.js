@@ -95,12 +95,6 @@ export default function RootLayout({ children }) {
               "paymentAccepted": "Cash, Credit Card, Bank Transfer (USD)",
               "applicationCategory": "BusinessApplication",
               "operatingSystem": ["Android", "iOS"],
-              "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD",
-                "availability": "https://schema.org/InStock"
-              },
               "softwareVersion": "1.0.0",
               "softwareRequirements": "Android 5.0+ or iOS 12.0+",
               "downloadUrl": [
@@ -108,8 +102,6 @@ export default function RootLayout({ children }) {
                 "https://apps.apple.com/app/crownworksnl/id1234567890"
               ],
               "screenshot": "https://crownworksnl.com/app-screenshot.png",
-              "applicationCategory": "BusinessApplication",
-              "operatingSystem": ["Android", "iOS"],
               "offers": [
                 {
                   "@type": "Offer",
