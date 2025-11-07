@@ -59,7 +59,7 @@ export async function POST(request) {
     }
 
     const body = await request.json();
-    const { priceId, packageName, amount, isRecurring } = body;
+    const { priceId, packageName, amount, isRecurring, presale, tier, presaleId } = body;
 
     // Validate package name and amount match
     if (packageName && ALLOWED_PACKAGES[packageName]) {
@@ -103,10 +103,22 @@ export async function POST(request) {
       );
     }
 
-    // Sanitize package name
-    const sanitizedPackageName = packageName 
-      ? packageName.replace(/[<>]/g, '').slice(0, 100)
-      : 'CrownWorksNL Service';
+    // Handle presales
+    let sanitizedPackageName;
+    if (presale && tier) {
+      const tierNames = {
+        founder: 'CrownWorks AI Agent - Founder Tier (Presale)',
+        pioneer: 'CrownWorks AI Agent - Pioneer Tier (Presale)',
+        early: 'CrownWorks AI Agent - Early Adopter (Presale)',
+        starter: 'CrownWorks AI Agent - Starter (Presale)'
+      };
+      sanitizedPackageName = tierNames[tier] || 'CrownWorks AI Agent - Presale';
+    } else {
+      // Sanitize package name
+      sanitizedPackageName = packageName 
+        ? packageName.replace(/[<>]/g, '').slice(0, 100)
+        : 'CrownWorksNL Service';
+    }
 
     // Create checkout session
     const sessionParams = {
@@ -117,6 +129,9 @@ export async function POST(request) {
       metadata: {
         packageName: sanitizedPackageName,
         timestamp: new Date().toISOString(),
+        presale: presale ? 'true' : 'false',
+        tier: tier || '',
+        presaleId: presaleId || ''
       },
     };
 

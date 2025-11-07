@@ -22,6 +22,7 @@ const nav = [
   { label: "Pricing", href: "#pricing" },
   { label: "Mobile App", href: "#mobile-apps" },
   { label: "AI Agents", href: "#ai-agents" },
+  { label: "Presales", href: "/presales" },
   { label: "About Glen", href: "#about" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
