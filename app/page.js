@@ -16,6 +16,8 @@ const SITE = {
 
 const nav = [
   { label: "Services", href: "#services" },
+  { label: "iLawyer", href: "#ilawyer" },
+  { label: "ProVet", href: "#provet" },
   { label: "Pricing", href: "#pricing" },
   { label: "AI Agents", href: "#ai-agents" },
   { label: "About Glen", href: "#about" },
@@ -26,6 +28,8 @@ const nav = [
 const services = [
   { icon: <ShieldCheck className="w-6 h-6" />, title: "Consulting & Strategy", desc: "Roadmaps, audits, and hands‑on guidance to grow with confidence." },
   { icon: <Sparkles className="w-6 h-6" />, title: "Brand & Creative", desc: "Identity systems, content packages, and thumbnail/shorts kits." },
+  { icon: <FileText className="w-6 h-6" />, title: "iLawyer", desc: "AI-powered legal assistance and document preparation for businesses." },
+  { icon: <ShieldCheck className="w-6 h-6" />, title: "ProVet", desc: "Professional veterinary practice management and business consulting." },
 ];
 
 const features = [
@@ -300,7 +304,7 @@ export default function Page() {
         <div className="max-w-6xl mx-auto px-4">
           <AnimatedSection className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Our Services</h2>
-            <p className="text-zinc-600">Comprehensive solutions for your business and land needs</p>
+            <p className="text-zinc-600">Comprehensive solutions for your business needs</p>
           </AnimatedSection>
           <div className="grid md:grid-cols-3 gap-6">
             {services.map((service, i) => (
@@ -319,6 +323,160 @@ export default function Page() {
                 </Card>
               </AnimatedSection>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="ilawyer" className="py-20 bg-gradient-to-b from-white to-indigo-50">
+        <div className="max-w-6xl mx-auto px-4">
+          <AnimatedSection className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">iLawyer</h2>
+            <p className="text-zinc-600 max-w-2xl mx-auto">
+              AI-powered legal assistance and document preparation for businesses in Newfoundland & Labrador.
+            </p>
+          </AnimatedSection>
+          <div className="grid md:grid-cols-2 gap-6">
+            <AnimatedSection>
+              <Card>
+                <CardHeader>
+                  <div className="text-indigo-600 mb-2">
+                    <FileText className="w-6 h-6" />
+                  </div>
+                  <CardTitle>Legal Document Preparation</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-zinc-600 mb-4">
+                    Get help with contracts, agreements, and legal documents for your business.
+                  </p>
+                  <ul className="space-y-2 text-zinc-600 mb-4">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
+                      <span>Contract review and preparation</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
+                      <span>Business agreements</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
+                      <span>Legal compliance documents</span>
+                    </li>
+                  </ul>
+                  <a href="#contact" className="no-underline">
+                    <Button className="rounded-2xl w-full">Get Started</Button>
+                  </a>
+                </CardContent>
+              </Card>
+            </AnimatedSection>
+            <AnimatedSection>
+              <Card>
+                <CardHeader>
+                  <div className="text-indigo-600 mb-2">
+                    <Bot className="w-6 h-6" />
+                  </div>
+                  <CardTitle>AI Legal Assistant</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-zinc-600 mb-4">
+                    Get instant answers to legal questions and guidance for your business needs.
+                  </p>
+                  <ul className="space-y-2 text-zinc-600 mb-4">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
+                      <span>24/7 AI legal consultation</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
+                      <span>Legal question answering</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
+                      <span>Compliance guidance</span>
+                    </li>
+                  </ul>
+                  <a href="#contact" className="no-underline">
+                    <Button className="rounded-2xl w-full">Learn More</Button>
+                  </a>
+                </CardContent>
+              </Card>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      <section id="provet" className="py-20 bg-gradient-to-b from-indigo-50 to-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <AnimatedSection className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">ProVet</h2>
+            <p className="text-zinc-600 max-w-2xl mx-auto">
+              Professional veterinary practice management and business consulting services.
+            </p>
+          </AnimatedSection>
+          <div className="grid md:grid-cols-2 gap-6">
+            <AnimatedSection>
+              <Card>
+                <CardHeader>
+                  <div className="text-indigo-600 mb-2">
+                    <ShieldCheck className="w-6 h-6" />
+                  </div>
+                  <CardTitle>Practice Management</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-zinc-600 mb-4">
+                    Streamline your veterinary practice operations and improve efficiency.
+                  </p>
+                  <ul className="space-y-2 text-zinc-600 mb-4">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
+                      <span>Appointment scheduling systems</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
+                      <span>Patient record management</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
+                      <span>Billing and payment systems</span>
+                    </li>
+                  </ul>
+                  <a href="#contact" className="no-underline">
+                    <Button className="rounded-2xl w-full">Get Started</Button>
+                  </a>
+                </CardContent>
+              </Card>
+            </AnimatedSection>
+            <AnimatedSection>
+              <Card>
+                <CardHeader>
+                  <div className="text-indigo-600 mb-2">
+                    <TrendingUp className="w-6 h-6" />
+                  </div>
+                  <CardTitle>Business Growth</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-zinc-600 mb-4">
+                    Grow your veterinary practice with strategic consulting and marketing.
+                  </p>
+                  <ul className="space-y-2 text-zinc-600 mb-4">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
+                      <span>Marketing and client acquisition</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
+                      <span>Financial planning and optimization</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
+                      <span>Staff training and development</span>
+                    </li>
+                  </ul>
+                  <a href="#contact" className="no-underline">
+                    <Button className="rounded-2xl w-full">Learn More</Button>
+                  </a>
+                </CardContent>
+              </Card>
+            </AnimatedSection>
           </div>
         </div>
       </section>
