@@ -592,31 +592,35 @@ export default function Page() {
                       <ShieldCheck className="w-6 h-6" />
                     </div>
                   </div>
-                  <CardTitle className="group-hover:text-indigo-600 transition-colors">Practice Management</CardTitle>
+                  <CardTitle className="group-hover:text-indigo-600 transition-colors">AI-Powered Consultations</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-zinc-600 mb-4">
-                    Streamline your veterinary practice operations and improve efficiency.
+                    Get instant expert guidance for your dog's health 24/7. AI-powered consultations available whenever you need them.
                   </p>
                   <ul className="space-y-2 text-zinc-600 mb-4">
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                      <span>Appointment scheduling systems</span>
+                      <span>24/7 AI veterinary consultations</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                      <span>Patient record management</span>
+                      <span>Health records management</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                      <span>Billing and payment systems</span>
+                      <span>Vaccination tracking</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
+                      <span>Instant expert guidance</span>
                     </li>
                   </ul>
                   <a 
                     href="#contact" 
                     onClick={(e) => {
                       e.preventDefault();
-                      handleCTAClick('get_started', 'provet_practice_mgmt');
+                      handleCTAClick('start_free_trial', 'provet_ai_consultations');
                       const targetElement = document.getElementById('contact');
                       if (targetElement) {
                         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -624,7 +628,7 @@ export default function Page() {
                     }} 
                     className="no-underline"
                   >
-                    <Button className="rounded-2xl w-full">Get Started</Button>
+                    <Button className="rounded-2xl w-full">Start Free Trial</Button>
                   </a>
                 </CardContent>
               </Card>
@@ -637,39 +641,43 @@ export default function Page() {
                       <TrendingUp className="w-6 h-6" />
                     </div>
                   </div>
-                  <CardTitle className="group-hover:text-indigo-600 transition-colors">Business Growth</CardTitle>
+                  <CardTitle className="group-hover:text-indigo-600 transition-colors">Complete Canine Health Management</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-zinc-600 mb-4">
-                    Grow your veterinary practice with strategic consulting and marketing.
+                    Save up to 80% compared to traditional vet visits. Comprehensive health management at a fraction of the cost.
                   </p>
                   <ul className="space-y-2 text-zinc-600 mb-4">
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                      <span>Marketing and client acquisition</span>
+                      <span>Complete health records</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                      <span>Financial planning and optimization</span>
+                      <span>Vaccination reminders</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                      <span>Staff training and development</span>
+                      <span>Cost-effective care</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
+                      <span>Expert guidance on demand</span>
                     </li>
                   </ul>
                   <a 
-                    href="#contact" 
+                    href="#pricing" 
                     onClick={(e) => {
                       e.preventDefault();
-                      handleCTAClick('learn_more', 'provet_business_growth');
-                      const targetElement = document.getElementById('contact');
+                      handleCTAClick('view_pricing', 'provet_health_mgmt');
+                      const targetElement = document.getElementById('pricing');
                       if (targetElement) {
                         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                       }
                     }} 
                     className="no-underline"
                   >
-                    <Button className="rounded-2xl w-full">Learn More</Button>
+                    <Button className="rounded-2xl w-full">View Pricing</Button>
                   </a>
                 </CardContent>
               </Card>
