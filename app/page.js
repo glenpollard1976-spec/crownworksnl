@@ -753,9 +753,8 @@ export default function Page() {
                       handleCTAClick('pricing_click', 'business_growth_package');
                       setLoadingCheckout(prev => ({ ...prev, businessGrowth: true }));
                       try {
-                        const apiUrl = typeof window !== 'undefined' && window.location.hostname === 'localhost' 
-                          ? '/api/checkout' 
-                          : 'https://crownworksnl.com/api/checkout';
+                        // Use relative path - works in both dev and production
+                        const apiUrl = '/api/checkout';
                         
                         const response = await fetch(apiUrl, {
                           method: 'POST',
