@@ -435,23 +435,21 @@ export default function Page() {
                   Get instant preliminary legal guidance from our AI legal assistant. Start your first consultation free.
                 </p>
                 <div className="flex flex-wrap gap-4 justify-center">
-                  <a 
-                    href="#contact" 
+                  <Button 
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
                       handleCTAClick('start_free_consultation', 'ilawyer_banner');
                       const targetElement = document.getElementById('contact');
                       if (targetElement) {
                         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                       }
                     }} 
-                    className="no-underline"
+                    className="rounded-2xl bg-white text-indigo-600 hover:bg-indigo-50 px-6 py-3 font-semibold flex items-center gap-2"
                   >
-                    <Button className="rounded-2xl bg-white text-indigo-600 hover:bg-indigo-50 px-6 py-3 font-semibold flex items-center gap-2">
-                      Start Free Consultation
-                      <ArrowRight className="w-4 h-4" />
-                    </Button>
-                  </a>
+                    Start Free Consultation
+                    <ArrowRight className="w-4 h-4" />
+                  </Button>
                 </div>
               </div>
             </div>
@@ -485,20 +483,20 @@ export default function Page() {
                       <span>Legal compliance documents</span>
                     </li>
                   </ul>
-                  <a 
-                    href="#contact" 
+                  <Button 
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
                       handleCTAClick('get_started', 'ilawyer_legal_docs');
                       const targetElement = document.getElementById('contact');
                       if (targetElement) {
                         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                       }
                     }} 
-                    className="no-underline"
+                    className="rounded-2xl w-full"
                   >
-                    <Button className="rounded-2xl w-full">Get Started</Button>
-                  </a>
+                    Get Started
+                  </Button>
                 </CardContent>
               </Card>
             </AnimatedSection>
@@ -530,20 +528,20 @@ export default function Page() {
                       <span>Compliance guidance</span>
                     </li>
                   </ul>
-                  <a 
-                    href="#contact" 
+                  <Button 
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
                       handleCTAClick('learn_more', 'ilawyer_ai_assistant');
                       const targetElement = document.getElementById('contact');
                       if (targetElement) {
                         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                       }
                     }} 
-                    className="no-underline"
+                    className="rounded-2xl w-full"
                   >
-                    <Button className="rounded-2xl w-full">Learn More</Button>
-                  </a>
+                    Learn More
+                  </Button>
                 </CardContent>
               </Card>
             </AnimatedSection>
