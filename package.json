@@ -19,7 +19,9 @@
     "cap:ios": "npx cap open ios",
     "build:mobile": "npm run build && npx cap sync",
     "submit-google": "node scripts/auto-submit-google.js",
-    "auto-google": "node scripts/auto-submit-google.js"
+    "auto-google": "node scripts/auto-submit-google.js",
+    "fix-vercel": "node FIX_VERCEL_AUTO.js",
+    "auto-fix-vercel": "powershell -ExecutionPolicy Bypass -File AUTO_FIX_VERCEL.ps1"
   },
   "dependencies": {
     "@capacitor/android": "^7.4.4",
