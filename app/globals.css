@@ -3,38 +3,8 @@
 @tailwind utilities;
 
 /* ---- Global styles ---- */
-html, body {
-  @apply font-sans bg-gray-900 text-white scroll-smooth;
+html {
+  scroll-behavior: smooth;
 }
 
-/* ---- Navbar ---- */
-.navbar {
-  @apply flex flex-wrap justify-center gap-6 bg-purple-800 py-4;
-}
-
-.navbar a {
-  @apply text-lg text-white hover:underline;
-}
-
-/* ---- Hero Section ---- */
-.hero {
-  @apply bg-purple-900 text-white text-center py-20 px-6;
-}
-
-.hero h1 {
-  @apply text-4xl md:text-6xl font-bold mb-4;
-}
-
-.hero p {
-  @apply text-lg md:text-xl;
-}
-
-/* ---- Contact Section ---- */
-.contact {
-  @apply bg-gray-800 p-8 rounded-lg text-center;
-}
-
-.contact a {
-  @apply text-purple-400 font-semibold hover:underline;
-}
-@apply bg-purple-900 text-white text-center py-20;
+/* Remove unused styles - design is handled via Tailwind classes in components */
