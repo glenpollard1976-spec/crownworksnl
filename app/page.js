@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { Crown, Sparkles, ShieldCheck, MapPin, Phone, Mail, ArrowRight, CheckCircle2, X, Bot, FileText, TrendingUp, DollarSign, Clock, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -43,19 +43,44 @@ const testimonials = [
   { quote: "Smart strategy + crisp design. They handled site, branding, and shorts—stress free.", name: "R. Bennett", role: "Founder, EastRock Guides" },
 ];
 
-const fade = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.5 } } };
+// Optimized animations - no y-transform on mobile to prevent jumpiness
+const fade = { 
+  hidden: { opacity: 0, y: 12 }, 
+  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } } 
+};
+
+// Mobile-friendly fade (opacity only, no y-transform)
+const fadeMobile = { 
+  hidden: { opacity: 0 }, 
+  show: { opacity: 1, transition: { duration: 0.3, ease: "easeOut" } } 
+};
 
 function AnimatedSection({ children, className = "" }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Detect mobile on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsMobile(window.innerWidth < 768);
+      const handleResize = () => setIsMobile(window.innerWidth < 768);
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
+  
+  // Use mobile-friendly animation on mobile (no y-transform)
+  const variants = isMobile ? fadeMobile : fade;
   
   return (
     <motion.div
       ref={ref}
       initial="hidden"
       animate={isInView ? "show" : "hidden"}
-      variants={fade}
+      variants={variants}
       className={className}
+      style={{ willChange: 'opacity' }}
     >
       {children}
     </motion.div>
@@ -133,7 +158,7 @@ export default function Page() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-zinc-50 to-white text-zinc-900">
-      <header className="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-zinc-200 will-change-transform">
+      <header className="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-zinc-200" style={{ willChange: 'transform', transform: 'translateZ(0)' }}>
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <a href="#home" className="flex items-center gap-2 font-semibold no-underline">
@@ -174,9 +199,10 @@ export default function Page() {
               height: mobileMenuOpen ? "auto" : 0,
               opacity: mobileMenuOpen ? 1 : 0,
             }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.15, ease: "easeInOut" }}
             className="md:hidden overflow-hidden"
             aria-label="Mobile navigation"
+            style={{ willChange: 'height, opacity', transform: 'translateZ(0)' }}
           >
             <div className="py-4 space-y-3 border-t border-zinc-200 mt-2">
               {nav.map((n) => (
@@ -205,7 +231,13 @@ export default function Page() {
           <div className="w-[50rem] h-[50rem] rounded-full bg-indigo-200/40 blur-3xl absolute -top-40 -right-32" />
         </div>
         <div className="max-w-6xl mx-auto px-4 pt-20 pb-16">
-          <motion.div variants={fade} initial="hidden" animate="show" className="grid md:grid-cols-2 gap-10 items-center">
+          <motion.div 
+            variants={fade} 
+            initial="hidden" 
+            animate="show" 
+            className="grid md:grid-cols-2 gap-10 items-center"
+            style={{ willChange: 'opacity', transform: 'translateZ(0)' }}
+          >
             <div>
               <div className="inline-flex items-center gap-2 text-xs px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 mb-4">
                 <Sparkles className="w-4 h-4" />

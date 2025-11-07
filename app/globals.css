@@ -4,15 +4,28 @@
 
 /* ---- Global styles ---- */
 html {
-  scroll-behavior: smooth;
+  /* Disable smooth scroll on mobile to prevent jumpiness */
+  scroll-behavior: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Prevent horizontal scroll */
+  overflow-x: hidden;
+}
+
+/* Enable smooth scroll only on desktop */
+@media (min-width: 768px) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
   /* Prevent layout shift on mobile */
   overflow-x: hidden;
   position: relative;
+  /* Prevent jumpiness from address bar on mobile */
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 
 /* Prevent layout shift from images */
@@ -32,6 +45,22 @@ img {
   body {
     min-height: -webkit-fill-available;
   }
+  
+  /* Fix iOS viewport jumping */
+  html {
+    height: -webkit-fill-available;
+  }
+}
+
+/* Prevent jumpiness from animations on mobile */
+@media (max-width: 767px) {
+  /* GPU acceleration for animated elements only */
+  [data-framer-component],
+  [data-motion-component] {
+    transform: translateZ(0);
+    will-change: opacity;
+    backface-visibility: hidden;
+  }
 }
 
 /* Prevent jumpiness from animations */
@@ -42,5 +71,30 @@ img {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Optimize animations for mobile */
+@media (max-width: 767px) {
+  /* Faster, less jumpy animations for motion components */
+  [data-framer-component],
+  [data-motion-component] {
+    transition-duration: 0.2s !important;
+    animation-duration: 0.3s !important;
+  }
+}
+
+/* Prevent layout shifts */
+section {
+  min-height: 1px;
+  contain: layout style paint;
+}
+
+/* GPU acceleration for smooth scrolling */
+@media (max-width: 767px) {
+  body {
+    -webkit-overflow-scrolling: touch;
+    transform: translateZ(0);
   }
 }
