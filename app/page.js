@@ -323,7 +323,20 @@ export default function Page() {
                   <Phone className="w-4 h-4" />
                   Call Now
                 </a>
-                <a href="#pricing" onClick={() => handleCTAClick('view_pricing', 'hero')} className="px-5 py-3 rounded-2xl border border-zinc-300 text-sm hover:bg-zinc-50 no-underline font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors">View Pricing</a>
+                <a 
+                  href="#pricing" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleCTAClick('view_pricing', 'hero');
+                    const targetElement = document.getElementById('pricing');
+                    if (targetElement) {
+                      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }} 
+                  className="px-5 py-3 rounded-2xl border border-zinc-300 text-sm hover:bg-zinc-50 no-underline font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
+                >
+                  View Pricing
+                </a>
               </div>
               <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
                 <p className="text-sm text-green-800 font-medium">
