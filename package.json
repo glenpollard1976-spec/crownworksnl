@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "send-emails": "node scripts/send-emails.js",
+    "send-emails-auto": "node scripts/send-emails-auto.js"
   },
   "dependencies": {
     "@stripe/stripe-js": "^8.3.0",
