@@ -1044,7 +1044,16 @@ export default function Page() {
                         Get on Google Play
                       </Button>
                     </a>
-                    <p className="text-xs text-indigo-200 mt-3">Coming soon to Play Store</p>
+                    <p className="text-xs text-indigo-200 mt-3">
+                      <a 
+                        href="https://play.google.com/store/apps/details?id=com.crownworksnl.app" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-indigo-200 hover:text-white underline"
+                      >
+                        Direct Link to Play Store
+                      </a>
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -1072,7 +1081,16 @@ export default function Page() {
                         Get on App Store
                       </Button>
                     </a>
-                    <p className="text-xs text-indigo-200 mt-3">Coming soon to App Store</p>
+                    <p className="text-xs text-indigo-200 mt-3">
+                      <a 
+                        href="https://apps.apple.com/app/crownworksnl/id1234567890" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-indigo-200 hover:text-white underline"
+                      >
+                        Direct Link to App Store
+                      </a>
+                    </p>
                   </div>
                 </CardContent>
               </Card>

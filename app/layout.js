@@ -103,8 +103,29 @@ export default function RootLayout({ children }) {
               },
               "softwareVersion": "1.0.0",
               "softwareRequirements": "Android 5.0+ or iOS 12.0+",
-              "downloadUrl": "https://play.google.com/store/apps/details?id=com.crownworksnl.app",
-              "screenshot": "https://crownworksnl.com/app-screenshot.png"
+              "downloadUrl": [
+                "https://play.google.com/store/apps/details?id=com.crownworksnl.app",
+                "https://apps.apple.com/app/crownworksnl/id1234567890"
+              ],
+              "screenshot": "https://crownworksnl.com/app-screenshot.png",
+              "applicationCategory": "BusinessApplication",
+              "operatingSystem": ["Android", "iOS"],
+              "offers": [
+                {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "USD",
+                  "availability": "https://schema.org/InStock",
+                  "url": "https://play.google.com/store/apps/details?id=com.crownworksnl.app"
+                },
+                {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "USD",
+                  "availability": "https://schema.org/InStock",
+                  "url": "https://apps.apple.com/app/crownworksnl/id1234567890"
+                }
+              ]
             })
           }}
         />
