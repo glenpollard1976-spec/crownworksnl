@@ -252,7 +252,7 @@ export default function Page() {
                 Empowering business growth in NL
               </div>
               <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight">
-                Grow boldly. Land your future with confidence.
+                Grow boldly. Build your future with confidence.
               </h1>
               <p className="mt-4 text-zinc-600 text-lg">
                 CrownWorksNL, founded by Glen Pollard of the Qalipu First Nation, provides strategy, design, and business consulting services to help you grow and succeed in Newfoundland & Labrador.
