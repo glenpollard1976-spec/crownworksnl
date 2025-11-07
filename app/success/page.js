@@ -67,7 +67,7 @@ function SuccessContent() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
               <div className="flex items-center gap-2 text-zinc-600">
                 <Mail className="w-5 h-5" />
-                <span>info@crownworksnl.com</span>
+                <span>crownworksnl@gmail.com</span>
               </div>
               <div className="flex items-center gap-2 text-zinc-600">
                 <Phone className="w-5 h-5" />

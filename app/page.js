@@ -11,7 +11,7 @@ const SITE = {
   name: "CrownWorksNL",
   phone: "+1 (709) 721-0340",
   url: "https://crownworksnl.com",
-  email: "info@crownworksnl.com",
+  email: "crownworksnl@gmail.com",
 };
 
 const nav = [

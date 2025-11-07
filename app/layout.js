@@ -75,7 +75,7 @@ export default function RootLayout({ children }) {
               "description": "Business consulting and growth services in Newfoundland & Labrador",
               "url": "https://crownworksnl.com",
               "telephone": "+1-709-721-0340",
-              "email": "info@crownworksnl.com",
+              "email": "crownworksnl@gmail.com",
               "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Corner Brook",

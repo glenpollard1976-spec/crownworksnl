@@ -113,7 +113,7 @@ async function setupGmail() {
     service: 'gmail',
     auth: {
       type: 'OAuth2',
-      user: token.email || 'info@crownworksnl.com',
+      user: token.email || 'crownworksnl@gmail.com',
       clientId: client_id,
       clientSecret: client_secret,
       refreshToken: token.refresh_token,
@@ -132,7 +132,7 @@ async function sendEmails(transporter, contacts, delayMs = 2000) {
     
     try {
       await transporter.sendMail({
-        from: 'Glen Pollard <info@crownworksnl.com>',
+        from: 'Glen Pollard <crownworksnl@gmail.com>',
         to: contact.email,
         subject: EMAIL_TEMPLATE.subject,
         text: EMAIL_TEMPLATE.body(contact.name),

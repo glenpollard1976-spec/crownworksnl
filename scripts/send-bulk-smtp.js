@@ -125,7 +125,7 @@ async function sendEmail(transporter, contact, subject, body) {
       to: contact.email,
       subject: subject,
       text: body(contact.name),
-      replyTo: 'info@crownworksnl.com',
+      replyTo: 'crownworksnl@gmail.com',
     };
 
     const info = await transporter.sendMail(mailOptions);
