@@ -10,7 +10,10 @@
     "send-emails": "node scripts/send-emails.js",
     "send-emails-auto": "node scripts/send-emails-auto.js",
     "send-batch": "node scripts/send-batch.js",
-    "send-bulk": "node scripts/send-bulk-smtp.js"
+    "send-bulk": "node scripts/send-bulk-smtp.js",
+    "auto-launch": "powershell -ExecutionPolicy Bypass -File AUTO_LAUNCH.ps1",
+    "auto-deploy": "powershell -ExecutionPolicy Bypass -File AUTO_DEPLOY.ps1",
+    "auto-email": "powershell -ExecutionPolicy Bypass -File AUTO_SEND_EMAILS.ps1"
   },
   "dependencies": {
     "@stripe/stripe-js": "^8.3.0",

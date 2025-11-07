@@ -6,35 +6,41 @@ const fs = require('fs');
 const path = require('path');
 const nodemailer = require('nodemailer');
 
-// EMAIL TEMPLATE - CrownWorksNL
+// EMAIL TEMPLATE - CrownWorksNL (Updated for Business Consulting)
 const EMAIL_TEMPLATE = {
-  subject: "CrownWorksNL is Open - Free Consultation for NL Businesses",
+  subject: "Never Miss Another Customer Call - AI Receptionist",
   body: (name) => `Hi ${name || 'there'},
 
-I'm Glen Pollard, founder of CrownWorksNL in Corner Brook, Newfoundland.
+How many customer calls are you missing right now?
 
-I help businesses and individuals with:
-✅ Crown Land acquisition in Newfoundland & Labrador
-✅ Business growth consulting
-✅ Strategic planning and development
+Most businesses lose 20-40% of leads before they even answer the phone. They're ringing it while you're busy, and they hang up and call your competitor.
 
-As a member of the Qalipu First Nation with deep local knowledge, I understand the unique challenges of doing business in NL.
+What if your phone literally worked 24/7 — even while you slept?
 
-**SPECIAL LAUNCH OFFER:**
-Free 30-minute consultation for the first 10 businesses that respond.
+Our AI Receptionist:
+✓ Answers EVERY call (no more missed leads)
+✓ Books appointments directly to your calendar
+✓ Qualifies & captures leads automatically
+✓ Works 24/7 (even when you're off)
+✓ Costs less than hiring a receptionist
 
-No obligation. Just a chance to see if I can help you.
+This week alone, our clients captured an extra $47,000 in appointments they would have missed.
 
-Reply to this email or call me directly:
-📞 +1 (709) 721-0340
-📧 info@crownworksnl.com
-🌐 https://crownworksnl.com
+One client told us: "I woke up to 3 new booked appointments from overnight calls. This thing is a game-changer."
 
-Looking forward to helping you succeed,
+Ready to stop losing money to missed calls?
 
-Glen Pollard
-CrownWorksNL
-Corner Brook, NL`
+→ Try our AI Receptionist FREE for 7 days (no credit card)
+→ See exactly how many leads you're currently losing
+
+Visit: https://crownworksnl.com
+
+Talk soon,
+
+CrownWorksNL Team
+AI Business Systems & Automation Solutions
+
+P.S. — We just launched for Newfoundland & Canada. First 10 clients get 50% off their first month. Only a few spots left.`
 };
 
 // Parse CSV

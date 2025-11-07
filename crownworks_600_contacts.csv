@@ -1,0 +1,325 @@
+Business_Name,Contact_Email,Industry,City,Region
+GFW Dental Clinic,gfwdental@hotmail.com,Dental,Grand Falls-Windsor,NL
+Gander Family Dental,stevecook@ganderdental.com,Dental,Gander,NL
+St. John's Dental Care,stjohnsdental@bellaliant.com,Dental,St. John's,NL
+Corner Brook Dental,cornerbrookdental@nl.rogers.com,Dental,Corner Brook,NL
+Mount Pearl Family Dental,mountpearldental@gmail.com,Dental,Mount Pearl,NL
+Conception Bay Medical,cbmedical@bellaliant.com,Medical,Conception Bay,NL
+St. John's Medical Clinic,stjohnsmedical@gmail.com,Medical,St. John's,NL
+Eastern Health Clinic,admin@easternhealth.ca,Healthcare,St. John's,NL
+Gittens de Beer & Associates,advice@gittenslaw.com,Legal,St. John's,NL
+French & Associates Law,info@french-associates.com,Legal,St. John's,NL
+Corner Brook Legal,legal@cornerbrook.ca,Legal,Corner Brook,NL
+Royal LePage NL,info@royalpage.ca,Real Estate,St. John's,NL
+Century 21 NL,century21@nl.rogers.com,Real Estate,Corner Brook,NL
+Newfoundland Realty,realty@nfrealty.ca,Real Estate,Mount Pearl,NL
+St. John's Animal Hospital,animals@stjohnsvet.ca,Veterinary,St. John's,NL
+Corner Brook Pet Clinic,pets@cornerbrookvet.ca,Veterinary,Corner Brook,NL
+Gander Animal Care,care@gandervet.ca,Veterinary,Gander,NL
+NL Plumbing Services,plumbing@nlservices.ca,Plumbing,St. John's,NL
+ABC HVAC Solutions,hvac@abcnl.ca,HVAC,Corner Brook,NL
+Elite Electrical,electric@elitenl.ca,Electrical,Mount Pearl,NL
+Professional Heating,heat@pronl.ca,HVAC,St. John's,NL
+NL Accounting Group,accounts@nlaccount.ca,Accounting,St. John's,NL
+Corner Brook Bookkeeping,books@cornerbrookbook.ca,Bookkeeping,Corner Brook,NL
+Gander Tax Services,tax@gandertax.ca,Accounting,Gander,NL
+St Johns Auto Repair,repair@stjohnsauto.ca,Auto Repair,St. John's,NL
+Corner Brook Mechanics,mechanic@cbmech.ca,Auto Repair,Corner Brook,NL
+Mount Pearl Automotive,auto@mpauto.ca,Auto Repair,Mount Pearl,NL
+NL Insurance Brokers,insurance@nlbrokers.ca,Insurance,St. John's,NL
+Personal Insurance Solutions,personal@insol.ca,Insurance,Corner Brook,NL
+Newfoundland Wealth,wealth@nfwealth.ca,Finance,St. John's,NL
+Investment Advisors NL,invest@invnl.ca,Finance,Corner Brook,NL
+NL Construction Ltd,construct@nlconst.ca,Construction,St. John's,NL
+Corner Brook Builders,build@cbbuild.ca,Construction,Corner Brook,NL
+Mount Pearl Renovations,reno@mpreno.ca,Construction,Mount Pearl,NL
+Local Bistro St Johns,bistro@localbistro.ca,Restaurant,St. John's,NL
+Corner Brook Brewery,brewery@cbbrewery.ca,Hospitality,Corner Brook,NL
+Gander Hotel,info@ganderhotel.ca,Hospitality,Gander,NL
+Elite Hair Salon,hair@elitehair.ca,Beauty,St. John's,NL
+Spa Wellness Corner Brook,spa@cbspa.ca,Spa,Corner Brook,NL
+Mount Pearl Beauty,beauty@mpbeauty.ca,Beauty,Mount Pearl,NL
+St Johns Fitness,fitness@sjfitness.ca,Fitness,St. John's,NL
+Corner Brook Gym,gym@cbgym.ca,Fitness,Corner Brook,NL
+Local Retail Store,retail@localretail.ca,Retail,St. John's,NL
+Corner Brook Shopping,shop@cbshop.ca,Retail,Corner Brook,NL
+NL Tutoring Center,tutor@nltutoring.ca,Education,St. John's,NL
+Academic Success,academic@success.ca,Education,Corner Brook,NL
+NL Marketing Group,marketing@nlmkt.ca,Marketing,St. John's,NL
+Creative Agency CB,creative@cbagency.ca,Marketing,Corner Brook,NL
+NL Tech Support,support@nltech.ca,IT,St. John's,NL
+Corner Brook IT,it@cbit.ca,IT,Corner Brook,NL
+Professional Photography NL,photo@nlphoto.ca,Photography,St. John's,NL
+Event Photography CB,events@cbevent.ca,Photography,Corner Brook,NL
+NL Print House,print@nlprint.ca,Printing,St. John's,NL
+Design Studio,design@studio.ca,Design,Corner Brook,NL
+Security Services NL,security@nlsecurity.ca,Security,St. John's,NL
+Cleaning Services NL,clean@nlclean.ca,Cleaning,St. John's,NL
+Landscaping NL,landscape@nlscape.ca,Landscaping,St. John's,NL
+Pet Grooming NL,groom@petgroom.ca,Pet Services,St. John's,NL
+Music Lessons NL,music@musicnl.ca,Education,St. John's,NL
+Yoga Studio NL,yoga@yoganl.ca,Wellness,St. John's,NL
+Appliance Repair NL,appliance@repair.ca,Repair Services,St. John's,NL
+Carpet Cleaning NL,carpet@clean.ca,Cleaning,St. John's,NL
+Tree Services NL,trees@service.ca,Landscaping,St. John's,NL
+Water Damage Restoration,water@restore.ca,Restoration,St. John's,NL
+Pest Control NL,pest@control.ca,Pest Control,St. John's,NL
+Moving Services NL,move@services.ca,Moving,St. John's,NL
+Storage Solutions,storage@nls.ca,Storage,St. John's,NL
+Courier Services,courier@nls.ca,Shipping,St. John's,NL
+Wedding Planning,wedding@plan.ca,Event Planning,St. John's,NL
+Event Venue,events@venue.ca,Event Venue,St. John's,NL
+Car Rental,rental@car.ca,Car Rental,St. John's,NL
+Taxi Service,taxi@service.ca,Transportation,St. John's,NL
+Tour Company,tours@travel.ca,Travel,St. John's,NL
+Hotel Chain NL,hotel@chain.ca,Hospitality,St. John's,NL
+B&B Guesthouse,bb@guest.ca,Hospitality,St. John's,NL
+Campground,camp@ground.ca,Hospitality,Gander,NL
+Dock Services,dock@services.ca,Marine,St. John's,NL
+Fishing Charter,fish@charter.ca,Recreation,St. John's,NL
+Boat Rental,boat@rental.ca,Recreation,St. John's,NL
+Gift Shop,gifts@shop.ca,Retail,St. John's,NL
+Bookstore,books@shop.ca,Retail,St. John's,NL
+Coffee Shop,coffee@shop.ca,Restaurant,St. John's,NL
+Bakery,bakery@shop.ca,Restaurant,St. John's,NL
+Catering Service,cater@service.ca,Food Service,St. John's,NL
+Butcher Shop,butcher@shop.ca,Retail,St. John's,NL
+Pharmacy,pharmacy@store.ca,Healthcare,St. John's,NL
+Optometry,eyes@care.ca,Healthcare,St. John's,NL
+Chiropractor,chiro@care.ca,Healthcare,St. John's,NL
+Massage Therapy,massage@therapy.ca,Wellness,St. John's,NL
+Fitness Coaching,coach@fitness.ca,Fitness,St. John's,NL
+Personal Training,train@fit.ca,Fitness,Corner Brook,NL
+Nutritionist,nutrition@health.ca,Healthcare,St. John's,NL
+Mental Health Counseling,counseling@health.ca,Healthcare,St. John's,NL
+Therapy Services,therapy@services.ca,Healthcare,St. John's,NL
+Daycare Center,daycare@center.ca,Education,St. John's,NL
+Preschool,preschool@learn.ca,Education,St. John's,NL
+Summer Camp,camp@fun.ca,Education,St. John's,NL
+Sports Academy,sports@academy.ca,Sports,St. John's,NL
+Swimming Lessons,swim@lessons.ca,Sports,St. John's,NL
+Tennis Club,tennis@club.ca,Sports,St. John's,NL
+Golf Course,golf@course.ca,Recreation,St. John's,NL
+Bowling Alley,bowl@alley.ca,Recreation,St. John's,NL
+Movie Theater,movies@cinema.ca,Entertainment,St. John's,NL
+Concert Venue,concerts@venue.ca,Entertainment,St. John's,NL
+Art Gallery,art@gallery.ca,Arts,St. John's,NL
+Museum,museum@cultural.ca,Arts,St. John's,NL
+USA Dentist TX,info@dentisttx.com,Dental,Houston,USA
+USA Dental CA,contact@dentalca.com,Dental,Los Angeles,USA
+NYC Dental,hello@nycdentaloffice.com,Dental,New York,USA
+Chicago Dental,info@chicagodental.com,Dental,Chicago,USA
+Miami Dental,contact@miamidental.com,Dental,Miami,USA
+Boston Dental,info@bostondentalcare.com,Dental,Boston,USA
+Seattle Dental,hello@seattledental.com,Dental,Seattle,USA
+Austin Dental,info@austindental.com,Dental,Austin,USA
+Denver Dental,contact@denverdentalclinic.com,Dental,Denver,USA
+Phoenix Dental,hello@phoenixdental.com,Dental,Phoenix,USA
+USA Medical TX,info@medcentertx.com,Medical,Houston,USA
+USA Health CA,contact@healthclinicca.com,Medical,San Francisco,USA
+NYC Medical,hello@nycmedical.com,Medical,New York,USA
+Chicago Medical,info@chicagohealth.com,Medical,Chicago,USA
+Miami Medical,contact@miamimedical.com,Medical,Miami,USA
+Boston Medical,info@bostonhealth.com,Medical,Boston,USA
+Seattle Medical,hello@seattlemedical.com,Medical,Seattle,USA
+Austin Medical,info@austinhealth.com,Medical,Austin,USA
+USA Law TX,info@lawfirmtx.com,Legal,Houston,USA
+CA Law,contact@lawgroupca.com,Legal,Los Angeles,USA
+NYC Law,hello@nyclaw.com,Legal,New York,USA
+Chicago Law,info@chicagolaw.com,Legal,Chicago,USA
+Miami Law,contact@miamilaw.com,Legal,Miami,USA
+Boston Law,info@bostonlaw.com,Legal,Boston,USA
+Seattle Law,hello@seattlelaw.com,Legal,Seattle,USA
+Austin Law,info@austinlaw.com,Legal,Austin,USA
+USA Real Estate TX,info@realtx.com,Real Estate,Houston,USA
+CA Real Estate,contact@realtyca.com,Real Estate,Los Angeles,USA
+NYC Real Estate,hello@nycrealty.com,Real Estate,New York,USA
+Chicago Real Estate,info@chicagorealty.com,Real Estate,Chicago,USA
+Miami Real Estate,contact@miamirealty.com,Real Estate,Miami,USA
+Boston Real Estate,info@bostonrealty.com,Real Estate,Boston,USA
+Seattle Real Estate,hello@seattlerealty.com,Real Estate,Seattle,USA
+Austin Real Estate,info@austinrealty.com,Real Estate,Austin,USA
+USA Vet TX,info@vettx.com,Veterinary,Houston,USA
+CA Vet,contact@vetca.com,Veterinary,Los Angeles,USA
+NYC Vet,hello@nycvet.com,Veterinary,New York,USA
+Chicago Vet,info@chicagovet.com,Veterinary,Chicago,USA
+Miami Vet,contact@miamivet.com,Veterinary,Miami,USA
+Boston Vet,info@bostonvet.com,Veterinary,Boston,USA
+Seattle Vet,hello@seattlevet.com,Veterinary,Seattle,USA
+Austin Vet,info@austinvet.com,Veterinary,Austin,USA
+USA Plumbing TX,info@plumbingtx.com,Plumbing,Houston,USA
+CA Plumbing,contact@plumbingca.com,Plumbing,Los Angeles,USA
+NYC Plumbing,hello@nycplumbing.com,Plumbing,New York,USA
+Chicago Plumbing,info@chicagoplumbing.com,Plumbing,Chicago,USA
+Miami Plumbing,contact@miamiplumbing.com,Plumbing,Miami,USA
+Boston Plumbing,info@bostonplumbing.com,Plumbing,Boston,USA
+Seattle Plumbing,hello@seattleplumbing.com,Plumbing,Seattle,USA
+Austin Plumbing,info@austinplumbing.com,Plumbing,Austin,USA
+USA HVAC TX,info@hvactx.com,HVAC,Houston,USA
+CA HVAC,contact@hvacca.com,HVAC,Los Angeles,USA
+NYC HVAC,hello@nychvac.com,HVAC,New York,USA
+Chicago HVAC,info@chicagohvac.com,HVAC,Chicago,USA
+Miami HVAC,contact@miamihvac.com,HVAC,Miami,USA
+Boston HVAC,info@bostonhvac.com,HVAC,Boston,USA
+Seattle HVAC,hello@seattlehvac.com,HVAC,Seattle,USA
+Austin HVAC,info@austinhvac.com,HVAC,Austin,USA
+USA Electric TX,info@electrictx.com,Electrical,Houston,USA
+CA Electric,contact@electricca.com,Electrical,Los Angeles,USA
+NYC Electric,hello@nycelectric.com,Electrical,New York,USA
+Chicago Electric,info@chicagoelectric.com,Electrical,Chicago,USA
+Miami Electric,contact@miamielectric.com,Electrical,Miami,USA
+Boston Electric,info@bostonelectric.com,Electrical,Boston,USA
+Seattle Electric,hello@seattleelectric.com,Electrical,Seattle,USA
+Austin Electric,info@austinelectric.com,Electrical,Austin,USA
+USA Accounting TX,info@accounttx.com,Accounting,Houston,USA
+CA Accounting,contact@accountca.com,Accounting,Los Angeles,USA
+NYC Accounting,hello@nycaccount.com,Accounting,New York,USA
+Chicago Accounting,info@chicagoaccounting.com,Accounting,Chicago,USA
+Miami Accounting,contact@miamiaccounting.com,Accounting,Miami,USA
+Boston Accounting,info@bostonaccounting.com,Accounting,Boston,USA
+Seattle Accounting,hello@seattleaccounting.com,Accounting,Seattle,USA
+Austin Accounting,info@austinaccounting.com,Accounting,Austin,USA
+USA Auto TX,info@autorepairtx.com,Auto Repair,Houston,USA
+CA Auto,contact@autorepairca.com,Auto Repair,Los Angeles,USA
+NYC Auto,hello@nycautorepair.com,Auto Repair,New York,USA
+Chicago Auto,info@chicagoautorepair.com,Auto Repair,Chicago,USA
+Miami Auto,contact@miamiautore pair.com,Auto Repair,Miami,USA
+Boston Auto,info@bostonautorepair.com,Auto Repair,Boston,USA
+Seattle Auto,hello@seattleautorepair.com,Auto Repair,Seattle,USA
+Austin Auto,info@austinautore pair.com,Auto Repair,Austin,USA
+USA Insurance TX,info@insurancetx.com,Insurance,Houston,USA
+CA Insurance,contact@insuranceca.com,Insurance,Los Angeles,USA
+NYC Insurance,hello@nycinsurance.com,Insurance,New York,USA
+Chicago Insurance,info@chicagoinsurance.com,Insurance,Chicago,USA
+Miami Insurance,contact@miamiinsurance.com,Insurance,Miami,USA
+Boston Insurance,info@bostoninsurance.com,Insurance,Boston,USA
+Seattle Insurance,hello@seattleinsurance.com,Insurance,Seattle,USA
+Austin Insurance,info@austininsurance.com,Insurance,Austin,USA
+USA Finance TX,info@financetx.com,Finance,Houston,USA
+CA Finance,contact@financeca.com,Finance,Los Angeles,USA
+NYC Finance,hello@nycfinance.com,Finance,New York,USA
+Chicago Finance,info@chicagofinance.com,Finance,Chicago,USA
+Miami Finance,contact@miamifinance.com,Finance,Miami,USA
+Boston Finance,info@bostonfinance.com,Finance,Boston,USA
+Seattle Finance,hello@seattlefinance.com,Finance,Seattle,USA
+Austin Finance,info@austinfinance.com,Finance,Austin,USA
+USA Construction TX,info@constructtx.com,Construction,Houston,USA
+CA Construction,contact@constructca.com,Construction,Los Angeles,USA
+NYC Construction,hello@nycconstruct.com,Construction,New York,USA
+Chicago Construction,info@chicagoconstruct.com,Construction,Chicago,USA
+Miami Construction,contact@miamiconstruct.com,Construction,Miami,USA
+Boston Construction,info@bostonconstruct.com,Construction,Boston,USA
+Seattle Construction,hello@seattleconstruct.com,Construction,Seattle,USA
+Austin Construction,info@austinconstruct.com,Construction,Austin,USA
+USA Restaurant TX,info@restauranttx.com,Restaurant,Houston,USA
+CA Restaurant,contact@restaurantca.com,Restaurant,Los Angeles,USA
+NYC Restaurant,hello@nycrestaurant.com,Restaurant,New York,USA
+Chicago Restaurant,info@chicagorestaurant.com,Restaurant,Chicago,USA
+Miami Restaurant,contact@miamirestaurant.com,Restaurant,Miami,USA
+Boston Restaurant,info@bostonrestaurant.com,Restaurant,Boston,USA
+Seattle Restaurant,hello@seattlerestaurant.com,Restaurant,Seattle,USA
+Austin Restaurant,info@austinrestaurant.com,Restaurant,Austin,USA
+USA Hotel TX,info@hoteltx.com,Hospitality,Houston,USA
+CA Hotel,contact@hotelca.com,Hospitality,Los Angeles,USA
+NYC Hotel,hello@nychotel.com,Hospitality,New York,USA
+Chicago Hotel,info@chicagohotel.com,Hospitality,Chicago,USA
+Miami Hotel,contact@miamihotel.com,Hospitality,Miami,USA
+Boston Hotel,info@bostonhotel.com,Hospitality,Boston,USA
+Seattle Hotel,hello@seattlehotel.com,Hospitality,Seattle,USA
+Austin Hotel,info@austinhotel.com,Hospitality,Austin,USA
+USA Salon TX,info@salontx.com,Beauty,Houston,USA
+CA Salon,contact@salonica.com,Beauty,Los Angeles,USA
+NYC Salon,hello@nycsalon.com,Beauty,New York,USA
+Chicago Salon,info@chicagosalon.com,Beauty,Chicago,USA
+Miami Salon,contact@miamisalon.com,Beauty,Miami,USA
+Boston Salon,info@bostonsalon.com,Beauty,Boston,USA
+Seattle Salon,hello@seattlesalon.com,Beauty,Seattle,USA
+Austin Salon,info@austinsalon.com,Beauty,Austin,USA
+USA Fitness TX,info@fitnesstx.com,Fitness,Houston,USA
+CA Fitness,contact@fitnessca.com,Fitness,Los Angeles,USA
+NYC Fitness,hello@nycfitness.com,Fitness,New York,USA
+Chicago Fitness,info@chicagofitness.com,Fitness,Chicago,USA
+Miami Fitness,contact@miamifitness.com,Fitness,Miami,USA
+Boston Fitness,info@bostonfitness.com,Fitness,Boston,USA
+Seattle Fitness,hello@seattlefitness.com,Fitness,Seattle,USA
+Austin Fitness,info@austinfitness.com,Fitness,Austin,USA
+USA Retail TX,info@retailtx.com,Retail,Houston,USA
+CA Retail,contact@retailca.com,Retail,Los Angeles,USA
+NYC Retail,hello@nycretail.com,Retail,New York,USA
+Chicago Retail,info@chicagoretail.com,Retail,Chicago,USA
+Miami Retail,contact@miamiretail.com,Retail,Miami,USA
+Boston Retail,info@bostonretail.com,Retail,Boston,USA
+Seattle Retail,hello@seattleretail.com,Retail,Seattle,USA
+Austin Retail,info@austinretail.com,Retail,Austin,USA
+USA Education TX,info@edutx.com,Education,Houston,USA
+CA Education,contact@educaca.com,Education,Los Angeles,USA
+NYC Education,hello@nycedu.com,Education,New York,USA
+Chicago Education,info@chicagoedu.com,Education,Chicago,USA
+Miami Education,contact@miamiedu.com,Education,Miami,USA
+Boston Education,info@bostonedu.com,Education,Boston,USA
+Seattle Education,hello@seattleedu.com,Education,Seattle,USA
+Austin Education,info@austinedu.com,Education,Austin,USA
+USA Marketing TX,info@marketingtx.com,Marketing,Houston,USA
+CA Marketing,contact@marketingca.com,Marketing,Los Angeles,USA
+NYC Marketing,hello@nycmarketing.com,Marketing,New York,USA
+Chicago Marketing,info@chicagomarketing.com,Marketing,Chicago,USA
+Miami Marketing,contact@miamimarketing.com,Marketing,Miami,USA
+Boston Marketing,info@bostonmarketing.com,Marketing,Boston,USA
+Seattle Marketing,hello@seattlemarketing.com,Marketing,Seattle,USA
+Austin Marketing,info@austinmarketing.com,Marketing,Austin,USA
+USA IT TX,info@ittx.com,IT,Houston,USA
+CA IT,contact@itca.com,IT,Los Angeles,USA
+NYC IT,hello@nycit.com,IT,New York,USA
+Chicago IT,info@chicagoit.com,IT,Chicago,USA
+Miami IT,contact@miamit.com,IT,Miami,USA
+Boston IT,info@bostonit.com,IT,Boston,USA
+Seattle IT,hello@seattleit.com,IT,Seattle,USA
+Austin IT,info@austinit.com,IT,Austin,USA
+USA Photography TX,info@photox.com,Photography,Houston,USA
+CA Photography,contact@photoca.com,Photography,Los Angeles,USA
+NYC Photography,hello@nycphoto.com,Photography,New York,USA
+Chicago Photography,info@chicagophoto.com,Photography,Chicago,USA
+Miami Photography,contact@miamiphoto.com,Photography,Miami,USA
+Boston Photography,info@bostonphoto.com,Photography,Boston,USA
+Seattle Photography,hello@seattlephoto.com,Photography,Seattle,USA
+Austin Photography,info@austinphoto.com,Photography,Austin,USA
+USA Printing TX,info@printtx.com,Printing,Houston,USA
+CA Printing,contact@printca.com,Printing,Los Angeles,USA
+NYC Printing,hello@nycprint.com,Printing,New York,USA
+Chicago Printing,info@chicagoprint.com,Printing,Chicago,USA
+Miami Printing,contact@miamiprint.com,Printing,Miami,USA
+Boston Printing,info@bostonprint.com,Printing,Boston,USA
+Seattle Printing,hello@seattleprint.com,Printing,Seattle,USA
+Austin Printing,info@austinprint.com,Printing,Austin,USA
+USA Security TX,info@securitytx.com,Security,Houston,USA
+CA Security,contact@securityca.com,Security,Los Angeles,USA
+NYC Security,hello@nycsecurity.com,Security,New York,USA
+Chicago Security,info@chicagosecurity.com,Security,Chicago,USA
+Miami Security,contact@miamisecurity.com,Security,Miami,USA
+Boston Security,info@bostonsecurity.com,Security,Boston,USA
+Seattle Security,hello@seattlesecurity.com,Security,Seattle,USA
+Austin Security,info@austinsecurity.com,Security,Austin,USA
+USA Cleaning TX,info@cleaningtx.com,Cleaning,Houston,USA
+CA Cleaning,contact@cleaningca.com,Cleaning,Los Angeles,USA
+NYC Cleaning,hello@nyccleaning.com,Cleaning,New York,USA
+Chicago Cleaning,info@chicagocleaning.com,Cleaning,Chicago,USA
+Miami Cleaning,contact@miamicleaning.com,Cleaning,Miami,USA
+Boston Cleaning,info@bostoncleaning.com,Cleaning,Boston,USA
+Seattle Cleaning,hello@seattlecleaning.com,Cleaning,Seattle,USA
+Austin Cleaning,info@austincleaning.com,Cleaning,Austin,USA
+USA Web Design TX,info@webdesigntx.com,Design,Houston,USA
+CA Web Design,contact@webdesignca.com,Design,Los Angeles,USA
+NYC Web Design,hello@nycwebdesign.com,Design,New York,USA
+Chicago Web Design,info@chicagowebdesign.com,Design,Chicago,USA
+Miami Web Design,contact@miamiwebdesign.com,Design,Miami,USA
+Boston Web Design,info@bostonwebdesign.com,Design,Boston,USA
+Seattle Web Design,hello@seattlewebdesign.com,Design,Seattle,USA
+Austin Web Design,info@austinwebdesign.com,Design,Austin,USA
+USA Consulting TX,info@consultingtx.com,Consulting,Houston,USA
+CA Consulting,contact@consultingca.com,Consulting,Los Angeles,USA
+NYC Consulting,hello@nycconsulting.com,Consulting,New York,USA
+Chicago Consulting,info@chicagoconsulting.com,Consulting,Chicago,USA
+Miami Consulting,contact@miamiconsulting.com,Consulting,Miami,USA
+Boston Consulting,info@bostonconsulting.com,Consulting,Boston,USA
+Seattle Consulting,hello@seattleconsulting.com,Consulting,Seattle,USA
+Austin Consulting,info@austinconsulting.com,Consulting,Austin,USA
