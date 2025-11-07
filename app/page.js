@@ -407,7 +407,7 @@ export default function Page() {
                       <span>Legal compliance documents</span>
                     </li>
                   </ul>
-                  <a href="#contact" className="no-underline">
+                  <a href="#contact" onClick={() => handleCTAClick('get_started', 'ilawyer_legal_docs')} className="no-underline">
                     <Button className="rounded-2xl w-full">Get Started</Button>
                   </a>
                 </CardContent>
@@ -441,7 +441,7 @@ export default function Page() {
                       <span>Compliance guidance</span>
                     </li>
                   </ul>
-                  <a href="#contact" className="no-underline">
+                  <a href="#contact" onClick={() => handleCTAClick('learn_more', 'ilawyer_ai_assistant')} className="no-underline">
                     <Button className="rounded-2xl w-full">Learn More</Button>
                   </a>
                 </CardContent>
@@ -488,7 +488,7 @@ export default function Page() {
                       <span>Billing and payment systems</span>
                     </li>
                   </ul>
-                  <a href="#contact" className="no-underline">
+                  <a href="#contact" onClick={() => handleCTAClick('get_started', 'provet_practice_mgmt')} className="no-underline">
                     <Button className="rounded-2xl w-full">Get Started</Button>
                   </a>
                 </CardContent>
@@ -522,7 +522,7 @@ export default function Page() {
                       <span>Staff training and development</span>
                     </li>
                   </ul>
-                  <a href="#contact" className="no-underline">
+                  <a href="#contact" onClick={() => handleCTAClick('learn_more', 'provet_business_growth')} className="no-underline">
                     <Button className="rounded-2xl w-full">Learn More</Button>
                   </a>
                 </CardContent>
