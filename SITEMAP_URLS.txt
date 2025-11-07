@@ -1,0 +1,17 @@
+
+# 📍 SITEMAP SUBMISSION URLs
+
+## Google Search Console
+After verifying your site, submit this sitemap:
+https://crownworksnl.com/sitemap.xml
+
+## Bing Webmaster Tools
+https://www.bing.com/webmasters
+Submit: https://crownworksnl.com/sitemap.xml
+
+## Yandex Webmaster
+https://webmaster.yandex.com
+Submit: https://crownworksnl.com/sitemap.xml
+
+## Direct Sitemap Access
+https://crownworksnl.com/sitemap.xml

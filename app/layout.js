@@ -36,6 +36,8 @@ export default function RootLayout({ children }) {
         <link rel="canonical" href="https://crownworksnl.com" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icon-192.png" />
+        {/* Google Search Console Verification - Add your verification code here */}
+        {/* <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" /> */}
         {/* Google Analytics - Replace G-XXXXXXXXXX with your actual Google Analytics ID */}
         {/* <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
         <script
