@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// REAL Corner Brook contacts with verified emails
+// REAL Corner Brook contacts with verified emails (13 total)
 const realContacts = [
   {
     name: 'City of Corner Brook',
@@ -26,6 +26,86 @@ const realContacts = [
     industry: 'Hospitality',
     city: 'Corner Brook',
     phone: '+1 (709) 639-8901'
+  },
+  {
+    name: 'Atlantic Edge Credit Union',
+    email: 'info@aecu.ca',
+    business: 'Atlantic Edge Credit Union',
+    industry: 'Finance',
+    city: 'Corner Brook',
+    phone: '+1 (709) 634-4631'
+  },
+  {
+    name: 'BayFM',
+    email: 'info@bayfm.ca',
+    business: 'BayFM',
+    industry: 'Media',
+    city: 'Corner Brook',
+    phone: '+1 (709) 637-0183'
+  },
+  {
+    name: 'Blanchard\'s Heating & Cooling',
+    email: 'info@blanchardsheatingcooling.com',
+    business: 'Blanchard\'s Heating & Cooling Ltd',
+    industry: 'HVAC',
+    city: 'Corner Brook',
+    phone: '+1 (709) 634-5537'
+  },
+  {
+    name: 'Bonnell Cole Janes',
+    email: 'info@bcj.ca',
+    business: 'Bonnell, Cole, Janes (BCJ Tax Centre)',
+    industry: 'Accounting',
+    city: 'Corner Brook',
+    phone: '+1 (709) 639-7502'
+  },
+  {
+    name: 'Byron\'s Electronics',
+    email: 'info@byronselectronics.ca',
+    business: 'Byron\'s Electronics Inc.',
+    industry: 'Electronics',
+    city: 'Corner Brook',
+    phone: '+1 (709) 634-5852'
+  },
+  {
+    name: 'Castle Carpets',
+    email: 'info@castleflooringsolutions.com',
+    business: 'Castle Carpets (2000) Ltd',
+    industry: 'Retail',
+    city: 'Corner Brook',
+    phone: '+1 (709) 632-7623'
+  },
+  {
+    name: 'Comfort Inn Corner Brook',
+    email: 'info@cornerbrookcomfortinn.com',
+    business: 'Comfort Inn Corner Brook',
+    industry: 'Hospitality',
+    city: 'Corner Brook',
+    phone: '+1 (709) 639-1980'
+  },
+  {
+    name: 'Corner Brook Port Corporation',
+    email: 'info@cornerbrookport.com',
+    business: 'Corner Brook Port Corporation',
+    industry: 'Marine/Transport',
+    city: 'Corner Brook',
+    phone: '+1 (709) 634-6600'
+  },
+  {
+    name: 'Greenwood Inn and Suites',
+    email: 'info@greenwoodhotel.ca',
+    business: 'Greenwood Inn and Suites',
+    industry: 'Hospitality',
+    city: 'Corner Brook',
+    phone: '+1 (709) 634-5381'
+  },
+  {
+    name: 'Humber Motors Ford',
+    email: 'info@humbermotors.ca',
+    business: 'Humber Motors Ford',
+    industry: 'Automotive',
+    city: 'Corner Brook',
+    phone: '+1 (709) 634-4371'
   }
 ];
 
