@@ -5,6 +5,7 @@ import { Crown, Sparkles, ShieldCheck, MapPin, Phone, Mail, ArrowRight, CheckCir
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { validateContactForm, checkRateLimit } from "@/lib/security";
+import AIAgentWidget from "@/components/AIAgentWidget";
 import "./globals.css";
 
 const SITE = {
@@ -1359,6 +1360,9 @@ export default function Page() {
           <p>&copy; {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
         </div>
       </footer>
+
+      {/* AI Agent Widget */}
+      <AIAgentWidget />
     </div>
   );
 }
