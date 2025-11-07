@@ -174,6 +174,12 @@ export default function Page() {
               <a href="/email-list" className="text-sm hover:text-zinc-900 text-zinc-600 no-underline transition-colors">
                 Email List
               </a>
+              <a href={`tel:${SITE.phone}`} className="no-underline mr-2">
+                <Button variant="outline" className="rounded-2xl text-sm">
+                  <Phone className="w-4 h-4 mr-1" />
+                  Call Now
+                </Button>
+              </a>
               <a href="#contact" className="no-underline">
                 <Button className="rounded-2xl">Get a Quote</Button>
               </a>
@@ -250,8 +256,17 @@ export default function Page() {
                 CrownWorksNL, founded by Glen Pollard of the Qalipu First Nation, provides strategy, design, and Crown Land services to simplify your path to ownership and growth in Newfoundland & Labrador.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <a href="#contact" onClick={() => handleCTAClick('get_free_consultation', 'hero')} className="no-underline"><Button className="rounded-2xl text-lg px-6 py-3">Get Free Consultation <ArrowRight className="ml-2 w-4 h-4" /></Button></a>
+                <a href="#contact" onClick={() => handleCTAClick('get_free_consultation', 'hero')} className="no-underline"><Button className="rounded-2xl text-lg px-6 py-3 bg-indigo-600 hover:bg-indigo-700">Get Free Consultation <ArrowRight className="ml-2 w-4 h-4" /></Button></a>
+                <a href={`tel:${SITE.phone}`} onClick={() => handleCTAClick('call_now', 'hero')} className="px-5 py-3 rounded-2xl border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50 no-underline font-medium flex items-center gap-2">
+                  <Phone className="w-4 h-4" />
+                  Call Now
+                </a>
                 <a href="#pricing" onClick={() => handleCTAClick('view_pricing', 'hero')} className="px-5 py-3 rounded-2xl border border-zinc-300 text-sm hover:bg-zinc-50 no-underline font-medium">View Pricing</a>
+              </div>
+              <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                <p className="text-sm text-green-800 font-medium">
+                  🎉 <strong>Launch Special:</strong> Free consultation for first 10 businesses - <span className="text-green-600">Only 7 spots left!</span>
+                </p>
               </div>
               <div className="mt-4 flex items-center gap-6 text-sm text-zinc-500">
                 <div className="flex items-center gap-2">
@@ -314,9 +329,13 @@ export default function Page() {
         <div className="max-w-6xl mx-auto px-4">
           <AnimatedSection className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Service Packages</h2>
-            <p className="text-zinc-600 max-w-2xl mx-auto">
+            <p className="text-zinc-600 max-w-2xl mx-auto mb-4">
               Transparent pricing for Crown Land services and business consulting. All packages include a free initial consultation.
             </p>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium">
+              <Users className="w-4 h-4" />
+              <span>12+ businesses helped this month</span>
+            </div>
           </AnimatedSection>
           <div className="grid md:grid-cols-3 gap-6">
             <AnimatedSection>
