@@ -1703,9 +1703,169 @@ export default function Page() {
       </section>
       </main>
 
-      <footer className="bg-zinc-900 text-zinc-400 py-8">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <p>&copy; {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
+      <footer className="bg-zinc-900 text-zinc-400 py-12">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
+            {/* Company Info */}
+            <div className="md:col-span-2">
+              <div className="flex items-center gap-2 mb-4">
+                <Crown className="w-6 h-6 text-indigo-500" />
+                <h3 className="text-white font-semibold text-lg">{SITE.name}</h3>
+              </div>
+              <p className="text-zinc-400 mb-4 leading-relaxed">
+                Transforming businesses through AI and automation. We help organizations leverage cutting-edge technology to streamline operations, reduce costs, and unlock exponential growth potential.
+              </p>
+              <p className="text-zinc-500 text-sm">
+                Founded by Glen Pollard
+              </p>
+              <p className="text-zinc-500 text-sm mt-2">
+                AI Business Systems & Automation Solutions
+              </p>
+            </div>
+
+            {/* Services */}
+            <div>
+              <h4 className="text-white font-semibold mb-4">Services</h4>
+              <ul className="space-y-2">
+                <li>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      const targetElement = document.getElementById('services');
+                      if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }}
+                    className="text-zinc-400 hover:text-white transition-colors cursor-pointer text-left bg-transparent border-none p-0"
+                    style={{ position: 'relative', zIndex: 10, pointerEvents: 'auto' }}
+                  >
+                    Web Automation
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      const targetElement = document.getElementById('ai-agents');
+                      if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }}
+                    className="text-zinc-400 hover:text-white transition-colors cursor-pointer text-left bg-transparent border-none p-0"
+                    style={{ position: 'relative', zIndex: 10, pointerEvents: 'auto' }}
+                  >
+                    AI Agents
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      window.location.href = '/university';
+                    }}
+                    className="text-zinc-400 hover:text-white transition-colors cursor-pointer text-left bg-transparent border-none p-0"
+                    style={{ position: 'relative', zIndex: 10, pointerEvents: 'auto' }}
+                  >
+                    Digital Products
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      const targetElement = document.getElementById('services');
+                      if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }}
+                    className="text-zinc-400 hover:text-white transition-colors cursor-pointer text-left bg-transparent border-none p-0"
+                    style={{ position: 'relative', zIndex: 10, pointerEvents: 'auto' }}
+                  >
+                    Business Consulting
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            {/* Company */}
+            <div>
+              <h4 className="text-white font-semibold mb-4">Company</h4>
+              <ul className="space-y-2">
+                <li>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      const targetElement = document.getElementById('about');
+                      if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }}
+                    className="text-zinc-400 hover:text-white transition-colors cursor-pointer text-left bg-transparent border-none p-0"
+                    style={{ position: 'relative', zIndex: 10, pointerEvents: 'auto' }}
+                  >
+                    About Us
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      // WABAM Philosophy - scroll to about section or create dedicated section
+                      const targetElement = document.getElementById('about');
+                      if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }}
+                    className="text-zinc-400 hover:text-white transition-colors cursor-pointer text-left bg-transparent border-none p-0"
+                    style={{ position: 'relative', zIndex: 10, pointerEvents: 'auto' }}
+                  >
+                    WABAM Philosophy
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      const targetElement = document.getElementById('contact');
+                      if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }}
+                    className="text-zinc-400 hover:text-white transition-colors cursor-pointer text-left bg-transparent border-none p-0"
+                    style={{ position: 'relative', zIndex: 10, pointerEvents: 'auto' }}
+                  >
+                    Contact
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-zinc-800 pt-8 mt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="text-zinc-500 text-sm">
+                &copy; {new Date().getFullYear()} {SITE.name}. All rights reserved.
+              </p>
+              <p className="text-zinc-500 text-sm">
+                Powered by AI & Automation
+              </p>
+            </div>
+          </div>
         </div>
       </footer>
 
