@@ -226,7 +226,7 @@ export default function Page() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     // Rate limiting check
@@ -253,14 +253,59 @@ export default function Page() {
     // Use validated and sanitized data
     const sanitizedData = validation.data;
     
-    // In a real application, you would send this to a backend API
-    // For now, we'll use mailto as a fallback
-    const subject = encodeURIComponent(`Contact from ${sanitizedData.name}`);
-    const body = encodeURIComponent(`Name: ${sanitizedData.name}\nEmail: ${sanitizedData.email}\nPhone: ${sanitizedData.phone}\n\nMessage:\n${sanitizedData.message}`);
-    window.location.href = `mailto:${SITE.email}?subject=${subject}&body=${body}`;
+    // Show loading state
     setFormSubmitted(true);
-    setFormData({ name: "", email: "", phone: "", message: "" });
-    setTimeout(() => setFormSubmitted(false), 5000);
+    const submitButton = e.target.querySelector('button[type="submit"]');
+    const originalText = submitButton?.textContent;
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+    }
+    
+    try {
+      // Send to backend API
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(sanitizedData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message');
+      }
+
+      // Success
+      setFormSubmitted(true);
+      setFormData({ name: "", email: "", phone: "", message: "" });
+      
+      if (submitButton) {
+        submitButton.textContent = 'Message Sent! ✓';
+        submitButton.style.backgroundColor = '#10b981';
+      }
+      
+      setTimeout(() => {
+        setFormSubmitted(false);
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalText;
+          submitButton.style.backgroundColor = '';
+        }
+      }, 5000);
+
+    } catch (error) {
+      console.error('Form submission error:', error);
+      alert(`Failed to send message: ${error.message}\n\nPlease contact us directly at ${SITE.email} or call ${SITE.phone}`);
+      
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = originalText;
+      }
+      setFormSubmitted(false);
+    }
   };
 
   const handleCTAClick = (ctaName, location) => {

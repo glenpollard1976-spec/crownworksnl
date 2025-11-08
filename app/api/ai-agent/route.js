@@ -5,6 +5,18 @@ import { NextResponse } from 'next/server';
  * Unified AI assistant that routes to appropriate services
  */
 
+// Initialize OpenAI (optional - falls back to rule-based if not configured)
+let openai = null;
+try {
+  if (process.env.OPENAI_API_KEY) {
+    const OpenAI = require('openai').default;
+    openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  }
+} catch (error) {
+  // OpenAI not available, will use rule-based responses
+  console.log('OpenAI not configured, using rule-based responses');
+}
+
 // Service routing logic
 const routeToService = (query, context) => {
   const lowerQuery = query.toLowerCase();
@@ -37,8 +49,8 @@ const routeToService = (query, context) => {
   return 'business';
 };
 
-// Service-specific response generators
-const generateResponse = async (service, query, context) => {
+// Service-specific response generators (fallback if OpenAI not available)
+const generateRuleBasedResponse = async (service, query, context) => {
   const responses = {
     ilawyer: {
       message: `I can help you with legal matters through our iLawyer service. I can assist with:
@@ -90,6 +102,52 @@ What creative project are you working on?`,
   return responses[service] || responses.business;
 };
 
+// Generate AI response using OpenAI
+const generateAIResponse = async (service, query, context) => {
+  if (!openai) {
+    return generateRuleBasedResponse(service, query, context);
+  }
+
+  try {
+    const serviceContext = {
+      ilawyer: 'You are an AI legal assistant for CrownWorksNL iLawyer service. Help with legal questions, document preparation, and business compliance.',
+      provet: 'You are an AI veterinary assistant for CrownWorksNL ProVet service. Help with pet health, veterinary consultations, and practice management.',
+      business: 'You are a business consultant for CrownWorksNL. Help with business strategy, growth planning, and revenue optimization.',
+      creative: 'You are a creative consultant for CrownWorksNL Brand & Creative service. Help with brand identity, design, and marketing materials.'
+    };
+
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      messages: [
+        {
+          role: 'system',
+          content: `${serviceContext[service] || serviceContext.business} Keep responses helpful, professional, and under 200 words. Always end by suggesting they contact us for more information.`
+        },
+        {
+          role: 'user',
+          content: query
+        }
+      ],
+      max_tokens: 300,
+      temperature: 0.7,
+    });
+
+    const aiMessage = completion.choices[0]?.message?.content || 'I can help with that. Please contact us for more information.';
+
+    return {
+      message: aiMessage,
+      action: 'contact',
+      service: service === 'ilawyer' ? 'iLawyer' : 
+               service === 'provet' ? 'ProVet' :
+               service === 'business' ? 'Business Consulting' : 'Brand & Creative'
+    };
+  } catch (error) {
+    console.error('OpenAI error:', error);
+    // Fallback to rule-based
+    return generateRuleBasedResponse(service, query, context);
+  }
+};
+
 export async function POST(request) {
   try {
     const { query, context = {} } = await request.json();
@@ -104,8 +162,8 @@ export async function POST(request) {
     // Route to appropriate service
     const service = routeToService(query, context);
     
-    // Generate response
-    const response = await generateResponse(service, query, context);
+    // Generate response (AI-powered if OpenAI configured, otherwise rule-based)
+    const response = await generateAIResponse(service, query, context);
     
     // Track usage (in production, save to database)
     // await trackUsage(service, query, context);
