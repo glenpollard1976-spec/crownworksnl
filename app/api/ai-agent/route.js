@@ -6,16 +6,36 @@ import { NextResponse } from 'next/server';
  * Now supports multiple LLM providers: OpenAI, Anthropic Claude, Google Gemini
  */
 
-// Try to use multi-LLM provider system, fallback to OpenAI-only
+// Initialize multi-LLM provider system (lazy load)
+let llmProvidersCache = null;
 let useMultiLLM = false;
-let llmProviders = null;
 
-try {
-  llmProviders = require('../../lib/llm-providers');
-  useMultiLLM = true;
-  console.log('✅ Multi-LLM provider system loaded');
-} catch (error) {
-  console.log('⚠️ Multi-LLM system not available, using OpenAI-only mode');
+async function initLLMProviders() {
+  if (llmProvidersCache !== null) {
+    return llmProvidersCache;
+  }
+  
+  try {
+    // Try ES module import first
+    const llmModule = await import('../../lib/llm-providers.js');
+    llmProvidersCache = llmModule;
+    useMultiLLM = true;
+    console.log('✅ Multi-LLM provider system loaded');
+    return llmModule;
+  } catch (error) {
+    // Try CommonJS require as fallback
+    try {
+      const llmModule = require('../../lib/llm-providers');
+      llmProvidersCache = llmModule;
+      useMultiLLM = true;
+      console.log('✅ Multi-LLM provider system loaded (CommonJS)');
+      return llmModule;
+    } catch (err) {
+      console.log('⚠️ Multi-LLM system not available, using OpenAI-only mode');
+      llmProvidersCache = false;
+      return false;
+    }
+  }
 }
 
 // Fallback: Initialize OpenAI (optional - falls back to rule-based if not configured)
@@ -186,7 +206,8 @@ ${service === 'ilawyer'
   };
 
   // Try multi-LLM system first
-  if (useMultiLLM && llmProviders) {
+  const llmProviders = await initLLMProviders();
+  if (llmProviders && useMultiLLM) {
     try {
       const result = await llmProviders.generateWithFallback(service, query, messages, options);
       
@@ -288,6 +309,7 @@ export async function POST(request) {
 
 // Health check endpoint
 export async function GET() {
+  const llmProviders = await initLLMProviders();
   const providers = useMultiLLM && llmProviders 
     ? llmProviders.getAvailableProviders().map(p => ({ name: p.name, models: p.models.length }))
     : openai ? [{ name: 'OpenAI', models: 2 }] : [];
