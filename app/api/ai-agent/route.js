@@ -21,8 +21,16 @@ try {
 const routeToService = (query, context) => {
   const lowerQuery = query.toLowerCase();
   
-  // Legal keywords
-  const legalKeywords = ['legal', 'law', 'contract', 'agreement', 'compliance', 'lawsuit', 'attorney', 'lawyer', 'document', 'legal document'];
+  // Legal keywords (expanded)
+  const legalKeywords = [
+    'legal', 'law', 'contract', 'agreement', 'compliance', 'lawsuit', 'attorney', 'lawyer', 
+    'document', 'legal document', 'nda', 'non-disclosure', 'employment contract', 'lease',
+    'partnership', 'incorporation', 'corporate', 'trademark', 'copyright', 'intellectual property',
+    'liability', 'risk', 'litigation', 'dispute', 'settlement', 'terms of service', 'privacy policy',
+    'terms and conditions', 'service agreement', 'consulting agreement', 'vendor agreement',
+    'commercial lease', 'real estate', 'business formation', 'corporate law', 'hr policy',
+    'employment law', 'labor law', 'regulatory', 'compliance', 'legal advice', 'legal question'
+  ];
   if (legalKeywords.some(keyword => lowerQuery.includes(keyword))) {
     return 'ilawyer';
   }
@@ -53,13 +61,29 @@ const routeToService = (query, context) => {
 const generateRuleBasedResponse = async (service, query, context) => {
   const responses = {
     ilawyer: {
-      message: `I can help you with legal matters through our iLawyer service. I can assist with:
-- Legal document preparation
-- Contract review
-- Business compliance
-- Legal questions
+      message: `I'm your AI legal assistant for iLawyer by CrownWorksNL. I specialize in Canadian business law, contracts, and compliance.
 
-Would you like me to help you with a specific legal matter?`,
+I can help you with:
+📄 **Contract Services**
+- Drafting employment contracts, service agreements, NDAs
+- Reviewing existing contracts for risks
+- Partnership and shareholder agreements
+
+🏢 **Business Law**
+- Business formation and incorporation
+- Corporate compliance and governance
+- Commercial leases and real estate
+
+⚖️ **Legal Compliance**
+- Employment law and HR policies
+- Industry-specific regulations
+- Risk assessment and mitigation
+
+💼 **Intellectual Property**
+- Trademark and copyright guidance
+- IP protection strategies
+
+What legal matter can I help you with today? Ask me anything about contracts, business law, compliance, or legal documents.`,
       action: 'contact',
       service: 'iLawyer'
     },
@@ -110,26 +134,54 @@ const generateAIResponse = async (service, query, context) => {
 
   try {
     const serviceContext = {
-      ilawyer: 'You are an AI legal assistant for CrownWorksNL iLawyer service. Help with legal questions, document preparation, and business compliance.',
+      ilawyer: `You are an expert AI legal assistant for CrownWorksNL iLawyer service, specializing in Canadian law (particularly Newfoundland & Labrador), business law, contracts, and compliance.
+
+Your expertise includes:
+- Contract drafting and review (employment, service, partnership, NDAs)
+- Business formation and corporate law
+- Employment law and HR compliance
+- Intellectual property (trademarks, copyrights)
+- Commercial leases and real estate
+- Regulatory compliance (industry-specific)
+- Legal document preparation
+- Risk assessment and mitigation
+
+Guidelines:
+- Provide practical, actionable legal advice
+- Reference relevant Canadian/NL legal frameworks when applicable
+- Explain legal concepts in clear, understandable language
+- Identify potential legal risks and suggest solutions
+- Always recommend consulting with a licensed attorney for complex matters
+- Be professional, thorough, and helpful
+
+When users ask legal questions, provide specific, detailed answers with relevant legal considerations. For document requests, explain what documents they need and key provisions to include.`,
       provet: 'You are an AI veterinary assistant for CrownWorksNL ProVet service. Help with pet health, veterinary consultations, and practice management.',
       business: 'You are a business consultant for CrownWorksNL. Help with business strategy, growth planning, and revenue optimization.',
       creative: 'You are a creative consultant for CrownWorksNL Brand & Creative service. Help with brand identity, design, and marketing materials.'
     };
 
+    // Use GPT-4 for legal questions (better accuracy), GPT-3.5 for others
+    const model = service === 'ilawyer' ? 'gpt-4' : 'gpt-3.5-turbo';
+    const maxTokens = service === 'ilawyer' ? 500 : 300;
+    
     const completion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: model,
       messages: [
         {
           role: 'system',
-          content: `${serviceContext[service] || serviceContext.business} Keep responses helpful, professional, and under 200 words. Always end by suggesting they contact us for more information.`
+          content: `${serviceContext[service] || serviceContext.business} 
+
+${service === 'ilawyer' 
+  ? 'Provide detailed, comprehensive legal guidance. Be thorough and specific. Explain legal concepts clearly. Include relevant considerations and potential risks. Keep responses between 200-400 words for complex questions, or 100-200 words for simple queries. Always end by suggesting they contact us for document preparation or complex legal matters.'
+  : 'Keep responses helpful, professional, and under 200 words. Always end by suggesting they contact us for more information.'}`
         },
         {
           role: 'user',
           content: query
         }
       ],
-      max_tokens: 300,
-      temperature: 0.7,
+      max_tokens: maxTokens,
+      temperature: service === 'ilawyer' ? 0.3 : 0.7, // Lower temperature for more accurate legal responses
     });
 
     const aiMessage = completion.choices[0]?.message?.content || 'I can help with that. Please contact us for more information.';
