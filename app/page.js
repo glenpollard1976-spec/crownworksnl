@@ -821,18 +821,20 @@ export default function Page() {
             <p className="text-zinc-600 max-w-2xl mx-auto text-lg mb-6">
               Complete canine health management at a fraction of traditional vet costs. AI-powered consultations, health records, vaccination tracking, and instant expert guidance whenever your dog needs it.
             </p>
-            <div className="flex flex-wrap gap-4 justify-center mb-6">
+            <div className="flex flex-wrap gap-4 justify-center mb-6" style={{ pointerEvents: 'auto', position: 'relative', zIndex: 1 }}>
               <a
                 href="#contact"
                 onClick={(e) => {
                   e.preventDefault();
+                  e.stopPropagation();
                   handleCTAClick('start_free_trial', 'provet_hero');
                   const targetElement = document.getElementById('contact');
                   if (targetElement) {
                     targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                   }
                 }}
-                className="inline-flex items-center justify-center px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold transition-colors no-underline focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                style={{ pointerEvents: 'auto', position: 'relative', zIndex: 10 }}
+                className="inline-flex items-center justify-center px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold transition-colors no-underline focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
               >
                 Start Free Trial
               </a>
@@ -840,13 +842,15 @@ export default function Page() {
                 href="#pricing"
                 onClick={(e) => {
                   e.preventDefault();
+                  e.stopPropagation();
                   handleCTAClick('view_pricing', 'provet_hero');
                   const targetElement = document.getElementById('pricing');
                   if (targetElement) {
                     targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                   }
                 }}
-                className="inline-flex items-center justify-center px-6 py-3 rounded-2xl border border-zinc-300 bg-white hover:bg-zinc-50 text-zinc-900 font-semibold transition-colors no-underline focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                style={{ pointerEvents: 'auto', position: 'relative', zIndex: 10 }}
+                className="inline-flex items-center justify-center px-6 py-3 rounded-2xl border border-zinc-300 bg-white hover:bg-zinc-50 text-zinc-900 font-semibold transition-colors no-underline focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
               >
                 View Pricing
               </a>
@@ -892,13 +896,15 @@ export default function Page() {
                     href="#contact"
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
                       handleCTAClick('start_free_trial', 'provet_ai_consultations');
                       const targetElement = document.getElementById('contact');
                       if (targetElement) {
                         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                       }
                     }}
-                    className="w-full inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white transition no-underline focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    style={{ pointerEvents: 'auto', position: 'relative', zIndex: 10 }}
+                    className="w-full inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white transition no-underline focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
                   >
                     Start Free Trial
                   </a>
@@ -941,13 +947,15 @@ export default function Page() {
                     href="#pricing"
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
                       handleCTAClick('view_pricing', 'provet_health_mgmt');
                       const targetElement = document.getElementById('pricing');
                       if (targetElement) {
                         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                       }
                     }}
-                    className="w-full inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white transition no-underline focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    style={{ pointerEvents: 'auto', position: 'relative', zIndex: 10 }}
+                    className="w-full inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white transition no-underline focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
                   >
                     View Pricing
                   </a>
