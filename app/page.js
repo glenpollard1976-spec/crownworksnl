@@ -1520,12 +1520,19 @@ export default function Page() {
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
+                      console.log('✅ Connect with Glen button clicked!');
                       handleCTAClick('connect_glen', 'about_section');
-                      const targetElement = document.getElementById('contact');
-                      if (targetElement) {
-                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                      }
+                      setTimeout(() => {
+                        const targetElement = document.getElementById('contact');
+                        if (targetElement) {
+                          console.log('✅ Scrolling to contact section');
+                          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        } else {
+                          console.error('❌ Contact section not found!');
+                        }
+                      }, 100);
                     }}
+                    style={{ position: 'relative', zIndex: 10, pointerEvents: 'auto' }}
                     className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
                     Connect with Glen <ArrowRight className="ml-2 w-4 h-4" />
@@ -1653,7 +1660,8 @@ export default function Page() {
                     </div>
                     <button
                       type="submit"
-                      className="w-full px-6 py-3 rounded-2xl bg-white text-indigo-600 font-medium hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      style={{ position: 'relative', zIndex: 10, pointerEvents: 'auto' }}
+                      className="w-full px-6 py-3 rounded-2xl bg-white text-indigo-600 font-medium hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                       aria-label="Send contact message"
                     >
                       {formSubmitted ? 'Message Sent!' : 'Send Message'}
