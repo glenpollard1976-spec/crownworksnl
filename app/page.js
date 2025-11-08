@@ -1587,11 +1587,39 @@ export default function Page() {
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                       <Phone className="w-5 h-5 flex-shrink-0" />
-                    <a href={`tel:${SITE.phone}`} className="no-underline text-white hover:underline focus:outline-none focus:ring-2 focus:ring-white rounded" aria-label={`Call ${SITE.phone}`}>{SITE.phone}</a>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('✅ Phone button clicked!');
+                        handleCTAClick('call_now', 'contact_section');
+                        window.location.href = `tel:${SITE.phone}`;
+                      }}
+                      style={{ position: 'relative', zIndex: 10, pointerEvents: 'auto' }}
+                      className="text-left text-white hover:underline focus:outline-none focus:ring-2 focus:ring-white rounded cursor-pointer bg-transparent border-none p-0"
+                      aria-label={`Call ${SITE.phone}`}
+                    >
+                      {SITE.phone}
+                    </button>
                   </div>
                   <div className="flex items-center gap-3">
                       <Mail className="w-5 h-5 flex-shrink-0" />
-                    <a href={`mailto:${SITE.email}`} className="no-underline text-white hover:underline focus:outline-none focus:ring-2 focus:ring-white rounded" aria-label={`Email ${SITE.email}`}>{SITE.email}</a>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('✅ Email button clicked!');
+                        handleCTAClick('email_contact', 'contact_section');
+                        window.location.href = `mailto:${SITE.email}`;
+                      }}
+                      style={{ position: 'relative', zIndex: 10, pointerEvents: 'auto' }}
+                      className="text-left text-white hover:underline focus:outline-none focus:ring-2 focus:ring-white rounded cursor-pointer bg-transparent border-none p-0"
+                      aria-label={`Email ${SITE.email}`}
+                    >
+                      {SITE.email}
+                    </button>
                   </div>
                     <div className="flex items-start gap-3">
                       <MapPin className="w-5 h-5 flex-shrink-0 mt-1" />
