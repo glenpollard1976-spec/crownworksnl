@@ -182,6 +182,10 @@ export default function RootLayout({ children }) {
                       if (rafId) {
                         cancelAnimationFrame(rafId);
                       }
+                      // Re-enable scrolling in CSS
+                      if (document.documentElement) {
+                        document.documentElement.classList.add('scrolled');
+                      }
                     } else {
                       setTimeout(checkStop, 100);
                     }
@@ -194,6 +198,10 @@ export default function RootLayout({ children }) {
                       clearInterval(scrollCheck);
                       if (rafId) {
                         cancelAnimationFrame(rafId);
+                      }
+                      // Re-enable scrolling in CSS
+                      if (document.documentElement) {
+                        document.documentElement.classList.add('scrolled');
                       }
                     }, 2000);
                   }, { once: true });

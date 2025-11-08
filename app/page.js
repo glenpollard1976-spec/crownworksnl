@@ -221,13 +221,17 @@ export default function Page() {
       }
     }, 10);
 
-    // Stop after 2 seconds
+    // Stop after 2 seconds and re-enable scrolling
     setTimeout(() => {
       isCancelled = true;
       if (rafId) {
         cancelAnimationFrame(rafId);
       }
       clearInterval(intervalId);
+      // Re-enable scrolling in CSS
+      if (document.documentElement) {
+        document.documentElement.classList.add('scrolled');
+      }
     }, 2000);
 
     // Handle hash navigation after the enforcement window
