@@ -10,7 +10,7 @@ const SITE = {
   name: "CrownWorksNL",
   phone: "+1 (709) 721-0340",
   email: "crownworksnl@gmail.com",
-  url: "https://crownworksnl.com",
+  url: "https://www.crownworksnl.com",
 };
 
 const courseData = {
