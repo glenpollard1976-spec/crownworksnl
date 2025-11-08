@@ -3,9 +3,22 @@ import { NextResponse } from 'next/server';
 /**
  * CrownWorks AI Agent API
  * Unified AI assistant that routes to appropriate services
+ * Now supports multiple LLM providers: OpenAI, Anthropic Claude, Google Gemini
  */
 
-// Initialize OpenAI (optional - falls back to rule-based if not configured)
+// Try to use multi-LLM provider system, fallback to OpenAI-only
+let useMultiLLM = false;
+let llmProviders = null;
+
+try {
+  llmProviders = require('../../lib/llm-providers');
+  useMultiLLM = true;
+  console.log('✅ Multi-LLM provider system loaded');
+} catch (error) {
+  console.log('⚠️ Multi-LLM system not available, using OpenAI-only mode');
+}
+
+// Fallback: Initialize OpenAI (optional - falls back to rule-based if not configured)
 let openai = null;
 try {
   if (process.env.OPENAI_API_KEY) {
@@ -126,15 +139,11 @@ What creative project are you working on?`,
   return responses[service] || responses.business;
 };
 
-// Generate AI response using OpenAI
+// Generate AI response using multi-LLM system or OpenAI fallback
 const generateAIResponse = async (service, query, context) => {
-  if (!openai) {
-    return generateRuleBasedResponse(service, query, context);
-  }
-
-  try {
-    const serviceContext = {
-      ilawyer: `You are an expert AI legal assistant for CrownWorksNL iLawyer service, specializing in Canadian law (particularly Newfoundland & Labrador), business law, contracts, and compliance.
+  // Service-specific context
+  const serviceContext = {
+    ilawyer: `You are an expert AI legal assistant for CrownWorksNL iLawyer service, specializing in Canadian law (particularly Newfoundland & Labrador), business law, contracts, and compliance.
 
 Your expertise includes:
 - Contract drafting and review (employment, service, partnership, NDAs)
@@ -155,33 +164,60 @@ Guidelines:
 - Be professional, thorough, and helpful
 
 When users ask legal questions, provide specific, detailed answers with relevant legal considerations. For document requests, explain what documents they need and key provisions to include.`,
-      provet: 'You are an AI veterinary assistant for CrownWorksNL ProVet service. Help with pet health, veterinary consultations, and practice management.',
-      business: 'You are a business consultant for CrownWorksNL. Help with business strategy, growth planning, and revenue optimization.',
-      creative: 'You are a creative consultant for CrownWorksNL Brand & Creative service. Help with brand identity, design, and marketing materials.'
-    };
+    provet: 'You are an AI veterinary assistant for CrownWorksNL ProVet service. Help with pet health, veterinary consultations, and practice management.',
+    business: 'You are a business consultant for CrownWorksNL. Help with business strategy, growth planning, and revenue optimization.',
+    creative: 'You are a creative consultant for CrownWorksNL Brand & Creative service. Help with brand identity, design, and marketing materials.'
+  };
 
-    // Use GPT-4 for legal questions (better accuracy), GPT-3.5 for others
-    const model = service === 'ilawyer' ? 'gpt-4' : 'gpt-3.5-turbo';
-    const maxTokens = service === 'ilawyer' ? 500 : 300;
-    
-    const completion = await openai.chat.completions.create({
-      model: model,
-      messages: [
-        {
-          role: 'system',
-          content: `${serviceContext[service] || serviceContext.business} 
+  const systemPrompt = `${serviceContext[service] || serviceContext.business} 
 
 ${service === 'ilawyer' 
   ? 'Provide detailed, comprehensive legal guidance. Be thorough and specific. Explain legal concepts clearly. Include relevant considerations and potential risks. Keep responses between 200-400 words for complex questions, or 100-200 words for simple queries. Always end by suggesting they contact us for document preparation or complex legal matters.'
-  : 'Keep responses helpful, professional, and under 200 words. Always end by suggesting they contact us for more information.'}`
-        },
-        {
-          role: 'user',
-          content: query
-        }
-      ],
-      max_tokens: maxTokens,
-      temperature: service === 'ilawyer' ? 0.3 : 0.7, // Lower temperature for more accurate legal responses
+  : 'Keep responses helpful, professional, and under 200 words. Always end by suggesting they contact us for more information.'}`;
+
+  const messages = [
+    { role: 'system', content: systemPrompt },
+    { role: 'user', content: query }
+  ];
+
+  const options = {
+    maxTokens: service === 'ilawyer' ? 500 : 300,
+    temperature: service === 'ilawyer' ? 0.3 : 0.7
+  };
+
+  // Try multi-LLM system first
+  if (useMultiLLM && llmProviders) {
+    try {
+      const result = await llmProviders.generateWithFallback(service, query, messages, options);
+      
+      return {
+        message: result.response || 'I can help with that. Please contact us for more information.',
+        action: 'contact',
+        service: service === 'ilawyer' ? 'iLawyer' : 
+                 service === 'provet' ? 'ProVet' :
+                 service === 'business' ? 'Business Consulting' : 'Brand & Creative',
+        provider: result.provider,
+        model: result.model
+      };
+    } catch (error) {
+      console.error('Multi-LLM error:', error);
+      // Fall through to OpenAI fallback
+    }
+  }
+
+  // Fallback to OpenAI-only mode
+  if (!openai) {
+    return generateRuleBasedResponse(service, query, context);
+  }
+
+  try {
+    const model = service === 'ilawyer' ? 'gpt-4' : 'gpt-3.5-turbo';
+    
+    const completion = await openai.chat.completions.create({
+      model: model,
+      messages: messages,
+      max_tokens: options.maxTokens,
+      temperature: options.temperature,
     });
 
     const aiMessage = completion.choices[0]?.message?.content || 'I can help with that. Please contact us for more information.';
@@ -191,7 +227,9 @@ ${service === 'ilawyer'
       action: 'contact',
       service: service === 'ilawyer' ? 'iLawyer' : 
                service === 'provet' ? 'ProVet' :
-               service === 'business' ? 'Business Consulting' : 'Brand & Creative'
+               service === 'business' ? 'Business Consulting' : 'Brand & Creative',
+      provider: 'OpenAI',
+      model: model
     };
   } catch (error) {
     console.error('OpenAI error:', error);
@@ -250,11 +288,17 @@ export async function POST(request) {
 
 // Health check endpoint
 export async function GET() {
+  const providers = useMultiLLM && llmProviders 
+    ? llmProviders.getAvailableProviders().map(p => ({ name: p.name, models: p.models.length }))
+    : openai ? [{ name: 'OpenAI', models: 2 }] : [];
+  
   return NextResponse.json({
     status: 'online',
     service: 'CrownWorks AI Agent',
-    version: '1.0.0',
-    services: ['ilawyer', 'provet', 'business', 'creative']
+    version: '2.0.0',
+    services: ['ilawyer', 'provet', 'business', 'creative'],
+    providers: providers,
+    multiLLM: useMultiLLM
   });
 }
 
