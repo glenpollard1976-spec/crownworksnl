@@ -821,63 +821,35 @@ export default function Page() {
             <p className="text-zinc-600 max-w-2xl mx-auto text-lg mb-6">
               Complete canine health management at a fraction of traditional vet costs. AI-powered consultations, health records, vaccination tracking, and instant expert guidance whenever your dog needs it.
             </p>
-            <div className="flex flex-wrap gap-4 justify-center mb-6" style={{ position: 'relative', zIndex: 50 }}>
-              <button
-                type="button"
+            <div className="flex flex-wrap gap-4 justify-center mb-6">
+              <a
+                href="#contact"
                 onClick={(e) => {
                   e.preventDefault();
-                  e.stopPropagation();
-                  console.log('✅ ProVet Start Free Trial button clicked!');
                   handleCTAClick('start_free_trial', 'provet_hero');
-                  
-                  // Try scrollIntoView first
                   const targetElement = document.getElementById('contact');
                   if (targetElement) {
                     targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  } else {
-                    // Fallback: direct navigation
-                    window.location.href = '#contact';
                   }
                 }}
-                style={{ 
-                  position: 'relative', 
-                  zIndex: 100, 
-                  pointerEvents: 'auto',
-                  cursor: 'pointer',
-                  WebkitTapHighlightColor: 'transparent'
-                }}
-                className="inline-flex items-center justify-center px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-semibold transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold transition-colors no-underline focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
                 Start Free Trial
-              </button>
-              <button
-                type="button"
+              </a>
+              <a
+                href="#pricing"
                 onClick={(e) => {
                   e.preventDefault();
-                  e.stopPropagation();
-                  console.log('✅ ProVet View Pricing button clicked!');
                   handleCTAClick('view_pricing', 'provet_hero');
-                  
-                  // Try scrollIntoView first
                   const targetElement = document.getElementById('pricing');
                   if (targetElement) {
                     targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  } else {
-                    // Fallback: direct navigation
-                    window.location.href = '#pricing';
                   }
                 }}
-                style={{ 
-                  position: 'relative', 
-                  zIndex: 100, 
-                  pointerEvents: 'auto',
-                  cursor: 'pointer',
-                  WebkitTapHighlightColor: 'transparent'
-                }}
-                className="inline-flex items-center justify-center px-6 py-3 rounded-2xl border border-zinc-300 bg-white hover:bg-zinc-50 active:bg-zinc-100 text-zinc-900 font-semibold transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-2xl border border-zinc-300 bg-white hover:bg-zinc-50 text-zinc-900 font-semibold transition-colors no-underline focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
                 View Pricing
-              </button>
+              </a>
             </div>
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium">
               <span>💰 Save up to 80% compared to traditional vet visits</span>
@@ -916,32 +888,20 @@ export default function Page() {
                       <span>Instant expert guidance</span>
                     </li>
                   </ul>
-                  <button
-                    type="button"
+                  <a
+                    href="#contact"
                     onClick={(e) => {
                       e.preventDefault();
-                      e.stopPropagation();
-                      console.log('✅ ProVet AI Consultations Start Free Trial clicked!');
                       handleCTAClick('start_free_trial', 'provet_ai_consultations');
-                      
                       const targetElement = document.getElementById('contact');
                       if (targetElement) {
                         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                      } else {
-                        window.location.href = '#contact';
                       }
                     }}
-                    style={{ 
-                      position: 'relative', 
-                      zIndex: 100, 
-                      pointerEvents: 'auto',
-                      cursor: 'pointer',
-                      WebkitTapHighlightColor: 'transparent'
-                    }}
-                    className="w-full inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    className="w-full inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white transition no-underline focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
                     Start Free Trial
-                  </button>
+                  </a>
                 </CardContent>
               </Card>
             </AnimatedSection>
@@ -977,32 +937,20 @@ export default function Page() {
                       <span>Expert guidance on demand</span>
                     </li>
                   </ul>
-                  <button
-                    type="button"
+                  <a
+                    href="#pricing"
                     onClick={(e) => {
                       e.preventDefault();
-                      e.stopPropagation();
-                      console.log('✅ ProVet Health Management View Pricing clicked!');
                       handleCTAClick('view_pricing', 'provet_health_mgmt');
-                      
                       const targetElement = document.getElementById('pricing');
                       if (targetElement) {
                         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                      } else {
-                        window.location.href = '#pricing';
                       }
                     }}
-                    style={{ 
-                      position: 'relative', 
-                      zIndex: 100, 
-                      pointerEvents: 'auto',
-                      cursor: 'pointer',
-                      WebkitTapHighlightColor: 'transparent'
-                    }}
-                    className="w-full inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    className="w-full inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white transition no-underline focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
                     View Pricing
-                  </button>
+                  </a>
                 </CardContent>
               </Card>
             </AnimatedSection>
