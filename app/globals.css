@@ -147,6 +147,9 @@ html {
   /* Disable smooth scroll on mobile to prevent jumpiness */
   scroll-behavior: auto;
   -webkit-font-smoothing: antialiased;
+  /* Prevent scroll on page load */
+  scroll-padding-top: 0;
+  overflow-x: hidden;
   -moz-osx-font-smoothing: grayscale;
   /* Prevent horizontal scroll */
   overflow-x: hidden;
@@ -157,6 +160,15 @@ html {
 /* Prevent auto-scroll on page load */
 html:not(:has(:target)) {
   scroll-behavior: auto;
+}
+
+/* Prevent scroll on initial page load */
+html:not(.scrolled) {
+  overflow-y: hidden;
+}
+
+html.scrolled {
+  overflow-y: auto;
 }
 
 /* Enable smooth scroll only on desktop */

@@ -180,24 +180,55 @@ export default function Page() {
     }
 
     const forceScrollToTop = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
       window.scrollTo(0, 0);
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    };
-
-    // Enforce top position with requestAnimationFrame for first 800ms
-    let isCancelled = false;
-    const startTime = performance.now();
-
-    const enforceTop = (now) => {
-      if (isCancelled) return;
-      forceScrollToTop();
-      if (now - startTime < 800) {
-        requestAnimationFrame(enforceTop);
+      if (document.documentElement) {
+        document.documentElement.scrollTop = 0;
+        document.documentElement.scrollLeft = 0;
+      }
+      if (document.body) {
+        document.body.scrollTop = 0;
+        document.body.scrollLeft = 0;
+      }
+      if (document.scrollingElement) {
+        document.scrollingElement.scrollTop = 0;
+        document.scrollingElement.scrollLeft = 0;
       }
     };
 
-    requestAnimationFrame(enforceTop);
+    // Force immediately
+    forceScrollToTop();
+
+    // Enforce top position with requestAnimationFrame for first 2 seconds
+    let isCancelled = false;
+    const startTime = performance.now();
+    let rafId = null;
+
+    const enforceTop = (now) => {
+      if (isCancelled) return;
+      if (now - startTime < 2000) { // Extend to 2 seconds
+        forceScrollToTop();
+        rafId = requestAnimationFrame(enforceTop);
+      }
+    };
+
+    rafId = requestAnimationFrame(enforceTop);
+
+    // Also use setInterval as backup
+    const intervalId = setInterval(() => {
+      if (window.scrollY > 0 || document.documentElement.scrollTop > 0) {
+        forceScrollToTop();
+      }
+    }, 10);
+
+    // Stop after 2 seconds
+    setTimeout(() => {
+      isCancelled = true;
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+      clearInterval(intervalId);
+    }, 2000);
 
     // Handle hash navigation after the enforcement window
     const hash = window.location.hash;
@@ -207,11 +238,15 @@ export default function Page() {
         if (targetElement) {
           targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      }, 850);
+      }, 2100); // Wait until after scroll prevention
     }
 
     return () => {
       isCancelled = true;
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+      clearInterval(intervalId);
     };
   }, []);
 

@@ -129,42 +129,92 @@ export default function RootLayout({ children }) {
               // Prevent scroll on page load - runs before React hydration
               (function() {
                 if (typeof window !== 'undefined') {
-                  // Disable scroll restoration
+                  // Disable scroll restoration immediately
                   if ('scrollRestoration' in history) {
                     history.scrollRestoration = 'manual';
                   }
-                  // Force scroll to top immediately
-                  window.scrollTo(0, 0);
-                  document.documentElement.scrollTop = 0;
-                  document.body.scrollTop = 0;
                   
-                  // Keep at top during page load
-                  var scrollCheck = setInterval(function() {
-                    if (window.scrollY > 0) {
-                      window.scrollTo(0, 0);
+                  // Force scroll to top immediately and repeatedly
+                  function forceTop() {
+                    window.scrollTo(0, 0);
+                    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+                    if (document.documentElement) {
                       document.documentElement.scrollTop = 0;
-                      document.body.scrollTop = 0;
+                      document.documentElement.scrollLeft = 0;
                     }
-                  }, 10);
+                    if (document.body) {
+                      document.body.scrollTop = 0;
+                      document.body.scrollLeft = 0;
+                    }
+                    if (document.scrollingElement) {
+                      document.scrollingElement.scrollTop = 0;
+                      document.scrollingElement.scrollLeft = 0;
+                    }
+                  }
                   
-                  // Stop checking after page loads
+                  // Force immediately
+                  forceTop();
+                  
+                  // Keep at top during page load - more aggressive
+                  var scrollCheck = setInterval(function() {
+                    if (window.scrollY > 0 || window.pageYOffset > 0 || 
+                        document.documentElement.scrollTop > 0 || 
+                        document.body.scrollTop > 0) {
+                      forceTop();
+                    }
+                  }, 5); // Check every 5ms
+                  
+                  // Also use requestAnimationFrame for smoother enforcement
+                  var rafId = null;
+                  function enforceTopRAF() {
+                    if (window.scrollY > 0 || document.documentElement.scrollTop > 0) {
+                      forceTop();
+                    }
+                    rafId = requestAnimationFrame(enforceTopRAF);
+                  }
+                  rafId = requestAnimationFrame(enforceTopRAF);
+                  
+                  // Stop checking after page fully loads
+                  var stopTime = Date.now() + 2000; // Run for 2 seconds
+                  function checkStop() {
+                    if (Date.now() >= stopTime) {
+                      clearInterval(scrollCheck);
+                      if (rafId) {
+                        cancelAnimationFrame(rafId);
+                      }
+                    } else {
+                      setTimeout(checkStop, 100);
+                    }
+                  }
+                  checkStop();
+                  
+                  // Also stop on load events
                   window.addEventListener('load', function() {
                     setTimeout(function() {
                       clearInterval(scrollCheck);
-                    }, 1000);
-                  });
+                      if (rafId) {
+                        cancelAnimationFrame(rafId);
+                      }
+                    }, 2000);
+                  }, { once: true });
                   
-                  // Also stop after DOM is ready
+                  // Stop on DOM ready
                   if (document.readyState === 'loading') {
                     document.addEventListener('DOMContentLoaded', function() {
                       setTimeout(function() {
                         clearInterval(scrollCheck);
-                      }, 1000);
-                    });
+                        if (rafId) {
+                          cancelAnimationFrame(rafId);
+                        }
+                      }, 2000);
+                    }, { once: true });
                   } else {
                     setTimeout(function() {
                       clearInterval(scrollCheck);
-                    }, 1000);
+                      if (rafId) {
+                        cancelAnimationFrame(rafId);
+                      }
+                    }, 2000);
                   }
                 }
               })();
