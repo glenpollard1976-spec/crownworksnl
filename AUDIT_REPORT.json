@@ -1,0 +1,293 @@
+{
+  "timestamp": "2025-11-08T21:26:13.282Z",
+  "passed": 26,
+  "warnings": 31,
+  "issues": 4,
+  "details": {
+    "issues": [
+      {
+        "file": "app/page.js",
+        "line": 633,
+        "issue": "Anchor tag missing href attribute"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1122,
+        "issue": "Anchor tag missing href attribute"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1430,
+        "issue": "Anchor tag missing href attribute"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1468,
+        "issue": "Anchor tag missing href attribute"
+      }
+    ],
+    "warnings": [
+      {
+        "file": "app/page.js",
+        "line": 427,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 440,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 456,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 497,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 543,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 567,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 614,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1101,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1216,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1291,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1374,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1416,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1454,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1534,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1606,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1624,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1705,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1747,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1764,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1781,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1795,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1819,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1836,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1854,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/business-audit-agent/page.js",
+        "line": 398,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/business-audit-agent/page.js",
+        "line": 407,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/business-audit-agent/page.js",
+        "line": 416,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/university/page.js",
+        "line": 264,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/university/page.js",
+        "line": 472,
+        "warning": "Button missing onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1134,
+        "warning": "Button without onClick handler"
+      },
+      {
+        "file": "app/page.js",
+        "line": 1705,
+        "warning": "Button without onClick handler"
+      }
+    ],
+    "passed": [
+      {
+        "file": "app/api/checkout/route.js",
+        "check": "Has export function"
+      },
+      {
+        "file": "app/api/contact/route.js",
+        "check": "Has export function"
+      },
+      {
+        "file": "app/api/ai-agent/route.js",
+        "check": "Has export function"
+      },
+      {
+        "file": "app/api/business-audit-agent/route.js",
+        "check": "Has export function"
+      },
+      {
+        "file": "app/api/presales/route.js",
+        "check": "Has export function"
+      },
+      {
+        "file": "app/api/webhook/route.js",
+        "check": "Has export function"
+      },
+      {
+        "file": "app/page.js",
+        "check": "File exists and readable"
+      },
+      {
+        "file": "app/presales/page.js",
+        "check": "File exists and readable"
+      },
+      {
+        "file": "app/business-audit/page.js",
+        "check": "File exists and readable"
+      },
+      {
+        "file": "app/business-audit-agent/page.js",
+        "check": "File exists and readable"
+      },
+      {
+        "file": "app/university/page.js",
+        "check": "File exists and readable"
+      },
+      {
+        "file": "app/university/[courseId]/page.js",
+        "check": "File exists and readable"
+      },
+      {
+        "file": "app/success/page.js",
+        "check": "File exists and readable"
+      },
+      {
+        "file": "app/email-list/page.js",
+        "check": "File exists and readable"
+      },
+      {
+        "file": "components/ui/button.jsx",
+        "check": "Component exists"
+      },
+      {
+        "file": "components/ui/card.jsx",
+        "check": "Component exists"
+      },
+      {
+        "file": "components/AIAgentWidget.jsx",
+        "check": "Component exists"
+      },
+      {
+        "file": "package.json",
+        "check": "Configuration file exists"
+      },
+      {
+        "file": "next.config.mjs",
+        "check": "Configuration file exists"
+      },
+      {
+        "file": "vercel.json",
+        "check": "Configuration file exists"
+      },
+      {
+        "file": "app/sitemap.js",
+        "check": "Configuration file exists"
+      },
+      {
+        "file": "app/robots.js",
+        "check": "Configuration file exists"
+      },
+      {
+        "file": "tailwind.config.js",
+        "check": "Configuration file exists"
+      },
+      {
+        "file": "lib/security.js",
+        "check": "Has validateContactForm"
+      },
+      {
+        "file": "lib/security.js",
+        "check": "Has checkRateLimit"
+      },
+      {
+        "file": "app/page.js",
+        "check": "No broken button/link patterns"
+      }
+    ]
+  }
+}

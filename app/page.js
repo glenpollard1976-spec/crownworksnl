@@ -1213,15 +1213,18 @@ export default function Page() {
                         <span>Full report for $99</span>
                       </li>
                     </ul>
-                    <a 
-                      href="/business-audit-agent" 
-                      className="no-underline inline-block"
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        window.location.href = '/business-audit-agent';
+                      }}
+                      className="bg-white text-indigo-600 hover:bg-indigo-50 px-6 py-3 font-semibold rounded-2xl inline-flex items-center justify-center transition-colors"
                     >
-                      <Button className="bg-white text-indigo-600 hover:bg-indigo-50 px-6 py-3 font-semibold rounded-2xl">
-                        Try Free Preview
-                        <ArrowRight className="ml-2 w-4 h-4" />
-                      </Button>
-                    </a>
+                      Try Free Preview
+                      <ArrowRight className="ml-2 w-4 h-4" />
+                    </button>
                   </div>
                   <div className="flex-shrink-0">
                     <Bot className="w-32 h-32 opacity-80" />
@@ -1410,18 +1413,19 @@ export default function Page() {
                     <p className="text-indigo-100 mb-4">
                       Available on Google Play Store. Download now for instant access to all CrownWorksNL services.
                     </p>
-                    <a 
-                      href="https://play.google.com/store/apps/details?id=com.crownworksnl.app" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      onClick={() => handleCTAClick('download_app', 'android')}
-                      className="no-underline inline-block"
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleCTAClick('download_app', 'android');
+                        window.open('https://play.google.com/store/apps/details?id=com.crownworksnl.app', '_blank', 'noopener,noreferrer');
+                      }}
+                      className="rounded-2xl bg-white text-indigo-600 hover:bg-indigo-50 px-6 py-3 font-semibold flex items-center gap-2 mx-auto transition-colors"
                     >
-                      <Button className="rounded-2xl bg-white text-indigo-600 hover:bg-indigo-50 px-6 py-3 font-semibold flex items-center gap-2 mx-auto">
-                        <Download className="w-5 h-5" />
-                        Get on Google Play
-                      </Button>
-                    </a>
+                      <Download className="w-5 h-5" />
+                      Get on Google Play
+                    </button>
                     <p className="text-xs text-indigo-200 mt-3">
                       <a 
                         href="https://play.google.com/store/apps/details?id=com.crownworksnl.app" 
@@ -1447,18 +1451,19 @@ export default function Page() {
                     <p className="text-indigo-100 mb-4">
                       Available on Apple App Store. Download now for instant access to all CrownWorksNL services.
                     </p>
-                    <a 
-                      href="https://apps.apple.com/app/crownworksnl/id1234567890" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      onClick={() => handleCTAClick('download_app', 'ios')}
-                      className="no-underline inline-block"
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleCTAClick('download_app', 'ios');
+                        window.open('https://apps.apple.com/app/crownworksnl/id1234567890', '_blank', 'noopener,noreferrer');
+                      }}
+                      className="rounded-2xl bg-white text-indigo-600 hover:bg-indigo-50 px-6 py-3 font-semibold flex items-center gap-2 mx-auto transition-colors"
                     >
-                      <Button className="rounded-2xl bg-white text-indigo-600 hover:bg-indigo-50 px-6 py-3 font-semibold flex items-center gap-2 mx-auto">
-                        <Download className="w-5 h-5" />
-                        Get on App Store
-                      </Button>
-                    </a>
+                      <Download className="w-5 h-5" />
+                      Get on App Store
+                    </button>
                     <p className="text-xs text-indigo-200 mt-3">
                       <a 
                         href="https://apps.apple.com/app/crownworksnl/id1234567890" 

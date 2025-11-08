@@ -261,12 +261,20 @@ export default function UniversityPage() {
               </div>
             </div>
 
-            <a href="#courses" className="inline-block">
-              <Button className="bg-white text-indigo-600 hover:bg-indigo-50 px-8 py-6 text-lg rounded-2xl font-semibold">
-                Browse Courses
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </a>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                const targetElement = document.getElementById('courses');
+                if (targetElement) {
+                  targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+              className="bg-white text-indigo-600 hover:bg-indigo-50 px-8 py-6 text-lg rounded-2xl font-semibold inline-flex items-center justify-center transition-colors"
+            >
+              Browse Courses
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </button>
           </motion.div>
         </div>
       </section>
@@ -461,12 +469,20 @@ export default function UniversityPage() {
           <p className="text-xl text-indigo-100 mb-8">
             Join 400+ students who are building their SaaS businesses with our proven frameworks.
           </p>
-          <a href="#courses">
-            <Button className="bg-white text-indigo-600 hover:bg-indigo-50 px-8 py-6 text-lg rounded-2xl font-semibold">
-              Start Learning Today
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-          </a>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              const targetElement = document.getElementById('courses');
+              if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }}
+            className="bg-white text-indigo-600 hover:bg-indigo-50 px-8 py-6 text-lg rounded-2xl font-semibold inline-flex items-center justify-center transition-colors"
+          >
+            Start Learning Today
+            <ArrowRight className="ml-2 w-5 h-5" />
+          </button>
         </div>
       </section>
 
