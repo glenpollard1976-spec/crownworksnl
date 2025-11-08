@@ -105,8 +105,35 @@ export default function PresalesPage() {
       console.log('Presale interest:', { tier, email, name });
     }
     
-    // Redirect to checkout
-    window.location.href = `/api/checkout?tier=${tier.id}&amount=${tier.price}&presale=true`;
+    try {
+      // Call checkout API
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          presale: true,
+          tier: tier.id,
+          amount: tier.price,
+          isRecurring: false,
+          customerEmail: email || undefined,
+          customerName: name || undefined,
+          presaleId: `${tier.id}_${Date.now()}`
+        }),
+      });
+      
+      const data = await response.json();
+      
+      if (data.error) {
+        alert(`Payment Error: ${data.error}\n\nPlease contact us at crownworksnl@gmail.com`);
+      } else if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('No checkout URL received');
+      }
+    } catch (error) {
+      console.error('Presale checkout error:', error);
+      alert(`Unable to start checkout. Please contact us directly:\n\n📧 crownworksnl@gmail.com`);
+    }
   };
 
   const totalValue = PRESALES_TIERS.reduce((sum, tier) => {

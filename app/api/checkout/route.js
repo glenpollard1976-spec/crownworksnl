@@ -5,7 +5,7 @@ const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 
 const stripe = stripeSecretKey
   ? new Stripe(stripeSecretKey, {
-      apiVersion: '2024-11-20.acacia',
+      apiVersion: '2024-12-18.acacia',
     })
   : null;
 
@@ -59,7 +59,7 @@ export async function POST(request) {
     }
 
     const body = await request.json();
-    const { priceId, packageName, amount, isRecurring, presale, tier, presaleId } = body;
+    const { priceId, packageName, amount, isRecurring, presale, tier, presaleId, customerEmail, customerName } = body;
 
     // Validate package name and amount match
     if (packageName && ALLOWED_PACKAGES[packageName]) {
@@ -126,13 +126,18 @@ export async function POST(request) {
       mode: isRecurring ? 'subscription' : 'payment',
       success_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://crownworksnl.com'}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://crownworksnl.com'}/pricing?canceled=true`,
+      customer_email: customerEmail || undefined,
       metadata: {
         packageName: sanitizedPackageName,
         timestamp: new Date().toISOString(),
         presale: presale ? 'true' : 'false',
         tier: tier || '',
-        presaleId: presaleId || ''
+        presaleId: presaleId || '',
+        customerName: customerName || '',
+        source: 'crownworksnl_website'
       },
+      allow_promotion_codes: true,
+      billing_address_collection: 'auto',
     };
 
     if (isRecurring && priceId) {
