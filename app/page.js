@@ -385,15 +385,34 @@ export default function Page() {
               <a href="/email-list" className="text-sm hover:text-zinc-900 text-zinc-600 no-underline transition-colors">
                 Email List
               </a>
-              <a href={`tel:${SITE.phone}`} onClick={() => handleCTAClick('call_now', 'header')} className="no-underline mr-2">
-                <Button variant="outline" className="rounded-2xl text-sm">
-                  <Phone className="w-4 h-4 mr-1" />
-                  Call Now
-                </Button>
-              </a>
-              <a href="#contact" onClick={(e) => { e.preventDefault(); const el = document.getElementById('contact'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); handleCTAClick('get_quote', 'header'); }} className="no-underline">
-                <Button className="rounded-2xl">Get a Quote</Button>
-              </a>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleCTAClick('call_now', 'header');
+                  window.location.href = `tel:${SITE.phone}`;
+                }}
+                className="mr-2 inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl border border-zinc-300 bg-white hover:bg-zinc-50 text-zinc-900 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                <Phone className="w-4 h-4 mr-1" />
+                Call Now
+              </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleCTAClick('get_quote', 'header');
+                  const targetElement = document.getElementById('contact');
+                  if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+                className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                Get a Quote
+              </button>
             </nav>
             <button 
               className="md:hidden p-2 text-zinc-600 hover:text-zinc-900 transition-colors z-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded-lg" 
@@ -436,9 +455,22 @@ export default function Page() {
               <a href="/email-list" onClick={handleNavClick} className="block text-sm hover:text-zinc-900 text-zinc-600 no-underline transition-colors py-2">
                 Email List
               </a>
-              <a href="#contact" onClick={handleNavClick} className="no-underline block mt-4">
-                <Button className="rounded-2xl w-full">Get a Quote</Button>
-              </a>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleNavClick(e);
+                  handleCTAClick('get_quote', 'mobile_menu');
+                  const targetElement = document.getElementById('contact');
+                  if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+                className="mt-4 w-full inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                Get a Quote
+              </button>
             </div>
           </motion.nav>
         </div>
@@ -493,20 +525,21 @@ export default function Page() {
                       )}
                     </div>
                     
-                    <a 
-                      href="#contact" 
+                    <button
+                      type="button"
                       onClick={(e) => {
                         e.preventDefault();
+                        e.stopPropagation();
                         handleCTAClick('get_started', `service_${service.title}`);
                         const targetElement = document.getElementById('contact');
                         if (targetElement) {
                           targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }
-                      }} 
-                      className="no-underline mt-auto"
+                      }}
+                      className="mt-auto w-full inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
-                      <Button className="rounded-2xl w-full group-hover:bg-indigo-700 transition-all">Get Started</Button>
-                    </a>
+                      Get Started
+                    </button>
                   </CardContent>
                 </Card>
               </AnimatedSection>
@@ -539,20 +572,21 @@ export default function Page() {
                 CrownWorksNL, founded by Glen Pollard of the Qalipu First Nation, provides strategy, design, and business consulting services to help you grow and succeed in Newfoundland & Labrador.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <a 
-                  href="#contact" 
+                <button
+                  type="button"
                   onClick={(e) => {
                     e.preventDefault();
+                    e.stopPropagation();
                     handleCTAClick('get_free_consultation', 'hero');
                     const targetElement = document.getElementById('contact');
                     if (targetElement) {
                       targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
-                  }} 
-                  className="no-underline"
+                  }}
+                  className="inline-flex items-center justify-center rounded-2xl text-lg px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
-                  <Button className="rounded-2xl text-lg px-6 py-3 bg-indigo-600 hover:bg-indigo-700">Get Free Consultation <ArrowRight className="ml-2 w-4 h-4" /></Button>
-                </a>
+                  Get Free Consultation <ArrowRight className="ml-2 w-4 h-4" />
+                </button>
                 <a href={`tel:${SITE.phone}`} onClick={() => handleCTAClick('call_now', 'hero')} className="px-5 py-3 rounded-2xl border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50 no-underline font-medium flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors" aria-label={`Call ${SITE.phone}`}>
                   <Phone className="w-4 h-4" />
                   Call Now
@@ -1053,20 +1087,21 @@ export default function Page() {
                       <span className="text-zinc-600">Ongoing maintenance & updates</span>
                     </li>
                   </ul>
-                  <a 
-                    href="#contact" 
+                  <button
+                    type="button"
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
                       handleCTAClick('pricing_click', 'ai_solutions');
                       const targetElement = document.getElementById('contact');
                       if (targetElement) {
                         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                       }
-                    }} 
-                    className="no-underline"
+                    }}
+                    className="w-full inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
-                    <Button className="rounded-2xl w-full">Get Quote</Button>
-                  </a>
+                    Get Quote
+                  </button>
                 </CardContent>
               </Card>
             </AnimatedSection>
@@ -1239,20 +1274,21 @@ export default function Page() {
           </div>
           <AnimatedSection className="mt-8 text-center">
             <p className="text-zinc-600 mb-4">Interested in implementing AI agents for your business?</p>
-            <a 
-              href="#contact" 
+            <button
+              type="button"
               onClick={(e) => {
                 e.preventDefault();
+                e.stopPropagation();
                 handleCTAClick('get_started', 'ai_agents_section');
                 const targetElement = document.getElementById('contact');
                 if (targetElement) {
                   targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-              }} 
-              className="no-underline"
+              }}
+              className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
-              <Button className="rounded-2xl">Get Started <ArrowRight className="ml-2 w-4 h-4" /></Button>
-            </a>
+              Get Started <ArrowRight className="ml-2 w-4 h-4" />
+            </button>
           </AnimatedSection>
         </div>
       </section>
@@ -1321,20 +1357,21 @@ export default function Page() {
           </div>
           <AnimatedSection className="text-center">
             <p className="text-zinc-600 mb-4">Have a partnership idea? Let's discuss how we can work together.</p>
-            <a 
-              href="#contact" 
+            <button
+              type="button"
               onClick={(e) => {
                 e.preventDefault();
+                e.stopPropagation();
                 handleCTAClick('contact_us', 'partnership_section');
                 const targetElement = document.getElementById('contact');
                 if (targetElement) {
                   targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-              }} 
-              className="no-underline"
+              }}
+              className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
-              <Button className="rounded-2xl">Contact Us <ArrowRight className="ml-2 w-4 h-4" /></Button>
-            </a>
+              Contact Us <ArrowRight className="ml-2 w-4 h-4" />
+            </button>
           </AnimatedSection>
         </div>
       </section>
@@ -1478,20 +1515,21 @@ export default function Page() {
                   Whether you're looking to grow your business, expand your reach, or explore new opportunities in Newfoundland & Labrador, Glen and the CrownWorksNL team are here to guide you every step of the way.
                 </p>
                 <div className="flex items-center gap-4 pt-4">
-                  <a 
-                    href="#contact" 
+                  <button
+                    type="button"
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
                       handleCTAClick('connect_glen', 'about_section');
                       const targetElement = document.getElementById('contact');
                       if (targetElement) {
                         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                       }
-                    }} 
-                    className="no-underline"
+                    }}
+                    className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
-                    <Button className="rounded-2xl">Connect with Glen <ArrowRight className="ml-2 w-4 h-4" /></Button>
-                  </a>
+                    Connect with Glen <ArrowRight className="ml-2 w-4 h-4" />
+                  </button>
                 </div>
               </div>
             </AnimatedSection>
