@@ -152,14 +152,35 @@ export async function POST(request) {
       billing_address_collection: 'auto',
     };
 
-    if (isRecurring && priceId) {
-      // Subscription
-      sessionParams.line_items = [
-        {
-          price: priceId,
-          quantity: 1,
-        },
-      ];
+    if (isRecurring) {
+      // Subscription - use price_data with recurring
+      if (priceId) {
+        // If priceId provided, use it
+        sessionParams.line_items = [
+          {
+            price: priceId,
+            quantity: 1,
+          },
+        ];
+      } else {
+        // Create subscription with price_data
+        sessionParams.line_items = [
+          {
+            price_data: {
+              currency: 'usd',
+              product_data: {
+                name: sanitizedPackageName,
+                description: sanitizedPackageName,
+              },
+              unit_amount: amount ? Math.round(amount * 100) : 149900, // Default $1,499 in cents
+              recurring: {
+                interval: 'month',
+              },
+            },
+            quantity: 1,
+          },
+        ];
+      }
     } else {
       // One-time payment
       sessionParams.line_items = [
