@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = 'https://crownworksnl.com';
+  const baseUrl = 'https://www.crownworksnl.com';
   
   return [
     {
@@ -43,6 +43,12 @@ export default function sitemap() {
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1.0,
+    },
+    {
+      url: `${baseUrl}/business-audit`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
     },
   ];
 }

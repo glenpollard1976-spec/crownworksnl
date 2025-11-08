@@ -11,12 +11,15 @@ import "./globals.css";
 const SITE = {
   name: "CrownWorksNL",
   phone: "+1 (709) 721-0340",
-  url: "https://crownworksnl.com",
+  url: "https://www.crownworksnl.com",
   email: "crownworksnl@gmail.com",
 };
 
 const nav = [
   { label: "Services", href: "#services" },
+  { label: "University", href: "/university" },
+  { label: "AI Audit Agent", href: "/business-audit-agent" },
+  { label: "Business Audit", href: "/business-audit" },
   { label: "iLawyer", href: "#ilawyer" },
   { label: "ProVet", href: "#provet" },
   { label: "Pricing", href: "#pricing" },
@@ -166,6 +169,51 @@ export default function Page() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [loadingCheckout, setLoadingCheckout] = useState({ businessGrowth: false });
   const [openDropdowns, setOpenDropdowns] = useState({});
+
+  // Ensure page starts at top on load
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    // Prevent browser from restoring scroll position
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    const forceScrollToTop = () => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+
+    // Enforce top position with requestAnimationFrame for first 800ms
+    let isCancelled = false;
+    const startTime = performance.now();
+
+    const enforceTop = (now) => {
+      if (isCancelled) return;
+      forceScrollToTop();
+      if (now - startTime < 800) {
+        requestAnimationFrame(enforceTop);
+      }
+    };
+
+    requestAnimationFrame(enforceTop);
+
+    // Handle hash navigation after the enforcement window
+    const hash = window.location.hash;
+    if (hash && hash !== '#') {
+      setTimeout(() => {
+        const targetElement = document.getElementById(hash.substring(1));
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 850);
+    }
+
+    return () => {
+      isCancelled = true;
+    };
+  }, []);
 
   // Smooth scroll for anchor links
   useEffect(() => {
@@ -601,15 +649,15 @@ export default function Page() {
           <div className="grid md:grid-cols-2 gap-6">
             <AnimatedSection>
               <Card className="group hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-1">
-                <CardHeader>
+                  <CardHeader>
                   <div className="service-icon-wrapper mb-4">
                     <div className="text-indigo-600 icon-pop icon-sparkle">
                       <FileText className="w-6 h-6" />
                     </div>
                   </div>
                   <CardTitle className="group-hover:text-indigo-600 transition-colors">Legal Document Preparation</CardTitle>
-                </CardHeader>
-                <CardContent>
+                  </CardHeader>
+                  <CardContent>
                   <p className="text-zinc-600 mb-4">
                     Get help with contracts, agreements, and legal documents for your business.
                   </p>
@@ -641,8 +689,8 @@ export default function Page() {
                   >
                     Get Started
                   </Button>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
             </AnimatedSection>
             <AnimatedSection>
               <Card className="group hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-1">
@@ -701,38 +749,52 @@ export default function Page() {
               Complete canine health management at a fraction of traditional vet costs. AI-powered consultations, health records, vaccination tracking, and instant expert guidance whenever your dog needs it.
             </p>
             <div className="flex flex-wrap gap-4 justify-center mb-6">
-              <a 
-                href="#contact" 
+              <button
+                type="button"
                 onClick={(e) => {
                   e.preventDefault();
+                  e.stopPropagation();
+                  console.log('✅ ProVet Start Free Trial button clicked!');
                   handleCTAClick('start_free_trial', 'provet_hero');
-                  const targetElement = document.getElementById('contact');
-                  if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }
-                }} 
-                className="no-underline"
+                  setTimeout(() => {
+                    const targetElement = document.getElementById('contact');
+                    if (targetElement) {
+                      console.log('✅ Scrolling to contact section');
+                      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else {
+                      console.error('❌ Contact section not found!');
+                      alert('Contact section not found. Please scroll down manually.');
+                    }
+                  }, 100);
+                }}
+                style={{ position: 'relative', zIndex: 10, pointerEvents: 'auto' }}
+                className="inline-flex items-center justify-center px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
-                <Button className="rounded-2xl bg-indigo-600 hover:bg-indigo-700 px-6 py-3 font-semibold">
-                  Start Free Trial
-                </Button>
-              </a>
-              <a 
-                href="#pricing" 
+                Start Free Trial
+              </button>
+              <button
+                type="button"
                 onClick={(e) => {
                   e.preventDefault();
+                  e.stopPropagation();
+                  console.log('✅ ProVet View Pricing button clicked!');
                   handleCTAClick('view_pricing', 'provet_hero');
-                  const targetElement = document.getElementById('pricing');
-                  if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }
-                }} 
-                className="no-underline"
+                  setTimeout(() => {
+                    const targetElement = document.getElementById('pricing');
+                    if (targetElement) {
+                      console.log('✅ Scrolling to pricing section');
+                      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else {
+                      console.error('❌ Pricing section not found!');
+                      alert('Pricing section not found. Please scroll down manually.');
+                    }
+                  }, 100);
+                }}
+                style={{ position: 'relative', zIndex: 10, pointerEvents: 'auto' }}
+                className="inline-flex items-center justify-center px-6 py-3 rounded-2xl border border-zinc-300 bg-white hover:bg-zinc-50 text-zinc-900 font-semibold transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
-                <Button variant="outline" className="rounded-2xl px-6 py-3 font-semibold">
-                  View Pricing
-                </Button>
-              </a>
+                View Pricing
+              </button>
             </div>
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium">
               <span>💰 Save up to 80% compared to traditional vet visits</span>
@@ -771,20 +833,29 @@ export default function Page() {
                       <span>Instant expert guidance</span>
                     </li>
                   </ul>
-                  <a 
-                    href="#contact" 
+                  <button
+                    type="button"
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
+                      console.log('✅ ProVet AI Consultations Start Free Trial clicked!');
                       handleCTAClick('start_free_trial', 'provet_ai_consultations');
-                      const targetElement = document.getElementById('contact');
-                      if (targetElement) {
-                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                      }
-                    }} 
-                    className="no-underline"
+                      setTimeout(() => {
+                        const targetElement = document.getElementById('contact');
+                        if (targetElement) {
+                          console.log('✅ Scrolling to contact section');
+                          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        } else {
+                          console.error('❌ Contact section not found!');
+                          alert('Contact section not found. Please scroll down manually.');
+                        }
+                      }, 100);
+                    }}
+                    style={{ position: 'relative', zIndex: 10, pointerEvents: 'auto' }}
+                    className="w-full inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
-                    <Button className="rounded-2xl w-full">Start Free Trial</Button>
-                  </a>
+                    Start Free Trial
+                  </button>
                 </CardContent>
               </Card>
             </AnimatedSection>
@@ -820,20 +891,29 @@ export default function Page() {
                       <span>Expert guidance on demand</span>
                     </li>
                   </ul>
-                  <a 
-                    href="#pricing" 
+                  <button
+                    type="button"
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
+                      console.log('✅ ProVet Health Management View Pricing clicked!');
                       handleCTAClick('view_pricing', 'provet_health_mgmt');
-                      const targetElement = document.getElementById('pricing');
-                      if (targetElement) {
-                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                      }
-                    }} 
-                    className="no-underline"
+                      setTimeout(() => {
+                        const targetElement = document.getElementById('pricing');
+                        if (targetElement) {
+                          console.log('✅ Scrolling to pricing section');
+                          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        } else {
+                          console.error('❌ Pricing section not found!');
+                          alert('Pricing section not found. Please scroll down manually.');
+                        }
+                      }, 100);
+                    }}
+                    style={{ position: 'relative', zIndex: 10, pointerEvents: 'auto' }}
+                    className="w-full inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
-                    <Button className="rounded-2xl w-full">View Pricing</Button>
-                  </a>
+                    View Pricing
+                  </button>
                 </CardContent>
               </Card>
             </AnimatedSection>
@@ -907,20 +987,25 @@ export default function Page() {
                             isRecurring: true,
                           }),
                         });
+                        
                         const data = await response.json();
-                        if (data.error) {
-                          alert(`Payment Error: ${data.error}\n\nPlease contact us at ${SITE.email} or call ${SITE.phone}`);
+                        
+                        if (!response.ok || data.error) {
+                          const errorMsg = data.error || data.details || 'Payment system error';
+                          console.error('Checkout API error:', { status: response.status, error: errorMsg, data });
+                          alert(`❌ Payment Error\n\n${errorMsg}\n\nIf this persists, contact:\n📧 ${SITE.email}\n📞 ${SITE.phone}`);
                           setLoadingCheckout(prev => ({ ...prev, businessGrowth: false }));
-                        } else if (data.url) {
+                          return;
+                        }
+                        
+                        if (data.url) {
                           window.location.href = data.url;
                         } else {
-                          throw new Error('No checkout URL received');
+                          throw new Error('No checkout URL received from server');
                         }
                       } catch (error) {
-                        if (process.env.NODE_ENV === 'development') {
-                          console.error('Checkout error:', error);
-                        }
-                        alert(`Unable to start checkout. Please contact us directly:\n\n📧 ${SITE.email}\n📞 ${SITE.phone}`);
+                        console.error('Checkout error:', error);
+                        alert(`❌ Unable to start checkout\n\n${error.message || 'Network error. Please check your connection.'}\n\nContact us:\n📧 ${SITE.email}\n📞 ${SITE.phone}`);
                         setLoadingCheckout(prev => ({ ...prev, businessGrowth: false }));
                       }
                     }}
@@ -1052,6 +1137,52 @@ export default function Page() {
             <p className="text-zinc-600 max-w-2xl mx-auto">
               Leverage cutting-edge AI technology to automate workflows, enhance customer interactions, and drive growth for your business.
             </p>
+          </AnimatedSection>
+          
+          {/* AI Audit Agent Promo */}
+          <AnimatedSection className="mb-12">
+            <Card className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white border-0">
+              <CardContent className="pt-8 pb-8">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-4">
+                      <Sparkles className="w-6 h-6" />
+                      <span className="text-indigo-100 font-medium">NEW: AI-Powered Business Audit</span>
+                    </div>
+                    <h3 className="text-2xl font-bold mb-3">Get Your Business Audit in 5 Minutes</h3>
+                    <p className="text-indigo-100 mb-4">
+                      Instant AI-powered analysis with actionable recommendations. Free preview available!
+                    </p>
+                    <ul className="space-y-2 text-indigo-100 mb-6">
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-5 h-5" />
+                        <span>4 category scores (Marketing, Operations, Financial, Growth)</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-5 h-5" />
+                        <span>Top 5 priority actions</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-5 h-5" />
+                        <span>Full report for $99</span>
+                      </li>
+                    </ul>
+                    <a 
+                      href="/business-audit-agent" 
+                      className="no-underline inline-block"
+                    >
+                      <Button className="bg-white text-indigo-600 hover:bg-indigo-50 px-6 py-3 font-semibold rounded-2xl">
+                        Try Free Preview
+                        <ArrowRight className="ml-2 w-4 h-4" />
+                      </Button>
+                    </a>
+                  </div>
+                  <div className="flex-shrink-0">
+                    <Bot className="w-32 h-32 opacity-80" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </AnimatedSection>
           <div className="grid md:grid-cols-3 gap-6">
             <AnimatedSection>

@@ -1,0 +1,17 @@
+========================================
+  CURRENT STEP: "Configure your destination"
+========================================
+
+✅ You're on the right track!
+
+WHAT TO DO:
+- Just click "Continue →" (bottom right)
+- Don't worry about payload styles - Stripe handles both automatically
+
+NEXT SCREENS:
+1. You'll enter the webhook URL: https://crownworksnl.com/api/webhook
+2. You'll select which events to listen to
+3. You'll get your webhook secret (whsec_...)
+
+========================================
+

@@ -150,6 +150,13 @@ html {
   -moz-osx-font-smoothing: grayscale;
   /* Prevent horizontal scroll */
   overflow-x: hidden;
+  /* Ensure page starts at top */
+  scroll-padding-top: 0;
+}
+
+/* Prevent auto-scroll on page load */
+html:not(:has(:target)) {
+  scroll-behavior: auto;
 }
 
 /* Enable smooth scroll only on desktop */
@@ -242,6 +249,43 @@ a:focus-visible {
   /* Fix iOS viewport jumping */
   html {
     height: -webkit-fill-available;
+  }
+}
+
+/* Dynamic viewport height for mobile */
+:root {
+  --vh: 1vh;
+}
+
+/* Prevent iOS zoom on input focus - must be 16px or larger */
+@media screen and (max-width: 768px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* Fix chat widget jumping on mobile */
+@media screen and (max-width: 768px) {
+  /* Prevent layout shifts from fixed elements */
+  [class*="fixed"] {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: transform;
+  }
+  
+  /* Prevent scroll jumping when keyboard appears - only for chat widget */
+  .chat-widget-container {
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Prevent input focus from causing page scroll */
+  input:focus,
+  textarea:focus {
+    scroll-margin: 0;
+    scroll-padding: 0;
   }
 }
 

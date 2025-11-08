@@ -12,6 +12,14 @@ const stripe = stripeSecretKey
 // Allowed package configurations for security
 const ALLOWED_PACKAGES = {
   'Business Growth Package': { amount: 1499, isRecurring: true },
+  'AI Business Audit Report': { amount: 99, isRecurring: false },
+  '60-Minute Business Audit': { amount: 99, isRecurring: false },
+  // University Courses
+  'SaaS Foundation: From Idea to Launch': { amount: 299, isRecurring: false },
+  'SaaS Growth Mastery: 0 to $10K MRR': { amount: 499, isRecurring: false },
+  'SaaS Technical Stack: Build Like a Pro': { amount: 399, isRecurring: false },
+  'SaaS Sales & Marketing: Close More Deals': { amount: 349, isRecurring: false },
+  'Complete SaaS Mastery Bundle': { amount: 999, isRecurring: false },
 };
 
 // Rate limiting store (in production, use Redis or similar)
@@ -39,8 +47,12 @@ function checkRateLimit(ip, maxRequests = 5, windowMs = 60000) {
 export async function POST(request) {
   try {
     if (!stripe) {
+      console.error('❌ Stripe checkout failed - STRIPE_SECRET_KEY missing');
       return NextResponse.json(
-        { error: 'Stripe is not configured. Please add STRIPE_SECRET_KEY to environment variables.' },
+        { 
+          error: 'Payment system not configured. Please contact support at crownworksnl@gmail.com',
+          details: 'STRIPE_SECRET_KEY environment variable is missing. Add it in Vercel Settings → Environment Variables.'
+        },
         { status: 500 }
       );
     }
@@ -124,8 +136,8 @@ export async function POST(request) {
     const sessionParams = {
       payment_method_types: ['card'],
       mode: isRecurring ? 'subscription' : 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://crownworksnl.com'}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://crownworksnl.com'}/pricing?canceled=true`,
+      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.crownworksnl.com'}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.crownworksnl.com'}/pricing?canceled=true`,
       customer_email: customerEmail || undefined,
       metadata: {
         packageName: sanitizedPackageName,

@@ -7,6 +7,22 @@ const nextConfig = {
   images: {
     unoptimized: true, // Required for static export
   },
+  async redirects() {
+    return [
+      // Redirect non-www to www
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'crownworksnl.com',
+          },
+        ],
+        destination: 'https://www.crownworksnl.com/:path*',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

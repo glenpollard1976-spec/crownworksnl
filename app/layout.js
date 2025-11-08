@@ -7,7 +7,7 @@ export const metadata = {
   openGraph: {
     title: "CrownWorksNL — Business Consulting & Growth Services",
     description: "Expert business consulting and growth services in Newfoundland & Labrador",
-    url: "https://crownworksnl.com",
+    url: "https://www.crownworksnl.com",
     siteName: "CrownWorksNL",
     locale: "en_CA",
     type: "website",
@@ -27,13 +27,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover, shrink-to-fit=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover, shrink-to-fit=no, interactive-widget=resizes-content" />
         <meta name="theme-color" content="#4f46e5" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="CrownWorksNL" />
-        <link rel="canonical" href="https://crownworksnl.com" />
+        <link rel="canonical" href="https://www.crownworksnl.com" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icon-192.png" />
         {/* Google Search Console Verification - Add your verification code here */}
@@ -75,7 +75,7 @@ export default function RootLayout({ children }) {
               "@type": "ProfessionalService",
               "name": "CrownWorksNL",
               "description": "Business consulting and growth services in Newfoundland & Labrador",
-              "url": "https://crownworksnl.com",
+              "url": "https://www.crownworksnl.com",
               "telephone": "+1-709-721-0340",
               "email": "crownworksnl@gmail.com",
               "address": {
@@ -103,7 +103,7 @@ export default function RootLayout({ children }) {
                 "https://play.google.com/store/apps/details?id=com.crownworksnl.app",
                 "https://apps.apple.com/app/crownworksnl/id1234567890"
               ],
-              "screenshot": "https://crownworksnl.com/app-screenshot.png",
+              "screenshot": "https://www.crownworksnl.com/app-screenshot.png",
               "offers": [
                 {
                   "@type": "Offer",
@@ -121,6 +121,54 @@ export default function RootLayout({ children }) {
                 }
               ]
             })
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Prevent scroll on page load - runs before React hydration
+              (function() {
+                if (typeof window !== 'undefined') {
+                  // Disable scroll restoration
+                  if ('scrollRestoration' in history) {
+                    history.scrollRestoration = 'manual';
+                  }
+                  // Force scroll to top immediately
+                  window.scrollTo(0, 0);
+                  document.documentElement.scrollTop = 0;
+                  document.body.scrollTop = 0;
+                  
+                  // Keep at top during page load
+                  var scrollCheck = setInterval(function() {
+                    if (window.scrollY > 0) {
+                      window.scrollTo(0, 0);
+                      document.documentElement.scrollTop = 0;
+                      document.body.scrollTop = 0;
+                    }
+                  }, 10);
+                  
+                  // Stop checking after page loads
+                  window.addEventListener('load', function() {
+                    setTimeout(function() {
+                      clearInterval(scrollCheck);
+                    }, 1000);
+                  });
+                  
+                  // Also stop after DOM is ready
+                  if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', function() {
+                      setTimeout(function() {
+                        clearInterval(scrollCheck);
+                      }, 1000);
+                    });
+                  } else {
+                    setTimeout(function() {
+                      clearInterval(scrollCheck);
+                    }, 1000);
+                  }
+                }
+              })();
+            `,
           }}
         />
       </head>

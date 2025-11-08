@@ -1,4 +1,17 @@
 {
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "crownworksnl.com"
+        }
+      ],
+      "destination": "https://www.crownworksnl.com/$1",
+      "permanent": true
+    }
+  ]
 }
 

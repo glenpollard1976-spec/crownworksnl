@@ -1,0 +1,45 @@
+========================================
+  COMPLETE STRIPE WEBHOOK SETUP
+========================================
+
+YOU ARE HERE: "Configure your destination" step
+
+NEXT STEPS:
+-----------
+
+1. Click "Continue →" button (bottom right)
+
+2. On next screen, you'll see:
+   - "Choose destination type" 
+   - Select "Webhook endpoint"
+
+3. Enter your webhook URL:
+   https://crownworksnl.com/api/webhook
+
+4. Select events (or select all events)
+
+5. Click "Add endpoint" or "Create"
+
+6. After creation, you'll see:
+   - Endpoint details
+   - "Signing secret" section
+   - Click "Reveal" to see the secret
+   - Copy the secret (starts with whsec_)
+
+7. Add to Vercel:
+   - Go to: https://vercel.com/dashboard
+   - Your project → Settings → Environment Variables
+   - Add: STRIPE_WEBHOOK_SECRET = whsec_...
+
+========================================
+  AFTER WEBHOOK IS CREATED
+========================================
+
+You'll also need your Stripe Secret Key:
+- Go to: https://dashboard.stripe.com/apikeys
+- Click "Reveal test key" or "Reveal live key"
+- Copy the key (starts with sk_live_ or sk_test_)
+- Add to Vercel as: STRIPE_SECRET_KEY
+
+========================================
+

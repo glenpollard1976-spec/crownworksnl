@@ -1,0 +1,49 @@
+========================================
+  COPY THESE TO VERCEL
+========================================
+
+VARIABLE 1:
+-----------
+Name: STRIPE_SECRET_KEY
+Value: [Your Stripe secret key from https://dashboard.stripe.com/apikeys]
+       (starts with sk_live_ or sk_test_)
+Environment: Production ✓
+
+VARIABLE 2:
+-----------
+Name: STRIPE_WEBHOOK_SECRET
+Value: [Your webhook secret from https://dashboard.stripe.com/webhooks]
+       (starts with whsec_)
+Environment: Production ✓
+
+VARIABLE 3:
+-----------
+Name: NEXT_PUBLIC_SITE_URL
+Value: https://crownworksnl.com
+Environment: Production ✓
+
+========================================
+  WHERE TO GET KEYS:
+========================================
+
+1. Stripe Secret Key:
+   https://dashboard.stripe.com/apikeys
+   → Click "Reveal test key" or "Reveal live key"
+   → Copy the key
+
+2. Stripe Webhook Secret:
+   https://dashboard.stripe.com/webhooks
+   → Click "Add endpoint"
+   → URL: https://crownworksnl.com/api/webhook
+   → Select events (checkout.session.completed, etc.)
+   → Click "Add endpoint"
+   → Copy "Signing secret"
+
+3. Add to Vercel:
+   https://vercel.com/dashboard
+   → Your project → Settings → Environment Variables
+   → Add the 3 variables above
+   → Save each one
+
+========================================
+

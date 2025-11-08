@@ -1,0 +1,51 @@
+========================================
+  STRIPE SETUP - COPY THESE STEPS
+========================================
+
+STEP 1: GET SECRET KEY
+----------------------
+1. In Stripe Dashboard → API keys section
+2. Click "Reveal test key" or "Reveal live key"
+3. Copy: sk_live_... or sk_test_...
+
+STEP 2: CREATE WEBHOOK
+----------------------
+1. Click "Webhooks" in sidebar
+2. Click "Add endpoint"
+3. URL: https://crownworksnl.com/api/webhook
+4. Select events:
+   - checkout.session.completed
+   - customer.subscription.created
+   - customer.subscription.updated
+   - customer.subscription.deleted
+   - payment_intent.succeeded
+   - payment_intent.payment_failed
+5. Click "Add endpoint"
+6. Copy webhook secret: whsec_...
+
+STEP 3: ADD TO VERCEL
+----------------------
+1. Go to: https://vercel.com/dashboard
+2. Your project → Settings → Environment Variables
+3. Add:
+   STRIPE_SECRET_KEY = sk_live_...
+   STRIPE_WEBHOOK_SECRET = whsec_...
+   NEXT_PUBLIC_SITE_URL = https://crownworksnl.com
+
+STEP 4: REDEPLOY
+----------------
+1. Vercel will auto-redeploy
+2. Or manually redeploy in Deployments tab
+
+STEP 5: TEST
+------------
+1. Go to your site
+2. Click "Subscribe - $1,499/month"
+3. Use test card: 4242 4242 4242 4242
+4. Complete payment
+5. Check Stripe dashboard for payment
+
+========================================
+  DONE! Stripe is configured!
+========================================
+

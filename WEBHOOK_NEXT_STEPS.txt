@@ -1,0 +1,16 @@
+========================================
+  YOU'RE ON STEP 1: "Select events"
+========================================
+
+✅ "Your account" is already selected (good!)
+
+NEXT:
+1. Click "Continue →" button (bottom right)
+2. On next screen, choose "Webhook endpoint"
+3. Enter URL: https://crownworksnl.com/api/webhook
+4. Select events (or select all)
+5. Click "Add endpoint" or "Create"
+6. Copy the webhook secret (starts with whsec_)
+
+========================================
+

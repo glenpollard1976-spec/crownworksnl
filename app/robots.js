@@ -5,7 +5,7 @@ export default function robots() {
       allow: '/',
       disallow: [],
     },
-    sitemap: 'https://crownworksnl.com/sitemap.xml',
+    sitemap: 'https://www.crownworksnl.com/sitemap.xml',
   };
 }
 

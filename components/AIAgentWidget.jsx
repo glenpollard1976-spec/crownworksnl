@@ -15,15 +15,101 @@ export default function AIAgentWidget() {
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const messagesEndRef = useRef(null);
+  const chatWidgetRef = useRef(null);
+  const inputRef = useRef(null);
+
+  // Detect mobile and handle viewport height
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    // Set viewport height CSS variable for mobile
+    const setViewportHeight = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+    
+    setViewportHeight();
+    window.addEventListener('resize', setViewportHeight);
+    window.addEventListener('orientationchange', () => {
+      setTimeout(setViewportHeight, 500);
+    });
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('resize', setViewportHeight);
+      window.removeEventListener('orientationchange', setViewportHeight);
+    };
+  }, []);
+
+  // Prevent scroll jump when input is focused on mobile
+  useEffect(() => {
+    if (!isOpen || !isMobile) return;
+    
+    const input = inputRef.current;
+    const widget = chatWidgetRef.current;
+    if (!input || !widget) return;
+
+    let initialScrollY = 0;
+
+    const handleFocus = () => {
+      // Store initial scroll position
+      initialScrollY = window.scrollY;
+      
+      // Small delay to let keyboard appear, then ensure input stays visible
+      setTimeout(() => {
+        // Only scroll within the widget messages container, not the page
+        const messagesContainer = widget.querySelector('.overflow-y-auto');
+        if (messagesContainer) {
+          // Scroll messages container to bottom to keep input visible
+          messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        // Prevent page scroll jump by maintaining scroll position
+        if (Math.abs(window.scrollY - initialScrollY) > 10) {
+          window.scrollTo({ top: initialScrollY, behavior: 'auto' });
+        }
+      }, 200);
+    };
+
+    input.addEventListener('focus', handleFocus);
+
+    return () => {
+      input.removeEventListener('focus', handleFocus);
+    };
+  }, [isOpen, isMobile]);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // Only scroll within the widget container, not the page
+    const messagesContainer = chatWidgetRef.current?.querySelector('.overflow-y-auto');
+    if (messagesContainer && messagesEndRef.current) {
+      // Scroll the messages container, not the page
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    } else {
+      // Fallback: use scrollIntoView but only if widget is open
+      if (isOpen && messagesEndRef.current) {
+        // Use instant scroll on mobile to prevent jumping
+        if (isMobile) {
+          messagesEndRef.current.scrollIntoView({ behavior: 'auto', block: 'nearest' });
+        } else {
+          messagesEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }
+    }
   };
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    // Only scroll if widget is open
+    if (isOpen) {
+      scrollToBottom();
+    }
+  }, [messages, isMobile, isOpen]);
 
   const handleSend = async () => {
     if (!input.trim() || loading) return;
@@ -94,6 +180,10 @@ export default function AIAgentWidget() {
         <button
           onClick={() => setIsOpen(true)}
           className="fixed bottom-6 right-6 w-14 h-14 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full shadow-lg flex items-center justify-center z-50 transition-all hover:scale-110"
+          style={{ 
+            transform: 'translateZ(0)',
+            willChange: 'transform'
+          }}
           aria-label="Open AI Assistant"
         >
           <MessageCircle className="w-6 h-6" />
@@ -102,7 +192,16 @@ export default function AIAgentWidget() {
 
       {/* Chat Widget */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 w-96 h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col z-50 border border-zinc-200">
+        <div 
+          ref={chatWidgetRef}
+          className={`fixed ${isMobile ? 'inset-4 bottom-4 right-4 left-4' : 'bottom-6 right-6 w-96'} ${isMobile ? 'h-[calc(var(--vh,1vh)*100-2rem)] max-h-[calc(var(--vh,1vh)*100-2rem)]' : 'h-[600px]'} bg-white rounded-2xl shadow-2xl flex flex-col z-50 border border-zinc-200`}
+          style={isMobile ? { 
+            height: 'calc(var(--vh, 1vh) * 100 - 2rem)',
+            maxHeight: 'calc(var(--vh, 1vh) * 100 - 2rem)',
+            transform: 'translateZ(0)',
+            willChange: 'transform'
+          } : {}}
+        >
           {/* Header */}
           <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-4 rounded-t-2xl flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -122,7 +221,10 @@ export default function AIAgentWidget() {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 overscroll-contain" style={{ 
+            WebkitOverflowScrolling: 'touch',
+            overscrollBehavior: 'contain'
+          }}>
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -177,15 +279,19 @@ export default function AIAgentWidget() {
           </div>
 
           {/* Input */}
-          <div className="p-4 border-t border-zinc-200">
+          <div className="p-4 border-t border-zinc-200 flex-shrink-0" style={{ 
+            paddingBottom: isMobile ? 'calc(1rem + env(safe-area-inset-bottom))' : '1rem'
+          }}>
             <div className="flex gap-2">
               <input
+                ref={inputRef}
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Type your message..."
                 className="flex-1 px-4 py-2 border border-zinc-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                style={{ fontSize: '16px' }}
                 disabled={loading}
               />
               <Button

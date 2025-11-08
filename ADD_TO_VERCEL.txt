@@ -1,0 +1,62 @@
+========================================
+  ADD KEYS TO VERCEL - QUICK STEPS
+========================================
+
+YOU HAVE: Stripe Secret Key ✅
+
+YOU NEED: Webhook Secret (from webhook endpoint)
+
+========================================
+  STEP 1: CREATE WEBHOOK (if not done)
+========================================
+
+1. Go to: https://dashboard.stripe.com/webhooks
+2. Click "Add endpoint"
+3. URL: https://crownworksnl.com/api/webhook
+4. Select events (or select all)
+5. Click "Add endpoint"
+6. Click endpoint name
+7. Click "Reveal" next to "Signing secret"
+8. Copy the secret (starts with whsec_)
+
+========================================
+  STEP 2: ADD TO VERCEL
+========================================
+
+1. Go to: https://vercel.com/dashboard
+2. Click your "crownworksnl" project
+3. Click "Settings" tab
+4. Click "Environment Variables" (left sidebar)
+
+ADD VARIABLE 1:
+- Name: STRIPE_SECRET_KEY
+- Value: [Paste your Stripe secret key]
+- Environment: ✅ Production
+- Click "Save"
+
+ADD VARIABLE 2:
+- Name: STRIPE_WEBHOOK_SECRET
+- Value: [Paste your webhook secret]
+- Environment: ✅ Production
+- Click "Save"
+
+ADD VARIABLE 3:
+- Name: NEXT_PUBLIC_SITE_URL
+- Value: https://crownworksnl.com
+- Environment: ✅ Production
+- Click "Save"
+
+========================================
+  STEP 3: REDEPLOY
+========================================
+
+Vercel will auto-redeploy, or:
+1. Go to "Deployments" tab
+2. Click "..." on latest deployment
+3. Click "Redeploy"
+
+Wait 2-3 minutes, then test!
+
+========================================
+
+

@@ -1,0 +1,48 @@
+========================================
+  HOW TO DELETE UNUSED FACEBOOK PAGES
+  Quick Steps
+========================================
+
+STEP 1: See All Your Pages
+---------------------------
+Go to: https://www.facebook.com/pages
+
+You'll see a list of all pages you manage.
+
+STEP 2: Identify Unused Pages
+------------------------------
+Look for:
+- Old test pages
+- Pages with 0 likes/followers
+- Pages you forgot about
+- Pages you never use
+- Duplicate pages
+
+STEP 3: Delete a Page
+---------------------
+For each unused page:
+
+1. Click on the page name
+2. Click "Settings" (left sidebar)
+3. Click "General" (in Settings)
+4. Scroll to bottom
+5. Find "Remove Page" or "Delete Page"
+6. Click it
+7. Confirm deletion
+
+STEP 4: Repeat
+--------------
+Delete 2-3 unused pages to free up space.
+
+STEP 5: Create CrownWorksNL Page
+---------------------------------
+After deleting:
+1. Go to: https://www.facebook.com/pages/create
+2. Create "CrownWorksNL" page
+3. Should work now!
+
+========================================
+  TIP: You can always recreate deleted
+  pages later if you need them.
+========================================
+
