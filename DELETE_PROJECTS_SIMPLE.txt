@@ -1,0 +1,29 @@
+HOW TO DELETE VERCEL PROJECTS
+==============================
+
+STEP 1: Click on a project name in Vercel dashboard
+
+STEP 2: Click "Settings" (gear icon, top right)
+
+STEP 3: Scroll ALL the way down to bottom of page
+
+STEP 4: Find "Danger Zone" section
+
+STEP 5: Click red "Delete Project" button
+
+STEP 6: Type the project name exactly (e.g., "crownworksnl")
+
+STEP 7: Click "Delete" to confirm
+
+STEP 8: Done! Repeat for next project.
+
+PROJECTS TO DELETE:
+- crownworksnl
+- crownworksnl-6eez
+- crownworksnl-9wte
+
+KEEP THIS ONE:
+- crownworksnl-23f4 (DO NOT DELETE!)
+
+Direct links opened in your browser - just scroll down and delete!
+

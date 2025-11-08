@@ -1,0 +1,24 @@
+SIMPLE DELETE STEPS
+===================
+
+1. Go to: https://vercel.com/websitenl
+
+2. Click on project name (e.g., "crownworksnl")
+
+3. Click "Settings" (top right)
+
+4. Scroll to bottom
+
+5. Click "Delete Project" (red button)
+
+6. Type project name
+
+7. Click "Delete"
+
+8. Repeat for:
+   - crownworksnl
+   - crownworksnl-6eez
+   - crownworksnl-9wte
+
+KEEP: crownworksnl-23f4
+
