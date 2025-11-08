@@ -156,7 +156,7 @@ function AnimatedSection({ children, className = "" }) {
       animate={isInView ? "show" : "hidden"}
       variants={variants}
       className={className}
-      style={{ willChange: 'opacity' }}
+      style={{ willChange: 'opacity', pointerEvents: 'auto' }}
     >
       {children}
     </motion.div>
