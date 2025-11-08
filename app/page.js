@@ -29,10 +29,78 @@ const nav = [
 ];
 
 const services = [
-  { icon: <ShieldCheck className="w-6 h-6" />, title: "Consulting & Strategy", desc: "Roadmaps, audits, and hands‑on guidance to grow with confidence." },
-  { icon: <Sparkles className="w-6 h-6" />, title: "Brand & Creative", desc: "Identity systems, content packages, and thumbnail/shorts kits." },
-  { icon: <FileText className="w-6 h-6" />, title: "iLawyer", desc: "AI-powered legal assistance and document preparation for businesses." },
-  { icon: <ShieldCheck className="w-6 h-6" />, title: "ProVet", desc: "Professional veterinary practice management and business consulting." },
+  { 
+    icon: <ShieldCheck className="w-6 h-6" />, 
+    title: "Consulting & Strategy", 
+    desc: "Roadmaps, audits, and hands‑on guidance to grow with confidence.",
+    products: [
+      "Business Growth Package - $1,499/month",
+      "Strategic Business Roadmap",
+      "Business Audits & Analysis",
+      "Monthly Strategy Sessions",
+      "Growth Planning & Execution"
+    ]
+  },
+  { 
+    icon: <Sparkles className="w-6 h-6" />, 
+    title: "Brand & Creative", 
+    desc: "Identity systems, content packages, and thumbnail/shorts kits.",
+    products: [
+      "Brand Identity Design",
+      "Logo Design Packages",
+      "Content Creation",
+      "Thumbnail & Shorts Kits",
+      "Social Media Graphics"
+    ]
+  },
+  { 
+    icon: <FileText className="w-6 h-6" />, 
+    title: "iLawyer", 
+    desc: "AI-powered legal assistance and document preparation for businesses.",
+    products: [
+      "Free Initial Consultation",
+      "Legal Document Preparation",
+      "AI Legal Assistant (24/7)",
+      "Compliance Guidance",
+      "Business Legal Services"
+    ]
+  },
+  { 
+    icon: <ShieldCheck className="w-6 h-6" />, 
+    title: "ProVet", 
+    desc: "Professional veterinary practice management and business consulting.",
+    products: [
+      "Free Trial Available",
+      "AI-Powered Consultations (24/7)",
+      "Complete Canine Health Management",
+      "Health Records Management",
+      "Vaccination Tracking"
+    ]
+  },
+  {
+    icon: <Bot className="w-6 h-6" />,
+    title: "AI Solutions",
+    desc: "Custom AI agent development and workflow automation.",
+    products: [
+      "Custom AI Agent Development",
+      "Workflow Automation",
+      "Integration & Training",
+      "Ongoing Maintenance",
+      "API Access"
+    ]
+  },
+  {
+    icon: <TrendingUp className="w-6 h-6" />,
+    title: "AI Agent Platform",
+    desc: "Unified AI assistant integrating all CrownWorks services.",
+    products: [
+      "Founder Tier - $4,999 (Lifetime)",
+      "Pioneer Tier - $1,999 (3 Years)",
+      "Early Adopter - $999 (2 Years)",
+      "Starter - $499 (1 Year)",
+      "Post-Launch Subscriptions Available"
+    ]
+  }
 ];
 
 const features = [
@@ -97,6 +165,7 @@ export default function Page() {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [loadingCheckout, setLoadingCheckout] = useState({ businessGrowth: false });
+  const [openDropdowns, setOpenDropdowns] = useState({});
 
   // Smooth scroll for anchor links
   useEffect(() => {
@@ -283,6 +352,76 @@ export default function Page() {
       </header>
 
       <main id="main-content">
+      {/* Services Section - Now First on Page */}
+      <section id="services" className="py-20 bg-white min-h-screen">
+        <div className="max-w-6xl mx-auto px-4">
+          <AnimatedSection className="text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Services</h1>
+            <p className="text-zinc-600 text-lg">Comprehensive solutions for your business needs</p>
+          </AnimatedSection>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((service, i) => (
+              <AnimatedSection key={i}>
+                <Card className="group hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
+                  <CardHeader>
+                    <div className="service-icon-wrapper mb-4">
+                      <div className="text-indigo-600 icon-pop icon-sparkle">
+                        {service.icon}
+                      </div>
+                    </div>
+                    <CardTitle className="group-hover:text-indigo-600 transition-colors text-xl">{service.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex-1 flex flex-col">
+                    <p className="text-zinc-600 mb-4">{service.desc}</p>
+                    
+                    {/* Dropdown Menu */}
+                    <div className="mb-4">
+                      <button
+                        onClick={() => setOpenDropdowns(prev => ({ ...prev, [i]: !prev[i] }))}
+                        className="w-full flex items-center justify-between px-4 py-2 bg-indigo-50 hover:bg-indigo-100 rounded-lg text-sm font-medium text-indigo-700 transition-colors"
+                      >
+                        <span>View Products & Services</span>
+                        <ArrowRight className={`w-4 h-4 transition-transform ${openDropdowns[i] ? 'rotate-90' : ''}`} />
+                      </button>
+                      
+                      {openDropdowns[i] && (
+                        <div className="mt-2 border border-indigo-200 rounded-lg bg-white shadow-sm">
+                          <ul className="py-2">
+                            {service.products?.map((product, idx) => (
+                              <li key={idx} className="px-4 py-2 text-sm text-zinc-700 hover:bg-indigo-50 transition-colors border-b border-indigo-100 last:border-b-0">
+                                <div className="flex items-start gap-2">
+                                  <CheckCircle2 className="w-4 h-4 text-indigo-600 flex-shrink-0 mt-0.5" />
+                                  <span>{product}</span>
+                                </div>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                    
+                    <a 
+                      href="#contact" 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleCTAClick('get_started', `service_${service.title}`);
+                        const targetElement = document.getElementById('contact');
+                        if (targetElement) {
+                          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                      }} 
+                      className="no-underline mt-auto"
+                    >
+                      <Button className="rounded-2xl w-full group-hover:bg-indigo-700 transition-all">Get Started</Button>
+                    </a>
+                  </CardContent>
+                </Card>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="home" className="relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="w-[50rem] h-[50rem] rounded-full bg-indigo-200/40 blur-3xl absolute -top-40 -right-32" />
@@ -374,48 +513,6 @@ export default function Page() {
               </div>
             </div>
           </motion.div>
-        </div>
-      </section>
-
-      <section id="services" className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <AnimatedSection className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Our Services</h2>
-            <p className="text-zinc-600">Comprehensive solutions for your business needs</p>
-          </AnimatedSection>
-          <div className="grid md:grid-cols-3 gap-6">
-            {services.map((service, i) => (
-              <AnimatedSection key={i}>
-                <Card className="group hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-1">
-                  <CardHeader>
-                    <div className="service-icon-wrapper mb-4">
-                      <div className="text-indigo-600 icon-pop icon-sparkle">
-                        {service.icon}
-                      </div>
-                    </div>
-                    <CardTitle className="group-hover:text-indigo-600 transition-colors">{service.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-zinc-600">{service.desc}</p>
-                    <a 
-                      href="#contact" 
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleCTAClick('get_started', `service_${service.title}`);
-                        const targetElement = document.getElementById('contact');
-                        if (targetElement) {
-                          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                      }} 
-                      className="no-underline mt-4 inline-block"
-                    >
-                      <Button className="rounded-2xl mt-4 w-full group-hover:bg-indigo-700 transition-all">Get Started</Button>
-                    </a>
-                  </CardContent>
-                </Card>
-              </AnimatedSection>
-            ))}
-          </div>
         </div>
       </section>
 
