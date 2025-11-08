@@ -15,6 +15,8 @@
     "send-launch-bulk": "node scripts/send-bulk-launch-emails.js",
     "test-backend": "node scripts/test-backend.js",
     "test-llm": "node scripts/test-llm-providers.js",
+    "setup-llm": "node scripts/setup-llm-providers.js",
+    "auto-setup-llm": "powershell -ExecutionPolicy Bypass -File scripts/auto-setup-llm.ps1",
     "auto-launch": "powershell -ExecutionPolicy Bypass -File AUTO_LAUNCH.ps1",
     "auto-deploy": "powershell -ExecutionPolicy Bypass -File AUTO_DEPLOY.ps1",
     "auto-email": "powershell -ExecutionPolicy Bypass -File AUTO_SEND_EMAILS.ps1",
