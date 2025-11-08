@@ -13,6 +13,7 @@
     "send-bulk": "node scripts/send-bulk-smtp.js",
     "send-launch": "node scripts/send-launch-email.js",
     "send-launch-bulk": "node scripts/send-bulk-launch-emails.js",
+    "test-backend": "node scripts/test-backend.js",
     "auto-launch": "powershell -ExecutionPolicy Bypass -File AUTO_LAUNCH.ps1",
     "auto-deploy": "powershell -ExecutionPolicy Bypass -File AUTO_DEPLOY.ps1",
     "auto-email": "powershell -ExecutionPolicy Bypass -File AUTO_SEND_EMAILS.ps1",
