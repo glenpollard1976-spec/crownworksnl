@@ -22,7 +22,7 @@ const nav = [
   { label: "University", href: "/university" },
   { label: "AI Audit Agent", href: "/business-audit-agent" },
   { label: "Business Audit", href: "/business-audit" },
-  { label: "iLawyer", href: "#ilawyer" },
+
   { label: "ProVet", href: "#provet" },
   { label: "Pricing", href: "#pricing" },
   { label: "Mobile App", href: "#mobile-apps" },
@@ -56,18 +56,6 @@ const services = [
       "Content Creation",
       "Thumbnail & Shorts Kits",
       "Social Media Graphics"
-    ]
-  },
-  { 
-    icon: <FileText className="w-6 h-6" />, 
-    title: "iLawyer", 
-    desc: "AI-powered legal assistance and document preparation for businesses.",
-    products: [
-      "Free Initial Consultation",
-      "Legal Document Preparation",
-      "AI Legal Assistant (24/7)",
-      "Compliance Guidance",
-      "Business Legal Services"
     ]
   },
   { 
@@ -731,138 +719,6 @@ export default function Page() {
               </div>
             </div>
           </motion.div>
-        </div>
-      </section>
-
-      <section id="ilawyer" className="py-20 bg-gradient-to-b from-white to-indigo-50">
-        <div className="max-w-6xl mx-auto px-4">
-          <AnimatedSection className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">iLawyer</h2>
-            <p className="text-zinc-600 max-w-2xl mx-auto mb-8">
-              AI-powered legal assistance and document preparation for businesses in Newfoundland & Labrador.
-            </p>
-            {/* Prominent CTA Banner */}
-            <div className="mt-8 mb-12 p-8 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl text-white">
-              <div className="flex flex-col items-center justify-center">
-                <div className="mb-4">
-                  <FileText className="w-12 h-12 mx-auto opacity-90" />
-                </div>
-                <h3 className="text-2xl font-bold mb-3">Ready to Get Started?</h3>
-                <p className="text-indigo-100 mb-6 max-w-xl">
-                  Get instant preliminary legal guidance from our AI legal assistant. Start your first consultation free.
-                </p>
-                <div className="flex flex-wrap gap-4 justify-center">
-                  <Button 
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      handleCTAClick('start_free_consultation', 'ilawyer_banner');
-                      const targetElement = document.getElementById('contact');
-                      if (targetElement) {
-                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                      }
-                    }} 
-                    className="rounded-2xl bg-white text-indigo-600 hover:bg-indigo-50 px-6 py-3 font-semibold flex items-center gap-2"
-                  >
-                    Start Free Consultation
-                    <ArrowRight className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-          <div className="grid md:grid-cols-2 gap-6">
-            <AnimatedSection>
-              <Card className="group hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-1">
-                  <CardHeader>
-                  <div className="service-icon-wrapper mb-4">
-                    <div className="text-indigo-600 icon-pop icon-sparkle">
-                      <FileText className="w-6 h-6" />
-                    </div>
-                  </div>
-                  <CardTitle className="group-hover:text-indigo-600 transition-colors">Legal Document Preparation</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                  <p className="text-zinc-600 mb-4">
-                    Get help with contracts, agreements, and legal documents for your business.
-                  </p>
-                  <ul className="space-y-2 text-zinc-600 mb-4">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                      <span>Contract review and preparation</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                      <span>Business agreements</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                      <span>Legal compliance documents</span>
-                    </li>
-                  </ul>
-                  <Button 
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      handleCTAClick('get_started', 'ilawyer_legal_docs');
-                      const targetElement = document.getElementById('contact');
-                      if (targetElement) {
-                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                      }
-                    }} 
-                    className="rounded-2xl w-full"
-                  >
-                    Get Started
-                  </Button>
-                  </CardContent>
-                </Card>
-            </AnimatedSection>
-            <AnimatedSection>
-              <Card className="group hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-1">
-                <CardHeader>
-                  <div className="service-icon-wrapper mb-4">
-                    <div className="text-indigo-600 icon-pop icon-sparkle">
-                      <Bot className="w-6 h-6" />
-                    </div>
-                  </div>
-                  <CardTitle className="group-hover:text-indigo-600 transition-colors">AI Legal Assistant</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-zinc-600 mb-4">
-                    Get instant answers to legal questions and guidance for your business needs.
-                  </p>
-                  <ul className="space-y-2 text-zinc-600 mb-4">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                      <span>24/7 AI legal consultation</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                      <span>Legal question answering</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                      <span>Compliance guidance</span>
-                    </li>
-                  </ul>
-                  <Button 
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      handleCTAClick('learn_more', 'ilawyer_ai_assistant');
-                      const targetElement = document.getElementById('contact');
-                      if (targetElement) {
-                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                      }
-                    }} 
-                    className="rounded-2xl w-full"
-                  >
-                    Learn More
-                  </Button>
-                </CardContent>
-              </Card>
-            </AnimatedSection>
-          </div>
         </div>
       </section>
 
@@ -1573,7 +1429,7 @@ export default function Page() {
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" />
-                  <span className="text-indigo-100">iLawyer & ProVet services</span>
+                  <span className="text-indigo-100">ProVet services</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" />
