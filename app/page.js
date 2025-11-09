@@ -17,6 +17,8 @@ const SITE = {
 
 const nav = [
   { label: "Services", href: "#services" },
+  { label: "AI Toolkit", href: "/ai-toolkit" },
+  { label: "Learning Centre", href: "/learning-center" },
   { label: "University", href: "/university" },
   { label: "AI Audit Agent", href: "/business-audit-agent" },
   { label: "Business Audit", href: "/business-audit" },
@@ -584,6 +586,56 @@ export default function Page() {
               </AnimatedSection>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* AI Toolkit Promo Banner */}
+      <section className="py-12 bg-gradient-to-r from-purple-600 to-purple-700 text-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <AnimatedSection>
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-3">
+                  <Sparkles className="w-5 h-5" />
+                  <span className="text-sm font-medium text-purple-100">NEW: AI Automation Toolkit</span>
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold mb-3">
+                  Calculate Your Automation ROI & Start Saving Today
+                </h2>
+                <p className="text-purple-100 mb-4">
+                  Get instant ROI calculations, implementation guides, and proven strategies. Join hundreds of businesses already saving $50K+ annually.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <a 
+                    href="/ai-toolkit"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCTAClick('ai_toolkit_hero', 'promo_banner');
+                      window.location.href = '/ai-toolkit';
+                    }}
+                    className="inline-flex items-center justify-center px-6 py-3 rounded-2xl bg-white text-purple-600 hover:bg-purple-50 font-semibold transition-colors no-underline"
+                  >
+                    Try ROI Calculator
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </a>
+                  <a 
+                    href="/learning-center"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCTAClick('learning_center_hero', 'promo_banner');
+                      window.location.href = '/learning-center';
+                    }}
+                    className="inline-flex items-center justify-center px-6 py-3 rounded-2xl border-2 border-white text-white hover:bg-white/10 font-semibold transition-colors no-underline"
+                  >
+                    Explore Learning Centre
+                  </a>
+                </div>
+              </div>
+              <div className="flex-shrink-0">
+                <TrendingUp className="w-32 h-32 opacity-80" />
+              </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 

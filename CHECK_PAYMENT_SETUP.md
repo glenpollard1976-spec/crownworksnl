@@ -274,3 +274,5 @@ curl -X POST http://localhost:3000/api/checkout \
 **If it works:** ✅ Payment system is ready!
 **If it fails:** Check error message and fix accordingly.
 
+
+
